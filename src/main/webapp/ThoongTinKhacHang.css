@@ -1,0 +1,44 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-content {
+  flex: 1 1 auto;
+}
+
+.main-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content form div {
+  display: flex;
+}
+
+.main-content form div label {
+  width: 30%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.main-content form div input {
+  width: 70%;
+}
+
+.main-content form div select {
+  width: 70%;
+}
+
+.main-content form div button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
