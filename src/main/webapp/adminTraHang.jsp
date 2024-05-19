@@ -48,9 +48,8 @@
 				<li><a href="adminsanphamcontroller">Quản lí sản phẩm</a></li>
 				<li><a href="adminxacnhancontroller">Xác nhận đặt hàng</a></li>
 				<li><a href="adminxoatkcontroller">Quản lí tài khoản</a></li>
-				<li><a href="adminThongKeController">Thống kê</a></li>
-<!-- 
-				<li><a
+				<li><a href="adminThongKeController" class="nav-mobile-css">Thống kê</a></li>
+			<!-- 	<li><a
 					class="footer-Evaluate footer-group js-buy-btn-Evaluate ">Đánh
 						Giá</a></li> -->
 			</ul>
@@ -114,6 +113,7 @@
 						nhận đặt mua</a></li>
 				<li><a href="adminxoatkcontroller" class="nav-mobile-css">Quản
 						lí tài khoản</a></li>
+				<li><a href="adminThongKeController" class="nav-mobile-css">Thống kê</a></li>
 
 			</ul>
 
@@ -242,13 +242,42 @@
 	<div class="notifications"></div>
 	<script src="assets/ThongBao.js"></script>
 	<%
-	if (request.getAttribute("checkUpdateXacNhan") != null) {
-		boolean checkUpdateXacNhan = (boolean) request.getAttribute("checkUpdateXacNhan");
-		if (checkUpdateXacNhan == true) {
+	if (request.getAttribute("checkUpdateHuyDon") != null) {
+		boolean checkUpdateHuyDon = (boolean) request.getAttribute("checkUpdateHuyDon");
+		if (checkUpdateHuyDon == true) {
 	%>
 	<script type="text/javascript">
 		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
-				'Xác nhận thành công');
+				'Bạn đã hủy đơn hàng thành công');
+	</script>
+	<%
+	}
+	}
+	%>
+	
+	<script src="assets/ThongBao.js"></script>
+	<%
+	if (request.getAttribute("checkTraHang") != null) {
+		boolean checkTraHang = (boolean) request.getAttribute("checkTraHang");
+		if (checkTraHang == true) {
+	%>
+	<script type="text/javascript">
+		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+				'Đã liên hệ với khách hàng');
+	</script>
+	<%
+	}
+	}
+	%>
+		<script src="assets/ThongBao.js"></script>
+	<%
+	if (request.getAttribute("checkTraHangTC") != null) {
+		boolean checkTraHangTC = (boolean) request.getAttribute("checkTraHangTC");
+		if (checkTraHangTC == true) {
+	%>
+	<script type="text/javascript">
+		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+				'Xác nhận trả hàng thành công!!');
 	</script>
 	<%
 	}
@@ -256,14 +285,12 @@
 	%>
 
 
-
 	<h1 style="color: black; margin-top: 140px; text-align: center;">Trang
-		ADMIN Xác Nhận Sản Phẩm</h1>
+		ADMIN Các đơn hàng xét trả</h1>
 		<div style="display: flex;justify-content: space-between;">
 	<a href="adminDonHangDaXacNhanShipperController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
 		nhận cho shipper</a>
-	<a href="adminTraHangController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng khách hàng trả</a>
-	<a href="adminDonHangDaXacNhanController" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
+	<a href="adminxacnhancontroller" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-times" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng chưa xác
 		nhận</a>
 		</div>
 	<div class="container text-center">
@@ -271,11 +298,11 @@
 			<div class="col-sm-12 text-left">
 				<%
 				//hiển thị chờ xác nhận
-				ArrayList<DonHangDaDatBean> dsadmin = (ArrayList<DonHangDaDatBean>) request.getAttribute("adminxacnhan");
+				ArrayList<DonHangDaDatBean> dsadmin = (ArrayList<DonHangDaDatBean>) request.getAttribute("admintra");
 				if (dsadmin != null) {
 					long tongtien = 0;
 					int n = dsadmin.size();
-					for (int i = n -1; i >= 0 ;i-- ) {
+					for (int i = n-1;i>=0;i--) {
 				%>
 				<!-- Modal thông tin khách hàng -->
 				<div class="modal fade" id="myModal<%=dsadmin.get(i).getMaChiTiet()%>"
@@ -324,13 +351,13 @@
 										class="FormSV-span" style="font-size: 18px">Số lượng
 										mua:</span>
 									<p style="color: red"><%=dsadmin.get(i).getSoLuongMua()%></p>
-
 								<%
 						        double gia = dsadmin.get(i).getDonGiaSP();
 						        double chiecKhau = dsadmin.get(i).getChiecKhau();
 						        double thanhTientt = (gia * (1 - (chiecKhau / 100)));
 						        DecimalFormat decimalFormat = new DecimalFormat("#,###");
 			        			String GiaFormatted = decimalFormat.format(thanhTientt); %>
+
 									<span class="FormSV-span" style="font-size: 18px">Giá:</span>
 									<p style="color: red"><%=GiaFormatted%></p>
 
@@ -339,7 +366,10 @@
 						        double giassp = dsadmin.get(i).getDonGiaSP();
 						        double chiecKhausp = dsadmin.get(i).getChiecKhau();
 						        double thanhTien = soLuongMua * (giassp * (1 - (chiecKhausp / 100)));
+			        			
+			        			
 			        			String tongTienFormatted = decimalFormat.format(thanhTien); %>
+								
 									<span class="FormSV-span" style="font-size: 18px">Tổng tiền:</span>
 									<p style="color: red"><%=tongTienFormatted%></p>
 								</div>
@@ -377,18 +407,31 @@
 							</form>
 						</div>
 						<div class="col-sm-2">
-							<p style="opacity: 0.7;position: absolute;bottom: 0px;right: 15px"><%=dsadmin.get(i).getNgayMua() %></p>
-						</div>
 					</div>
 					<br>
 					<div>
 						<input type="submit" value="Xem chi tiết" data-toggle="modal"
 							data-target="#myModal<%=dsadmin.get(i).getMaChiTiet()%>"
 							style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;font-weight:bold; margin-left: 20px; background-color: #446879; color: #fff; border-radius: 10px">
-						<a href="adminxacnhanspkhcontroller?btnXacNhan&mact=<%=dsadmin.get(i).getMaChiTiet()%>" onclick="disableButton(this)"
-							style="border: 1px solid #ccc; text-decoration: none;font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">Xác
-							nhận</a>
+						<%if(dsadmin.get(i).getTrangThaiCt() == 0 ){%>
+						<a href="adminxacnhanspkhcontroller?btnTraHang&mact=<%=dsadmin.get(i).getMaChiTiet()%>" onclick="disableButton(this)"
+							style="border: 1px solid #ccc; text-decoration: none;font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">
+							Liên hệ khách hàng</a>
+							<p style="opacity: 0.7;position: absolute;bottom: 0px;right: 30px"><%=dsadmin.get(i).getNgayMua() %></p>
+						</div>
+							
+						<%}else if (dsadmin.get(i).getTrangThaiCt() == 1){ %>	
+						<a href="" 
+							style="border: 1px solid #ccc; text-decoration: none;opacity:0.5 font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">
+							Liên hệ khách hàng</a>
+							<p style="opacity: 0.7;position: absolute;bottom: 0px;right: 15px"><%=dsadmin.get(i).getNgayMua() %></p>
+						</div>
+							
+						<%} %>
 							<script src="assets/ThemDisable.js"></script>
+						<a href="adminxacnhanspkhcontroller?btnXacNhanTra&mact=<%=dsadmin.get(i).getMaChiTiet()%>" onclick="disableButton(this)"
+							style="border: 1px solid #ccc; text-decoration: none;font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">
+							Xác nhận trả</a>
 					</div>
 				</div>
 				

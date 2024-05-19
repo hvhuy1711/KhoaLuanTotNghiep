@@ -1,7 +1,6 @@
 <%@page import="bean.choxacnhanbean"%>
 <%@page import="java.util.ArrayList"%>
 
-<%@page import="bean.thanhtoanspbean"%>
 
 <%@page import="bean.loaispbean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

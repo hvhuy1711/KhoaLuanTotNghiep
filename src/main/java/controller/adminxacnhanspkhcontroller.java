@@ -44,7 +44,9 @@ public class adminxacnhanspkhcontroller extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			String mact= request.getParameter("mact");
 			String btnXacNhan = request.getParameter("btnXacNhan");
+			String btnXacNhanTra = request.getParameter("btnXacNhanTra");
 			String btnDonDat = request.getParameter("btnDonDat");
+			String btnTraHang = request.getParameter("btnTraHang");
 			HttpSession session = request.getSession();
 			if(btnXacNhan != null) {
 				DonHangDaDatBo dhdd= new DonHangDaDatBo();
@@ -97,9 +99,58 @@ public class adminxacnhanspkhcontroller extends HttpServlet {
 					response.sendRedirect("adminDonHangDaXacNhanController");
 					return;
 				}
+			}else if(btnTraHang != null) {
+				DonHangDaDatBo dhdd= new DonHangDaDatBo();
+				if (mact != null) {
+					int mactInt = Integer.parseInt(mact);
+					dhdd.UpdateTrangThaiTraAdmin(mactInt);
+					DonHangDaDatBo dhad = new DonHangDaDatBo(); 
+					DonHangDaDatBean dsdh = dhad.getDHDDDanhGia(mactInt);
+//					dhad.UpdateTrangThaiCT();
+					String thanhtoan = null;
+					if(dsdh.getTrangThaiDon() == 0 ) {
+						thanhtoan = "Thanh toán trực tiếp";
+					}else {
+						thanhtoan = "Thanh toan online(đã thanh toán)";
+					}
+					double gia = dsdh.getDonGiaSP();
+			        double chiecKhau = dsdh.getChiecKhau();
+			        double thanhTientt = (gia * (1 - (chiecKhau / 100)));
+			        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        			String GiaFormatted = decimalFormat.format(thanhTientt);
+					String nodungEmail = "Thông báo đến xác thực thông tin trả:" + String.valueOf(dsdh.getTenSanPham()) +"--- Giá là:" +String.valueOf(GiaFormatted) + "đ--- Số lượng là:" + String.valueOf(dsdh.getSoLuongMua()) + "--- Kích thước là:" + dsdh.getGhiChuLS() + "--- Phương thức thanh toán:" + thanhtoan + "ĐƠN HÀNG CỦA BẠN CHỜ XÁC THỰC TRẢ";
+					Email.sendEmail(dsdh.getEmail(), "Thông báo xác thực thông tin trả", nodungEmail);
+					session.setAttribute("checkTraHang", true);
+					response.sendRedirect("adminTraHangController");
+					return;
+				}
+			
+		}else if(btnXacNhanTra != null) {
+			DonHangDaDatBo dhdd= new DonHangDaDatBo();
+			if (mact != null) {
+				int mactInt = Integer.parseInt(mact);
+				dhdd.UpdateTrangThaiTraAdmin(mactInt);
+				DonHangDaDatBo dhad = new DonHangDaDatBo(); 
+				DonHangDaDatBean dsdh = dhad.getDHDDDanhGia(mactInt);
+				dhad.UpdateTrangThaiCT();
+				String thanhtoan = null;
+				if(dsdh.getTrangThaiDon() == 0 ) {
+					thanhtoan = "Thanh toán trực tiếp";
+				}else {
+					thanhtoan = "Thanh toan online(đã thanh toán)";
+				}
+				double gia = dsdh.getDonGiaSP();
+		        double chiecKhau = dsdh.getChiecKhau();
+		        double thanhTientt = (gia * (1 - (chiecKhau / 100)));
+		        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+    			String GiaFormatted = decimalFormat.format(thanhTientt);
+				String nodungEmail = "Thông báo đến khách hàng sản phẩm của bạn đã được trả:" + String.valueOf(dsdh.getTenSanPham()) +"--- Giá là:" +String.valueOf(GiaFormatted) + "đ--- Số lượng là:" + String.valueOf(dsdh.getSoLuongMua()) + "--- Kích thước là:" + dsdh.getGhiChuLS() + "--- Phương thức thanh toán:" + thanhtoan + "ĐƠN HÀNG CỦA BẠN ĐANG ĐƯỢC TRẢ";
+				Email.sendEmail(dsdh.getEmail(), "Thông báo trả hàng", nodungEmail);
+				session.setAttribute("checkTraHangTC", true);
+				response.sendRedirect("adminTraHangController");
+				return;
 			}
-//				request.removeAttribute(mact);
-//				response.sendRedirect("adminxacnhancontroller");
+		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

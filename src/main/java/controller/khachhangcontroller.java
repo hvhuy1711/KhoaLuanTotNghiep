@@ -17,6 +17,7 @@ import bean.khachhangthibean;
 import bo.khachhangbo;
 import consts.constClass;
 import utilEmail.Email;
+import utilEmail.MaHoaMk;
 
 /**
  * Servlet implementation class khachhangcontroller
@@ -54,6 +55,7 @@ public class khachhangcontroller extends HttpServlet {
 
 //			boolean check;
 			if (username != null && password != null) {
+				password = MaHoaMk.toSHA1(password);
 				khbean = khbo.dntk(username, password);
 				if(khbean != null) {
 //				if (khbean != null && khbean.isQuyen() == true) {
@@ -119,6 +121,7 @@ public class khachhangcontroller extends HttpServlet {
 			}
 
 			// Tạo tài khoản nếu tất cả các điều kiện đều thỏa mãn
+			pass1 = MaHoaMk.toSHA1(pass1); 
 			khbo.dktk(ht, diachi, sodt, email, usernamedk, pass1, false, null);
 			session.setAttribute("checkDK", true);
 			}

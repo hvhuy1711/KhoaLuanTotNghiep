@@ -408,46 +408,6 @@ h2 {
 			</div>
 		</div>
 
-
-
-		<!-- Hiển thị modal đăng nhập -->
-		<!-- 	<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-
-				Modal content
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Đăng Nhập</h4>
-					</div>
-					<div class="Form">
-						<form style="text-align: center;" action="khachhangcontroller"
-							method="post">
-							<div style="display: block;">
-								<span class="FormSV-span">Tài Khoản:</span> <input
-									class="FormSV-input" type="text" name="txtun"
-									placeholder="Nhập tài khoản" required> <br>
-							</div>
-							<div style="display: block;">
-								<span class="FormSV-span">Mật khẩu:</span> <input
-									class="FormSV-input" type="Password" name="txtpass"
-									placeholder="Nhập Mật Khẩu" required> <br>
-							</div>
-							<div style="margin-top: 10px">
-								<span style="margin-top: 10px">Bạn chưa có tài khoản?<a
-									href="" data-toggle="modal" data-target="#myModaldk"
-									data-dismiss="modal">Đăng kí</a></span><br>
-								<button class="FormSV-Buttom">Đăng Nhập</button>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-
-			</div>
-		</div> -->
 		<!-- Hết modal đăng nhập -->
 
 		<!-- Hiển thị modal đăng kí -->
@@ -534,14 +494,9 @@ h2 {
 
 <%DonHangDaDatBean sp = (DonHangDaDatBean)request.getAttribute("dsspma");
 	if(sp != null){
-		 /* khachhangthibean kh = (khachhangthibean) session.getAttribute("dn"); 
-		if (kh == null ){
-			
-		} */
-	
 %>
 <div style="padding: 50px"></div>
-<h1 style="margin-left: 40px;color: red">Sản phẩm</h1>
+<h1 style="margin-left: 40px;color: red;text-align: center;">Sản phẩm</h1>
 <div class = "row">
 	<div class="col-sm-1"></div>
 	<div class="col-sm-3">
@@ -564,7 +519,19 @@ h2 {
 			<p><span>Kích thước:</span> <%=sp.getGhiChuCT()%></p>
 	</div>
 </div>
-<h1 style="margin-left: 40px;color: red">Đánh giá sản phẩm ở phía dưới</h1>
+
+<div style="text-align: center;" >
+	<h1>Trả hàng</h1>
+	<a href="ChinhSachController" style=" display: inline-block;
+	    margin: 10px 0;
+	    padding: 10px 20px;
+	    color: #fff;
+	    background-color: #446879;
+	    text-decoration: none;
+	    border-radius: 5px;
+	    transition: background-color 0.3s ease;">Chính sánh trả hàng</a>
+	    
+</div>
 <div class="product-info-tabs" style="background-color: #bcd8e5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <!-- <li class="nav-item"><a class="nav-link active"
@@ -573,50 +540,34 @@ h2 {
                 Tả</a></li> -->
         <li class="nav-item" style="font-size: 18px;font-weight: bold;"><a class="nav-link" id="review-tab"
             data-toggle="tab" href="#review" role="tab" aria-controls="review"
-            aria-selected="false">Đánh Giá </a></li>
+            aria-selected="false">Trả hàng tại đây</a></li>
     </ul>
-
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="review" role="tabpanel"
             aria-labelledby="review-tab">
-            <form class="review-form" action="DanhGiaSPController" method="get">
-                <div class="form-group">
-                    <label>Đánh giá của bạn</label>
-                    <div class="reviews-counter">
-                        <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" onchange="updateRating(this.value)" />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" onchange="updateRating(this.value)" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" onchange="updateRating(this.value)" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" onchange="updateRating(this.value)" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" onchange="updateRating(this.value)" />
-                            <label for="star1" title="text">1 star</label>
-                            
-                            <!-- Thẻ input để lưu trữ số sao đã chọn -->
-                            <input type="text" name="sosao" id="sosao" value="" style="display: none;">
-                                <input type="text" name="masp" id="masp" value="<%=sp.getMaSanPham() %>" style="display: none;">
-                            <script>
-                                function updateRating(value) {
-                                    // Lấy thẻ input theo id và gán giá trị được chọn từ radio button vào
-                                    document.getElementById("sosao").value = value;
-                                }
-                            </script>
-
+            <form class="review-form" action="TraHangController" id="TraHang" method="get">
+            <%DonHangDaDatBean sp1 = (DonHangDaDatBean)request.getAttribute("dsspma");
+                        if(sp1 != null){%>
+                        <div style="display: none">
+                        	<input form="TraHang" type="text" name="sptra" value="<%=sp1.getMaChiTiet()%>">
                         </div>
+                         <%}
+                        %>
+                <div class="form-group">
+                    
+                    <div class="reviews-counter">
+                      
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Nội Dung</label>
-                    <textarea name="nd" class="form-control" rows="10" name="comment"></textarea>
+                    <label>Nội Dung trả hàng</label>
+                    <textarea form="TraHang" name="ndtra" class="form-control" rows="10" name="comment"></textarea>
                 </div>
-                <% ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>)request.getAttribute("dskh");
-                khachhangthibean kh1 = (khachhangthibean)session.getAttribute("dn");
-                if(dskh !=null){
-                    for(khachhangthibean ds : dskh){
-                        if (ds.getMaKhachHang() == kh1.getMaKhachHang()){ %>
+                <% ArrayList<khachhangthibean> dskh1 = (ArrayList<khachhangthibean>)request.getAttribute("dskh");
+                khachhangthibean kh2 = (khachhangthibean)session.getAttribute("dn");
+                if(dskh1 !=null){
+                    for(khachhangthibean ds : dskh1){
+                        if (ds.getMaKhachHang() == kh2.getMaKhachHang()){ %>
                             
                 
                 <div class="row">
@@ -625,8 +576,9 @@ h2 {
                             <input type="text" name="" disabled="disabled" class="form-control" value="<%=ds.getHoTen() %>"
                                 placeholder="Họ và tên*">
                         </div>
-                        
                     </div>
+                    
+                    
                     <div class="col-md-6">
                         <div class="form-group"> 
                         <% if(ds.getEmail() == null){ %>
@@ -643,7 +595,7 @@ h2 {
                     }
                 } %>
                <div style="display: flex;justify-content: flex-end; align-items: center;">
-                <button class="round-black-btn" style="">Gửi Bình Luận</button>
+                <button class="round-black-btn" style="">Gửi thông tin trả</button>
                </div>
                
             </form>
@@ -652,6 +604,51 @@ h2 {
 </div>
 
 	<%} %>
+<%-- 	
+	
+		    <h1 class= "text-center">Đánh giá sản phẩm</h1>
+	<%ArrayList<DanhGiaBean> dsdg = (ArrayList<DanhGiaBean>)request.getAttribute("dsdg");
+	if(dsdg!=null){
+	for(DanhGiaBean ds : dsdg){%>
+		<div class="containers">
+		    <div class="reviews">
+		        <div class="review">
+		        	<div  style="display: flex;justify-content: space-between;">
+			        	<div> 
+			        	<%ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>)request.getAttribute("dskh");
+			        	if(dskh != null){
+			        		for(khachhangthibean ds1 : dskh){
+			        			if (ds1.getMaKhachHang() == ds.getMaKhachHang()){%>
+			        		
+				            <div class="reviewer"  style="font-size: 26px"><%=ds1.getHoTen()%></div>
+			        		<%
+			        			}
+			        		}
+			        	}
+			        	%>
+				            <div class="rating">
+							    <% for (int i = 0; i < ds.getSoSao(); i++) { %>
+							        <i class="fas fa-star"></i>
+							    <% } %>
+							    <% for (int i = 0; i < 5 - ds.getSoSao(); i++) { %>
+							        <i class="far fa-star"></i>
+							    <% } %>
+							    <%= ds.getSoSao() %> sao
+							</div>
+			           </div>
+			            <div>
+			            	<div class="date" style="padding: 10px 10px 0 0;"><%=ds.getNgayDanhGia() %></div>
+			            </div>
+		        	</div>
+		        	<hr>
+			         <span style="opacity: 0.5">Nội dung đánh giá:</span> 
+		            <div class="reviewer" style="font-size: 26px"><%=ds.getNoiDungDanhGia() %></div>
+		        </div>
+		        <!-- Thêm các đánh giá khác ở đây -->
+		    </div>
+		</div>
+	<%}}%> --%>
+	
 	
 	<div id="footer" class="footer-contact"
 		style="background-color: #446879; color: white;">

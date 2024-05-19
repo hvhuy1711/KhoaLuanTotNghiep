@@ -328,4 +328,37 @@ public class DonHangDaDatDao {
 		kn.cn.close();
 		return kq;
 	}
+	public int UpdateTrangThaiTra(int MaChiTiet, String GhiChuLS) throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "update ViewLichSuMua set TrangThai = 4,GhiChuLS=? where MaChiTiet = ?";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		cmdup.setString(1, GhiChuLS);
+		cmdup.setInt(2, MaChiTiet);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
+		return kq;
+	}
+	public int UpdateTrangThaiTraAdmin(int MaChiTiet) throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "update ViewLichSuMua set TrangThai = 4 where MaChiTiet = ?";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		cmdup.setInt(1, MaChiTiet);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
+		return kq;
+	}
+	public int UpdateTrangThaiCT() throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "update ViewLichSuMua set TrangThaiCT = 1";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
+		return kq;
+	}
 }

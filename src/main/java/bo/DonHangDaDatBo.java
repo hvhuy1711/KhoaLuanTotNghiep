@@ -39,4 +39,14 @@ public class DonHangDaDatBo {
 	public int UpdateTrangThaiHuyDon(int MaChiTiet) throws Exception{
 		return dhdao.UpdateTrangThaiHuyDon(MaChiTiet);
 	}
+	
+	public int UpdateTrangThaiTra(int MaChiTiet, String GhiChuLS) throws Exception{
+		return dhdao.UpdateTrangThaiTra(MaChiTiet, GhiChuLS);
+	}
+	public int UpdateTrangThaiTraAdmin(int MaChiTiet) throws Exception{
+		return dhdao.UpdateTrangThaiTraAdmin(MaChiTiet);
+	}
+	public int UpdateTrangThaiCT() throws Exception{
+		return dhdao.UpdateTrangThaiCT();
+	}
 }

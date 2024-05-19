@@ -626,6 +626,7 @@
 					<th>Số lượng</th>
 					<th>Kích thước</th>
 					<th>Ngày đặt</th>
+					<th>Trả hàng</th>
 					<th>Xem chi tiết</th>
 					<th>Nút mua</th>
 					<th>Trạng thái hàng</th>
@@ -709,7 +710,8 @@
 									<p style="color: red">Đã nhận hàng</p>
 								<%}else if (dsdonhang.get(i).getTrangThai() == 3){ %>
 									<p style="color: red">Đã hoàn thành</p>
-									
+								<%}else if (dsdonhang.get(i).getTrangThai() == 4){ %>
+								<p style="color: red">Chờ xác nhận trả</p>
 								<%} %>
 							</form>
 						</div>
@@ -730,6 +732,15 @@
 			<td><%=dsdonhang.get(i).getSoLuongMua()%></td>
 			<td><%=dsdonhang.get(i).getGhiChuCT()%></td>
 			<td><%=dsdonhang.get(i).getNgayMua()%></td>
+			<%if (dsdonhang.get(i).getTrangThai() == 3){%>
+				<td>
+				<a href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
+				</td>
+			<%}else{ %>
+				<td>
+				<a class="disabled" href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
+				</td>
+			<%} %>
 			<td><a
 				data-toggle="modal" data-target="#myModal<%=dsdonhang.get(i).getMaChiTiet()%>"
 				style="border: 1px solid #ccc;cursor:pointer; padding: 7px; background-color: #446879; color: #fff; border-radius: 10px">
@@ -759,7 +770,10 @@
 					<i style="padding: 5px"  class="fa-solid fa-check"></i>Đã hoàn thành</a>
 					<a href="DanhGiaSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Đánh giá</a>
 					</td>
-					
+				<%}else if (dsdonhang.get(i).getTrangThai() == 4){ %>
+				<td><a
+				style="border: 1px solid #ccc; cursor: pointer; opacity: 0.5; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;">
+					<i style="padding: 5px" class="fa-solid fa-hourglass-start"></i>Chờ xác nhận trả</a></td>
 					<%} %>
 			<%-- <td><a href="adminloaispcontroller?ml=<%=loai.getMaLoai()%>&tl=<%=loai.getTenLoai() %> &tab=chon"
 		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
