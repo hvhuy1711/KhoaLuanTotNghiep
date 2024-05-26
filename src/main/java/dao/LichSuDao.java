@@ -40,4 +40,17 @@ public class LichSuDao {
 		cmd.close();kn.cn.close();
 		return kq;
 	}
+	
+	public int DeleteLichSu(int MaLichSu) throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "DELETE FROM [dbo].[LichSuMua]\r\n"
+				+ "      WHERE MaLichSu = ?";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		cmdup.setInt(1, MaLichSu);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
+		return kq;
+	}
 }

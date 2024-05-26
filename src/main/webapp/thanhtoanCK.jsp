@@ -25,6 +25,7 @@
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="animation.css">
 <style type="text/css">
 .courses_wrapper {
 	display: flex;
@@ -62,10 +63,9 @@
 }
 
 .course_item_btn {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	display:block;
+	margin: 0 auto;
+	cursor: pointer;
 	font-size: 16px;
 	padding: 15px 60px;
 	border-radius: 10px;
@@ -525,6 +525,17 @@
 		<button class="course_item_btn" data-coursesID="<%=magio%>"
 			data-coursesPrice="<%=tongtien%>">Hiện Mã QR</button>
 	</div>
+	<div style="padding: 10px"></div>
+	<ul class="animation">
+      <li class="animation-li" style="--delay: 1.4s; --color: #ffff00"></li>
+      <li class="animation-li" style="--delay: 1.2s; --color: #76ff03"></li>
+      <li class="animation-li" style="--delay: 1s; --color: #f06292"></li>
+      <li class="animation-li" style="--delay: 0.8s; --color: #4fc3f7"></li>
+      <li class="animation-li" style="--delay: 0.6s; --color: #ba68c8"></li>
+      <li class="animation-li" style="--delay: 0.4s; --color: #f57c00"></li>
+      <li class="animation-li" style="--delay: 0.2s; --color: #673ab7"></li>
+    </ul>
+	<div style="padding: 10px"></div>	
 	<div class="courses_wrapper">
 		<div class="courses_inner"></div>
 		<div class="courses_qr" style="text-align: center;">

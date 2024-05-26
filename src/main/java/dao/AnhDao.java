@@ -37,7 +37,7 @@ public class AnhDao {
 		String sql = "SELECT *\r\n"
 				+ "  FROM [dbo].[Anh] where MaSanPham= ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		cmd.setInt(1, MaSanPham); // Gán giá trị tham số
+		cmd.setInt(1, MaSanPham); 
 		ResultSet rs = cmd.executeQuery();
 		while (rs.next()) {
 			int MaAnh = rs.getInt("MaAnh");

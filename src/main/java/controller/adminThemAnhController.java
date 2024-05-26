@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.AnhBean;
+import bean.KichThuocBean;
+import bean.loaispbean;
 import bean.sanphamfullbean;
 import bo.AnhBo;
+import bo.KichThuocBo;
+import bo.loaispbo;
 import bo.sanphambo;
 
 /**
@@ -50,10 +54,16 @@ public class adminThemAnhController extends HttpServlet {
 				ArrayList<AnhBean> dsAnh = anhbo.getdsAnh(maspInt);
 				sanphambo spbo = new sanphambo();
 				sanphamfullbean sp = spbo.get1sanpham(masp);
+				KichThuocBo ktbo = new KichThuocBo();
+				ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(maspInt);
+				request.setAttribute("dskichthuoc", dskt);
 				request.setAttribute("dssanpham", spbo.getsanpham());
 				request.setAttribute("sp", sp);
 				request.setAttribute("dsAnh", dsAnh);
 				session.removeAttribute("masp");
+				loaispbo loai = new loaispbo();
+				ArrayList<loaispbean> dsloai = loai.getloaisp();
+				request.setAttribute("dsloai", dsloai);
 			}
 			else {
 				String masp = request.getParameter("masp");
@@ -62,9 +72,15 @@ public class adminThemAnhController extends HttpServlet {
 				ArrayList<AnhBean> dsAnh = anhbo.getdsAnh(maspInt);
 				sanphambo spbo = new sanphambo();
 				sanphamfullbean sp = spbo.get1sanpham(masp);
+				KichThuocBo ktbo = new KichThuocBo();
+				ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(maspInt);
+				request.setAttribute("dskichthuoc", dskt);
 				request.setAttribute("dssanpham", spbo.getsanpham());
 				request.setAttribute("sp", sp);
 				request.setAttribute("dsAnh", dsAnh);
+				loaispbo loai = new loaispbo();
+				ArrayList<loaispbean> dsloai = loai.getloaisp();
+				request.setAttribute("dsloai", dsloai);
 			}
 			if (session.getAttribute("checkXoaChonAnh") != null) {
 				request.setAttribute("checkXoaChonAnh", (boolean) session.getAttribute("checkXoaChonAnh"));
@@ -77,6 +93,10 @@ public class adminThemAnhController extends HttpServlet {
 			if (session.getAttribute("checkXoaCheckBox") != null) {
 				request.setAttribute("checkXoaCheckBox", (boolean) session.getAttribute("checkXoaCheckBox"));
 				session.removeAttribute("checkXoaCheckBox");
+			}
+			if (session.getAttribute("checkDSAnh") != null) {
+				request.setAttribute("checkDSAnh", (boolean) session.getAttribute("checkDSAnh"));
+				session.removeAttribute("checkDSAnh");
 			}
 			RequestDispatcher rd = 
 					request.getRequestDispatcher("ThemAnh.jsp");

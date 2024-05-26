@@ -238,19 +238,43 @@
 <div class="notifications"></div>
 	<script src="assets/ThongBao.js"></script>
 	<%
-	if (request.getAttribute("checkThem") != null) {
-		boolean checkThem = (boolean) request.getAttribute("checkThem");
-		if (checkThem == true) {
+	if (request.getAttribute("checkThemSP") != null) {
+		boolean checkThemSP = (boolean) request.getAttribute("checkThemSP");
+		if (checkThemSP == true) {
 	%>
 	<script type="text/javascript">
 		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
 				'Đã thêm thành công sản phẩm');
 	</script>
 	<%
-	}
+	}else{%>
+		<script type="text/javascript">
+		createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+				'Tên sản phẩm đã tồn tại!! Vui lòng nhập tên sản phẩm khác!!');
+	</script>
+	<%}
 	}
 	%>
 	
+	<%
+	if (request.getAttribute("checkSuaSP") != null) {
+		boolean checkSuaSP = (boolean) request.getAttribute("checkSuaSP");
+		if (checkSuaSP == true) {
+	%>
+	<script type="text/javascript">
+		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+				'Bạn đã cập nhật thành công sản phẩm sản phẩm');
+	</script>
+	<%
+	}else{%>
+		<script type="text/javascript">
+		createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+				'Tên sản phẩm đã tồn tại!! Vui lòng nhập tên sản phẩm khác!!');
+	</script>
+	<%}
+	}
+	%>
+	<%-- 
 	<script src="assets/ThongBao.js"></script>
 	<%
 	if (request.getAttribute("checkCN") != null) {
@@ -264,7 +288,7 @@
 	<%
 	}
 	}
-	%>
+	%> --%>
 	<script src="assets/ThongBao.js"></script>
 	<%
 	if (request.getAttribute("checkXoa") != null) {
@@ -387,7 +411,7 @@
 				src="<%=request.getAttribute("anh")%>">
 			<div style="position: relative; display: inline-block;">
 				<p>Chọn ảnh</p>
-				<input name="anh" type="file" multiple>
+				<input name="anh" type="file" multiple required="required">
 			</div>
 		</div>
 		<br>
@@ -534,7 +558,7 @@
 									src="<%=loai.getAnh()%>" >
 								<div style="position: relative; display: inline-block;">
 									<p>Chọn ảnh thay đổi</p>
-									<input id="imageInput" name="anh" type="file" multiple onchange="displayImage()">
+									<input id="imageInput" name="anh" type="file" multiple onchange="displayImage()" required="required">
 								</div>
 								<div style="position: relative; display: inline-block;">
 								<p id = "anhSwap" style="display: none">Thay đổi thành</p>
@@ -626,8 +650,8 @@
 		<tr style="font-weight: bold;">
 			<td><%=loai.getMaSanPham()%></td>
 			<td><%=loai.getTenSanPham()%></td>
-			<td><%=loai.getGia()%></td>
-			<td><%=loai.getChiecKhau()%></td>
+			<td><%=loai.getGia()%>đ</td>
+			<td><%=loai.getChiecKhau()%>%</td>
 			<td><img style="width: 40px;" alt="" src="<%=loai.getAnh()%>">
 			</td>
 				<td><a

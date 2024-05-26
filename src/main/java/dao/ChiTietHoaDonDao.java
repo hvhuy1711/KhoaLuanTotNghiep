@@ -29,9 +29,21 @@ public class ChiTietHoaDonDao {
 		cmd.setString(4, GhichuCT);
 		cmd.setLong(5, DongiaSP);
 		cmd.setInt(6, SoLuongMua);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
+		return kq;
+	}
+	
+	public int DeleteChiTiet(int MaChiTiet) throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "DELETE FROM [dbo].[ChiTietHD]\r\n"
+				+ "      WHERE MaChiTiet = ?";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		cmdup.setInt(1, MaChiTiet);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
 		return kq;
 	}
 }

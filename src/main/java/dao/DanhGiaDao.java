@@ -34,10 +34,8 @@ public class DanhGiaDao {
 		cmd.setString(4, NoiDung);
 		Date n1 = new Date();
 		SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
-		//Doi ngay util theo dung dinh dang
-		String tam=dd.format(n1); //"2023-07-27"
-		Date n2 = dd.parse(tam);//Doi chuoi ra ngay util
-		//Doi ngay util sang ngay sql va dua vào tham so
+		String tam=dd.format(n1);
+		Date n2 = dd.parse(tam);
 		cmd.setDate(5, new java.sql.Date(n2.getTime()));
 		cmd.setBoolean(6, IsDanhGia);
 		int rs = cmd.executeUpdate();

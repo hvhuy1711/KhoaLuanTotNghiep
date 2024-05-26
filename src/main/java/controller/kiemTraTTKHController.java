@@ -97,18 +97,6 @@ public class kiemTraTTKHController extends HttpServlet {
 						request.setAttribute("dsgio", dsgiott);
 					}
 				}
-			
-//			
-//				HttpSession session = request.getSession();
-//				khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
-//					long makh = kh.getMaKhachHang();
-//					int maSPMUAInt = Integer.parseInt(maSPMUA);
-//					giospbo gh = new giospbo();
-//					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
-//						if (dsgiott != null) {
-//							request.setAttribute("dsgio", dsgiott);
-//						}
-//					request.setAttribute("dn", kh);
 					RequestDispatcher rd = 
 							request.getRequestDispatcher("kiemTraTTKH.jsp");
 					rd.forward(request, response);

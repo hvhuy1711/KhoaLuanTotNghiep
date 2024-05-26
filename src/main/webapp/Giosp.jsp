@@ -874,7 +874,7 @@
 							alt="" src="<%=s.getAnh()%>">
 					</div>
 					<div class="col-sm-7">
-						<form action="giospcontroller" id="cnkichthuoc" method="get"></form>
+						<form action="giospcontroller" id="cnkichthuoc" method="post"></form>
 						<h3><%=s.getTenSanPham()%></h3>
 						<%
 							 long giaLong = s.getGia();

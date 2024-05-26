@@ -39,6 +39,7 @@ public class DonHangDaDatDao {
 				+ "      ,[GhiChuLS]\r\n"
 				+ "      ,[NgayMua]\r\n"
 				+ "      ,[ChiecKhau]\r\n"
+				+ "      ,[MaLichSu]\r\n"
 				+ "  FROM [QLHvhShop].[dbo].[ViewLichSuMua]";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		ResultSet rs = cmd.executeQuery();
@@ -68,7 +69,8 @@ public class DonHangDaDatDao {
 			int TrangThaiDon = rs.getInt("TrangThaiDon");
 			Date NgayMua = rs.getDate("NgayMua");
 			int ChiecKhau = rs.getInt("ChiecKhau");
-			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau));
+			int MaLichSu = rs.getInt("MaLichSu");
+			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau, MaLichSu));
 		}
 		rs.close();
 		cmd.close();
@@ -105,9 +107,10 @@ public class DonHangDaDatDao {
 				+ "      ,[GhiChuLS]\r\n"
 				+ "      ,[NgayMua]\r\n"
 				+ "      ,[ChiecKhau]\r\n"
+				+ "      ,[MaLichSu]\r\n"
 				+ "  FROM [QLHvhShop].[dbo].[ViewLichSuMua] where MaKhachHang = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		cmd.setLong(1, MaKhachHang); // Gán giá trị tham số
+		cmd.setLong(1, MaKhachHang); 
 		ResultSet rs = cmd.executeQuery();
 		while (rs.next()) {
 			int MaChiTiet = rs.getInt("MaChiTiet");
@@ -135,7 +138,8 @@ public class DonHangDaDatDao {
 			int TrangThaiDon = rs.getInt("TrangThaiDon");
 			Date NgayMua = rs.getDate("NgayMua");
 			int ChiecKhau = rs.getInt("ChiecKhau");
-			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau));
+			int MaLichSu = rs.getInt("MaLichSu");
+			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau, MaLichSu));
 		}
 		rs.close();
 		cmd.close();
@@ -173,9 +177,10 @@ public class DonHangDaDatDao {
 				+ "      ,[GhiChuLS]\r\n"
 				+ "      ,[NgayMua]\r\n"
 				+ "      ,[ChiecKhau]\r\n"
+				+ "      ,[MaLichSu]\r\n"
 				+ "  FROM [QLHvhShop].[dbo].[ViewLichSuMua] where MaChiTiet = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		cmd.setLong(1, MaChiTiet); // Gán giá trị tham số
+		cmd.setLong(1, MaChiTiet); 
 		ResultSet rs = cmd.executeQuery();
 		if (rs.next()) {
 			int mact = rs.getInt("MaChiTiet");
@@ -203,7 +208,9 @@ public class DonHangDaDatDao {
 			int TrangThaiDon = rs.getInt("TrangThaiDon");
 			Date NgayMua = rs.getDate("NgayMua");
 			int ChiecKhau = rs.getInt("ChiecKhau");
-			ds=  new DonHangDaDatBean(mact, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau);
+			int MaLichSu = rs.getInt("MaLichSu");
+			
+			ds=  new DonHangDaDatBean(mact, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, TrangThaiDon, GhiChuCT, NgayMua, ChiecKhau, MaLichSu);
 		}
 		rs.close();
 		cmd.close();
@@ -241,6 +248,7 @@ public class DonHangDaDatDao {
 				+ "      ,[GhiChuLS]\r\n"
 				+ "      ,[NgayMua]\r\n"
 				+ "      ,[ChiecKhau]\r\n"
+				+ "      ,[MaLichSu]\r\n"
 				+ "  FROM [QLHvhShop].[dbo].[ViewLichSuMua] where TrangThai = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setInt(1, TrangThaiDon);
@@ -268,12 +276,12 @@ public class DonHangDaDatDao {
 			String Hang = rs.getString("Hang");
 			int MaLoai = rs.getInt("MaLoai");
 			String MoTaSanPham = rs.getString("MoTaSanPham");
-//	    	Date NgayDatDon = rs.getDate("NgayDatDon");
 			int ttdon = rs.getInt("TrangThaiDon");
 			String GhiChuLS = rs.getString("GhiChuLS");
 			Date NgayMua = rs.getDate("NgayMua");
 			int ChiecKhau = rs.getInt("ChiecKhau");
-			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, ttdon, GhiChuLS, NgayMua, ChiecKhau));
+			int MaLichSu = rs.getInt("MaLichSu");
+			ds.add(new DonHangDaDatBean(MaChiTiet, TrangThaiCt, GhiChuCT, DonGiaSP, SoLuongMua, MaHoaDon, makh, HoTen, DiaChi, SoDT, Email, TenDN, Quyen, google_id, TongTien, TrangThai, MaSanPham, TenSanPham, Anh, Hang, MaLoai, MoTaSanPham, ttdon, GhiChuLS, NgayMua, ChiecKhau, MaLichSu));
 		}
 		rs.close();
 		cmd.close();

@@ -332,8 +332,8 @@
 			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
 					'Bạn cập nhật số điện thoại chưa đúng quy định'); 
 		</script>
-		<%
-		} 
+	
+		<%}
 		} %>
 		
 		<%if (request.getAttribute("checkEmail") != null) {

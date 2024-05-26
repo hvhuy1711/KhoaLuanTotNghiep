@@ -9,7 +9,6 @@ public class MaHoaMk {
 	public static String toSHA1(String str) {
 		String salt = "asjrlkmcoewj@tjle;jdamxhsaiduasuxsajnas";
 		String result = null;
-		
 		str = str + salt;
 		try {
 			byte[] dataBytes = str.getBytes("UTF-8");

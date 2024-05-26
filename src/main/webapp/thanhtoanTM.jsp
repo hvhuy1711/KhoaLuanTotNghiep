@@ -26,6 +26,7 @@
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="animation.css">
 <style type="text/css">
 .disabled {
     opacity: 0.5; /* Làm mờ nút */
@@ -446,7 +447,17 @@
 			</div>
 		</div>
 	</div>
-	<div style="padding: 20px"></div>	
+	<div style="padding: 10px"></div>
+	<ul class="animation">
+      <li class="animation-li" style="--delay: 1.4s; --color: #ffff00"></li>
+      <li class="animation-li" style="--delay: 1.2s; --color: #76ff03"></li>
+      <li class="animation-li" style="--delay: 1s; --color: #f06292"></li>
+      <li class="animation-li" style="--delay: 0.8s; --color: #4fc3f7"></li>
+      <li class="animation-li" style="--delay: 0.6s; --color: #ba68c8"></li>
+      <li class="animation-li" style="--delay: 0.4s; --color: #f57c00"></li>
+      <li class="animation-li" style="--delay: 0.2s; --color: #673ab7"></li>
+    </ul>
+	<div style="padding: 10px"></div>	
 	<a href="ThanhToanTMController?btnXacNhan" id="myButton" onclick="disableButton(this)"
 		style="float:right;  padding: 15px 60px;font-size: 16px; font-weight:bold; background-color: red; color: #fff; border-radius: 5px; text-decoration: none; margin: 0 70px 20px 0">Hoàn Tất Thanh Toán			
 			</a>

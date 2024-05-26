@@ -37,10 +37,8 @@ public class giospdao {
 				long slmua = rs.getLong("SoLuongMua");
 				long donGia = rs.getLong("DonGia");
 				String GhiChu = rs.getString("GhiChu");
-//				long tt = rs.getLong("")
 				ds.add(new giospbean(masp, tenSp, soLuong, Gia, ChiecKhau, anh, MaLoai, Hang, NgayNhap, Mota, magh, makh, slmua, donGia, GhiChu, Gia*slmua));	
 		    }
-		    // Đóng kết nối
 		    rs.close();
 		    cmd.close();
 		    kn.cn.close();
@@ -58,7 +56,7 @@ public class giospdao {
 				+ "             dbo.SanPham ON dbo.GioHang.MaSanPham = dbo.SanPham.MaSanPham"
 				+ "				where dbo.GioHang.MaKhachHang = ?";
 		 PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		    cmd.setLong(1, MaKhachHang); // Gán giá trị tham số
+		    cmd.setLong(1, MaKhachHang); 
 		    ResultSet rs = cmd.executeQuery();
 		    while (rs.next()) {
 		    	int masp = rs.getInt("MaSanPham");
@@ -76,10 +74,8 @@ public class giospdao {
 				long slmua = rs.getLong("SoLuongMua");
 				long donGia = rs.getLong("DonGia");
 				String GhiChu = rs.getString("GhiChu");
-//				long tt = rs.getLong("")
 				ds.add(new giospbean(masp, tenSp, soLuong, Gia, ChiecKhau, anh, MaLoai, Hang, NgayNhap, Mota, magh, makh, slmua, donGia, GhiChu, Gia*slmua));	
 		    }
-		    // Đóng kết nối
 		    rs.close();
 		    cmd.close();
 		    kn.cn.close();
@@ -118,10 +114,8 @@ public class giospdao {
 				long slmua = rs.getLong("SoLuongMua");
 				long donGia = rs.getLong("DonGia");
 				String GhiChu1 = rs.getString("GhiChu");
-//				long tt = rs.getLong("")
 				ds.add(new giospbean(masp, tenSp, soLuong, Gia, ChiecKhau, anh, MaLoai, Hang, NgayNhap, Mota, magh, makh, slmua, donGia, GhiChu1, Gia*slmua));	
 		    }
-		    // Đóng kết nối
 		    rs.close();
 		    cmd.close();
 		    kn.cn.close();
@@ -140,7 +134,7 @@ public class giospdao {
 				+ "             dbo.SanPham ON dbo.GioHang.MaSanPham = dbo.SanPham.MaSanPham"
 				+ "				where dbo.GioHang.MaKhachHang = ? and dbo.SanPham.MaSanPham = ?";
 		 PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		    cmd.setLong(1, MaKhachHang); // Gán giá trị tham số
+		    cmd.setLong(1, MaKhachHang); 
 		    cmd.setLong(2, MaSanPham);
 		    ResultSet rs = cmd.executeQuery();
 		    if (rs.next()) {
@@ -159,28 +153,14 @@ public class giospdao {
 				long slmua = rs.getLong("SoLuongMua");
 				long donGia = rs.getLong("DonGia");
 				String GhiChu = rs.getString("GhiChu");
-//				long tt = rs.getLong("")
 				gio = new giospbean(masp, tenSp, soLuong, Gia, ChiecKhau, anh, MaLoai, Hang, NgayNhap, Mota, magh, makh, slmua, donGia, GhiChu, donGia);
 				}
-		    // Đóng kết nối
 		    rs.close();
 		    cmd.close();
 		    kn.cn.close();
 		    return gio;
 	}
 	
-//	public int DemSLGH(int MaKhachHang) throws Exception{
-//		ketnoidao kn = new ketnoidao();
-//		kn.ketnoi();
-//		String sql = "Select COUNT(*) from GioHang where MaKhachHang = ?";
-//		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-//	    cmd.setInt(1, MaKhachHang); // Gán giá trị tham số
-//	    ResultSet rs = cmd.executeQuery();
-//	    if (rs.next()) {
-//	    	return rs.next();
-//	    }
-//		
-//	}
 	
 	public int ThemSpGio(int MaKhachHang, int MaSanPham, long SoLuongMua, long DonGia,String GhiChu) throws Exception{
 		ketnoidao kn = new ketnoidao();
@@ -198,15 +178,13 @@ public class giospdao {
 				+ "           ,?\r\n"
 				+ "           ,?)";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		//Truyen 4 tham so vao cau lenh sql
 		cmd.setInt(1, MaKhachHang);
 		cmd.setInt(2, MaSanPham);
 		cmd.setLong(3, SoLuongMua);
 		cmd.setLong(4, DonGia);
 		cmd.setString(5, GhiChu);
 		
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}
@@ -222,8 +200,7 @@ public class giospdao {
 		cmd.setLong(1, SoLuongMua);
 		cmd.setLong(2, MaSanPham);
 		cmd.setString(3, GhiChu);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}
@@ -237,8 +214,7 @@ public class giospdao {
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setString(1, GhiChu);
 		cmd.setInt(2, MaSanPham);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}
@@ -252,8 +228,7 @@ public class giospdao {
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setLong(1, SoLuongMua);
 		cmd.setLong(2, MaGioHang);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}
@@ -266,8 +241,7 @@ public class giospdao {
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setInt(1, MaSanPham);
 		cmd.setString(2, Ghichu);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 		
@@ -279,8 +253,7 @@ public class giospdao {
 				+ "      WHERE MaSanPham = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setInt(1, MaSanPham);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 		
@@ -294,8 +267,7 @@ public class giospdao {
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setInt(1, MaSanPham);
 		cmd.setString(2, ghichu);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 		
@@ -308,8 +280,7 @@ public class giospdao {
 				+ "      WHERE MaKhachHang = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setInt(1, MaKhachHang);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}
@@ -323,8 +294,7 @@ public class giospdao {
 		cmd.setInt(1, MaSanPham);
 		cmd.setString(2, GhiChu);
 		cmd.setLong(3, MaKhachHang);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();kn.cn.close();
 		return kq;
 	}

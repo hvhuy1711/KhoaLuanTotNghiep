@@ -39,9 +39,6 @@ public class capNhatSizeController extends HttpServlet {
 		try {
 			response.setCharacterEncoding("utf-8");
 			request.setCharacterEncoding("utf-8");
-//			HttpSession session = request.getSession();
-//			khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-//			long makh = kh.getMaKhachHang();kichthuocsp
 			String kichthuocsp = request.getParameter("kichthuocsp");
 			String tensp = request.getParameter("tensp");
 			String maspsize = request.getParameter("maspsize");
@@ -49,8 +46,6 @@ public class capNhatSizeController extends HttpServlet {
 			int maspsizeInt = Integer.parseInt(maspsize);
 			ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(maspsizeInt);
 			request.setAttribute("dskt", (ArrayList<KichThuocBean>)dskt);
-//			giospbo gh = new giospbo();
-//			ArrayList<giospbean> dsgiosp = gh.getdsgio(makh);
 			request.setAttribute("tensp", tensp);
 			request.setAttribute("kichthuocsp", kichthuocsp);
 			RequestDispatcher rd = request.getRequestDispatcher("giospcontroller");

@@ -241,6 +241,12 @@
 				'Thêm danh mục thành công!!');
 	</script>
 	<%
+	}else{%>
+	<script type="text/javascript">
+		createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+				'Tên danh mục này đã tồn tại!! Không thể thêm.');
+	</script>
+	<%
 	}
 	}
 	%>
@@ -271,14 +277,14 @@
 		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
 				'Xóa danh mục thành công!!');
 	</script>
-	<%
-	}
+	
+	<%}
 	}
 	%>
 
 
 <form action="adminloaispcontroller" method="get" style="margin-top: 140px"  class="text-center">
-	<h1 style="color: black;">Trang ADMIN Sửa danh mục Sản Phẩm</h1>
+	<h1 style="color: black;">Trang ADMIN Quản lí danh mục</h1>
 	<div style="border: 2px solid #446789;padding: 30px;margin: 30px;border-radius: 20px">
 	<div class="form-row">
 			<span class="labelspan">Tên danh mục:</span>
@@ -360,7 +366,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Thông tin cập nhật kích thước</h4>
+						<h4 class="modal-title">Thông tin cập nhật danh mục</h4>
 					</div>
 					<div class="Form">
 						<form style="text-align: center;" action="adminCNLoaiController" method="get" >

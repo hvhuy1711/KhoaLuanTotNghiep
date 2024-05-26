@@ -96,4 +96,24 @@ public class loaispdao{
 		return kq;
 	}
 	
+	public ArrayList<String> getTenDanhMuc() throws Exception{
+		 ArrayList<String> listTenDM = new ArrayList<>(); // Changed to ArrayList<String>
+
+		    ketnoidao kn = new ketnoidao();
+		    kn.ketnoi();
+		    String sql = "SELECT DISTINCT TenLoai\r\n"
+		    		+ "FROM LoaiSanPham";
+		    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+
+		    ResultSet rs = cmd.executeQuery();
+
+		    while (rs.next()) {
+		        String tenloai = rs.getString("TenLoai");
+		        listTenDM.add(tenloai); // Add Hang value to the list
+		    }
+
+		    rs.close();
+		    kn.cn.close();
+		    return listTenDM; 
+	}
 }

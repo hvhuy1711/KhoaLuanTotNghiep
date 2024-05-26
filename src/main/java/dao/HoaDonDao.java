@@ -26,14 +26,11 @@ public class HoaDonDao {
 		cmd.setLong(1, MaKhacHang);
 		Date n1 = new Date();
 		SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
-		//Doi ngay util theo dung dinh dang
-		String tam=dd.format(n1); //"2023-07-27"
-		Date n2 = dd.parse(tam);//Doi chuoi ra ngay util
-		//Doi ngay util sang ngay sql va dua vào tham so
+		String tam=dd.format(n1);
+		Date n2 = dd.parse(tam);
 		cmd.setDate(2, new java.sql.Date(n2.getTime()));
 		cmd.setInt(3, TrangThaiDon);
-		int kq = cmd.executeUpdate();// thuc hien cau lenh sql
-		//b6 : Dong rs va ket noi
+		int kq = cmd.executeUpdate();
 		cmd.close();
 		kn.cn.close();
 		return kq;
@@ -46,7 +43,7 @@ public ArrayList<HoaDonBean> GetDSHoaDon(long MaKhachHang) throws Exception{
 	kn.ketnoi();
 	String sql = "select * from HoaDon where MaKhachHang = ?";
 	PreparedStatement cmd = kn.cn.prepareStatement(sql);
-	cmd.setLong(1, MaKhachHang); // Gán giá trị tham số
+	cmd.setLong(1, MaKhachHang);
 	ResultSet rs = cmd.executeQuery();
 	while (rs.next()) {
 		int MaHoaDon = rs.getInt("MaHoaDon");
@@ -67,7 +64,7 @@ public ArrayList<HoaDonBean> GetDSHoaDon(long MaKhachHang) throws Exception{
 		kn.ketnoi();
 		String sql = "select * from HoaDon where MaKhachHang = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-	    cmd.setLong(1, MaKhachHang); // Gán giá trị tham số
+	    cmd.setLong(1, MaKhachHang);
 	    ResultSet rs = cmd.executeQuery();
 	    if (rs.next()) {
 			int MaHoaDon = rs.getInt("MaHoaDon");
@@ -80,5 +77,17 @@ public ArrayList<HoaDonBean> GetDSHoaDon(long MaKhachHang) throws Exception{
 	    cmd.close();
 	    kn.cn.close();
 		return hd;
+	}
+	public int DeleteHoaDon(int MaHoaDon) throws Exception{
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "DELETE FROM [dbo].[HoaDon]\r\n"
+				+ "      WHERE MaHoaDon = ?";
+		PreparedStatement cmdup = kn.cn.prepareStatement(sql);
+		cmdup.setInt(1, MaHoaDon);
+		int kq = cmdup.executeUpdate();
+		cmdup.close();
+		kn.cn.close();
+		return kq;
 	}
 }

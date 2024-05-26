@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -113,16 +114,20 @@ public class adminThemSanPhamController extends HttpServlet {
 						 }
 					}
 				}
+				HttpSession session = request.getSession();
 				long giacu1 = Long.parseLong(giacu);
 				long giamoi1 = Long.parseLong(giamoi);
 				long gianhap1 = Long.parseLong(gianhap);
 				sanphambo sbo = new sanphambo();
 				sbo.getsanpham();
-				sbo.Themsp(tensanpham, gianhap1, giacu1, giamoi1, anh, hang, maloai, mota);
-				System.out.println("thêm thành công");
-				HttpSession session = request.getSession();
-				boolean checkThem = true;
-				session.setAttribute("checkThem", checkThem);
+				ArrayList<String> dsSP = sbo.getTenSanPham();
+				if(dsSP == null || dsSP.contains(tensanpham)) {
+					session.setAttribute("checkThemSP", false);
+				}else {						
+				
+					sbo.Themsp(tensanpham, gianhap1, giacu1, giamoi1, anh, hang, maloai, mota);
+					session.setAttribute("checkThemSP", true);
+				}
 				response.sendRedirect("adminsanphamcontroller");
 				return;
 				
@@ -130,10 +135,6 @@ public class adminThemSanPhamController extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}	
-		/*
-		 * RequestDispatcher rd = request.getRequestDispatcher("AdminThemSanPham.jsp");
-		 * rd.forward(request, response);
-		 */
 
 	}
 

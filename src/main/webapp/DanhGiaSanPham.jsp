@@ -519,9 +519,9 @@ h2 {
 	<div class="notifications"></div>
 	<script src="assets/ThongBao.js"></script>
 	<%
-	if (request.getAttribute("chechDanhGia") != null) {
-		boolean chechDanhGia = (boolean) request.getAttribute("chechDanhGia");
-		if (chechDanhGia == true) {
+	if (request.getAttribute("checkDanhGia") != null) {
+		boolean checkDanhGia = (boolean) request.getAttribute("checkDanhGia");
+		if (checkDanhGia == true) {
 	%>
 	<script type="text/javascript">
 		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
@@ -584,15 +584,15 @@ h2 {
                     <label>Đánh giá của bạn</label>
                     <div class="reviews-counter">
                         <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" onchange="updateRating(this.value)" />
+                            <input type="radio" id="star5" name="rate" value="5" required onchange="updateRating(this.value)" />
                             <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" onchange="updateRating(this.value)" />
+                            <input type="radio" id="star4" name="rate" value="4" required onchange="updateRating(this.value)" />
                             <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" onchange="updateRating(this.value)" />
+                            <input type="radio" id="star3" name="rate" value="3" required onchange="updateRating(this.value)" />
                             <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" onchange="updateRating(this.value)" />
+                            <input type="radio" id="star2" name="rate" value="2" required onchange="updateRating(this.value)" />
                             <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" onchange="updateRating(this.value)" />
+                            <input type="radio" id="star1" name="rate" value="1" required onchange="updateRating(this.value)" />
                             <label for="star1" title="text">1 star</label>
                             
                             <!-- Thẻ input để lưu trữ số sao đã chọn -->
@@ -610,7 +610,7 @@ h2 {
                 </div>
                 <div class="form-group">
                     <label>Nội Dung</label>
-                    <textarea name="nd" class="form-control" rows="10" name="comment"></textarea>
+                    <textarea name="nd" class="form-control" rows="10" name="comment" required="required"></textarea>
                 </div>
                 <% ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>)request.getAttribute("dskh");
                 khachhangthibean kh1 = (khachhangthibean)session.getAttribute("dn");
@@ -643,7 +643,7 @@ h2 {
                     }
                 } %>
                <div style="display: flex;justify-content: flex-end; align-items: center;">
-                <button class="round-black-btn" style="">Gửi Bình Luận</button>
+                <button class="round-black-btn" style="border: 2px solid; padding: 10px;border-radius: 10px;font-weight: bold;">Gửi Bình Luận</button>
                </div>
                
             </form>

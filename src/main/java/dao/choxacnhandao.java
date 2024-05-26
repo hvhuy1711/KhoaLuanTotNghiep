@@ -42,7 +42,6 @@ public class choxacnhandao {
 	public int dathang(String MaSanPham) throws Exception{
 		ketnoidao kn = new ketnoidao();
 		kn.ketnoi();
-		// cau lệnh update
 				String sql1 = "update VXacNhanDatMua set DaMua = 1 where MaSanPham = ?";
 				PreparedStatement cmdup = kn.cn.prepareStatement(sql1);
 				cmdup.setString(1, MaSanPham);

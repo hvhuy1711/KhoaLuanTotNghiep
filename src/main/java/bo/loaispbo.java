@@ -21,6 +21,9 @@ public class loaispbo {
 			return null;
 	}
 	
+	public ArrayList<String> getTenDanhMuc() throws Exception{
+		return ldao.getTenDanhMuc();
+	}
 	public loaispbean getloaispTheoMa(int maloai) throws Exception{
 		return ldao.getloaispTheoMa(maloai);
 	}

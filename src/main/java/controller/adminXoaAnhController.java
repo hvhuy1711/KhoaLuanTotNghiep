@@ -60,8 +60,8 @@ public class adminXoaAnhController extends HttpServlet {
 		        	 boolean checkXoaCheckBox = false;
 		                session.setAttribute("checkXoaCheckBox", (boolean) checkXoaCheckBox);
 		        } else {
-		            int maspInt = Integer.parseInt(maspxoa);
-		            ArrayList<AnhBean> dsAnh = abo.getdsAnh(maspInt);
+		        	  int maspInt = Integer.parseInt(maspxoa);
+			            ArrayList<AnhBean> dsAnh = abo.getdsAnh(maspInt);
 		            // Duyệt qua danh sách ảnh để xử lý xóa ảnh đã chọn
 		            for (AnhBean item : dsAnh) {
 		                int AnhId = item.getMaAnh();

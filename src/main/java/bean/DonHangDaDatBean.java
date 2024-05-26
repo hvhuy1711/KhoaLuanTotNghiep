@@ -30,14 +30,15 @@ public class DonHangDaDatBean {
 	private Date NgayMua;
 //	private Date NgayDatDon;
 	private int ChiecKhau;
+	private int MaLichSu;
 	
 	
-
 
 	public DonHangDaDatBean(int maChiTiet, int trangThaiCt, String ghiChuCT, int donGiaSP, int soLuongMua, int maHoaDon,
 			long maKhachHang, String hoTen, String diaChi, String soDT, String email, String tenDN, boolean quyen,
 			String google_id, String tongTien, int trangThai, int maSanPham, String tenSanPham, String anh, String hang,
-			int maLoai, String moTaSanPham, int trangThaiDon, String ghiChuLS, Date ngayMua, int chiecKhau) {
+			int maLoai, String moTaSanPham, int trangThaiDon, String ghiChuLS, Date ngayMua, int chiecKhau,
+			int maLichSu) {
 		super();
 		MaChiTiet = maChiTiet;
 		TrangThaiCt = trangThaiCt;
@@ -65,7 +66,19 @@ public class DonHangDaDatBean {
 		GhiChuLS = ghiChuLS;
 		NgayMua = ngayMua;
 		ChiecKhau = chiecKhau;
+		MaLichSu = maLichSu;
 	}
+
+
+	public int getMaLichSu() {
+		return MaLichSu;
+	}
+
+
+	public void setMaLichSu(int maLichSu) {
+		MaLichSu = maLichSu;
+	}
+
 
 
 	public int getChiecKhau() {

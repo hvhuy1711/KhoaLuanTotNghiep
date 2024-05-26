@@ -65,6 +65,8 @@ public class chitietsanphamcontroller extends HttpServlet {
 				khachhangbo khbo = new khachhangbo();
 				ArrayList<khachhangthibean> dskh = khbo.htkhachhang();
 				AnhBo anhbo = new AnhBo();
+				ArrayList<String> dsHang = spbo.getHang();
+				request.setAttribute("dsHang", dsHang);
 				request.setAttribute("dsAnh", (ArrayList<AnhBean>)anhbo.getdsAnh(ctspint));
 				request.setAttribute("dskh", dskh);
 				ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(ctspint);
@@ -87,6 +89,8 @@ public class chitietsanphamcontroller extends HttpServlet {
 					khachhangbo khbo = new khachhangbo();
 					ArrayList<khachhangthibean> dskh = khbo.htkhachhang();
 					AnhBo anhbo = new AnhBo();
+					ArrayList<String> dsHang = spbo.getHang();
+					request.setAttribute("dsHang", dsHang);
 					request.setAttribute("dsAnh", (ArrayList<AnhBean>)anhbo.getdsAnh(ctspint));
 					request.setAttribute("dskh", dskh);
 					request.setAttribute("dsdg", dsdg);
@@ -95,8 +99,6 @@ public class chitietsanphamcontroller extends HttpServlet {
 					request.setAttribute("ctsp", spbean);
 				}
 			}
-//			DanhGiaDao dg= new DanhGiaDao();
-			
 			
 			if (session.getAttribute("checkDanhGia") != null) {
 				request.setAttribute("checkDanhGia", (boolean) session.getAttribute("checkDanhGia"));

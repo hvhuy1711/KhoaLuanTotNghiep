@@ -25,6 +25,7 @@
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="animation.css">
 <link rel="stylesheet" href="Thongbao.css">
 
 
@@ -45,6 +46,10 @@
 
 /* tablet */
 @media ( min-width : 739px) and (max-width:1023px) {
+form {
+        width: 70%;
+        margin: 0 auto;
+    }
 	.item {
 		margin-top: 55px;
 	}
@@ -62,6 +67,18 @@
 
 /* Mobile */
 @media ( max-width : 740px) {
+ form {
+        width: 90%;
+        margin: 0 auto;
+    }
+    input[type="number"] {
+        width: calc(80% - 10px); /* Chia đôi chiều rộng cho các trường input */
+        margin-bottom: 10px;
+    }
+    input[type="submit"] {
+        width: 100%; /* Đưa nút submit ra dòng mới và căn giữa */
+        margin-top: 10px;
+    }
 	.item {
 		margin-top: 55px;
 	}
@@ -107,16 +124,25 @@
     display: block;
 }
 
+#nav-mobile {
+    list-style: none;
+    padding: 0;
+    max-height: 600px; /* Điều chỉnh chiều cao tối đa của menu */
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc khi cần thiết */
+}
+
 #nav .subnav {
     display: none;
+     max-height: 300px; /* Điều chỉnh chiều cao tối đa của menu */
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc khi cần thiết */
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 150px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-height: 300px; /* Set the maximum height for the dropdown */
-    overflow-y: auto;  /* Enable vertical scrolling if content exceeds max-height */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #nav>li:hover>a, #nav .subnav li:hover a {
@@ -136,8 +162,6 @@
     font-size: 12px;
 }
 
-
-
 /* Định dạng biểu mẫu và các thành phần bên trong */
 form#locgia {
   margin-top: 20px;
@@ -146,7 +170,7 @@ form#locgia {
 
 /* Định dạng các input */
 form#locgia input[type="number"] {
-  width: 100px;
+  width: 100%;
   margin-right: 10px;
   padding: 5px;
   border: 1px solid #ccc;
@@ -167,14 +191,11 @@ form#locgia input[type="submit"] {
 form#locgia input[type="submit"]:hover {
   background-color: #45a049;
 }
-
-
 </style>
 
 
 </head>
 <body>
-
 	<div id="main">
 
 		<div id="header" style="height: 120px; background-color: #446879;">
@@ -276,16 +297,6 @@ form#locgia input[type="submit"]:hover {
 				%>
 			</ul>
 			<ul class="nav navbar-nav navbar-right ">
-				<%-- <li>
-					<%
-					if (session.getAttribute("dn") == null) {
-					%> <a href="" data-toggle="modal" data-target="#myModaldk"
-					style="color: #fff; margin-right: 15px;" class="header-nav-re"><span
-						class="glyphicon glyphicon-user"
-						style="color: #fff; margin-right: 15px;"></span> Đăng kí</a> <%
- }
- %>
-				</li> --%>
 				<li>
 					<%
 					if (session.getAttribute("dn") != null) {
@@ -295,11 +306,11 @@ form#locgia input[type="submit"]:hover {
 						style="display: inline-block; width: 20px; background-color: pink; color: white; border-radius: 50%; text-align: center; margin-right: 5px; font-weight: 600;"><%=kh1.getHoTen().toUpperCase().charAt(0)%></span><%=kh1.getHoTen()%>
 				</a> <%
 				}
- } else {
- %> <a  href="" data-toggle="modal" data-target="#myModal"
-					style="color: #fff; margin-right: 40px;" class="header-nav-re"><i class="fas fa-user" style="font-size: 24px; margin-right: 10px;"></i></a> <%
- }
- %>
+				 } else {
+				 %> <a  href="" data-toggle="modal" data-target="#myModal"
+									style="color: #fff; margin-right: 40px;" class="header-nav-re"><i class="fas fa-user" style="font-size: 24px; margin-right: 10px;"></i></a> <%
+				 }
+				 %>
 				</li>
 				<li>
 					<%
@@ -316,35 +327,71 @@ form#locgia input[type="submit"]:hover {
 				class="fa-solid fa-bars"></i>
 			</label>
 
-			<!-- <label for="nav-mobile-input">Check 1</label> -->
-
 			<input type="checkbox" hidden name="" class="nav-input"
 				id="nav-mobile-input">
-
-			<!-- <label for="nav-mobile-input">Check 2</label> -->
 
 			<label for="nav-mobile-input" class="nav-overlay">
 				<li><a href="#"><i class="ti-home nav-home-icon "></i></a></li>
 			</label>
 
-			<ul id="nav-mobile">
-				<label for="nav-mobile-input" class="nav-mobile-close"> <i
-					class="fa-regular fa-circle-xmark "></i>
-				</label>
-				<li class="active"><a href="sanphamcontroller"><img alt=""
-						src="baithijava/logotc4.jpg" style="width: 50px; height: 50px;"></a></li>
+<ul id="nav-mobile">
+    <label for="nav-mobile-input" class="nav-mobile-close"> <i
+        class="fa-regular fa-circle-xmark "></i>
+    </label>
+    <li class="active">
+        <a href="sanphamcontroller"><img alt=""
+                src="baithijava/logotc4.jpg" style="width: 50px; height: 50px;"></a>
+    </li>
+    <li>
+        <a href="sanphamcontroller" class="nav-mobile-css">Trang Chủ</a>
+    </li>
+    <li>
+        <a href="sanphamcontroller" class="nav-mobile-css">Sản phẩm</a>
+          <ul class="subnav">
+                    <% 
+                    if (dsloaiheader != null) {
+                        for (loaispbean l : dsloaiheader) {
+                    %>
+                    <li>
+                        <a style="cursor: pointer; text-decoration: none;" href="sanphamcontroller?ml=<%=l.getMaLoai()%>"> 
+                            <%=l.getTenLoai()%>
+                        </a>
+                    </li>
+                    <% 
+                        } 
+                    } 
+                    %>
+                </ul>
+    </li>
+    <li>
+        <a href="giospcontroller" class="nav-mobile-css">Giỏ hàng</a>
+    </li>
+    <li id="thuongHieuLi">
+        <a href="#" class="nav-mobile-css" id="thuongHieuLink">Thương hiệu</a>
+        <ul class="subnav" id="thuongHieuSubnav">
+            <% 
+        
+            if (dshang != null) {
+                for (String hang : dshang) { 
+            %>
+            <li>
+                <a href="sanphamcontroller?tenhang=<%= hang %>" 
+                   style="cursor: pointer; text-decoration: none;">
+                    <%= hang %>
+                </a>
+            </li>
+            <% 
+                }
+            } 
+            %>
+        </ul>
+    </li>
+    <li>
+        <a href="LichSuMuaController" class="nav-mobile-css">Lịch Sử Mua</a>
+    </li>
+</ul>
 
-				<li><a href="sanphamcontroller" class="nav-mobile-css">Trang
-						Chủ</a></li>
-				<li><a href="giospcontroller" class="nav-mobile-css">Giỏ
-						Hàng</a></li>
-				<li><a href="thanhtoanspcontroller" class="nav-mobile-css">Thanh
-						Toán</a></li>
-				<li><a href="choxacnhancontroller" class="nav-mobile-css">Chờ
-						xác nhận</a></li>
-				<li><a href="lichsuspcontroller" class="nav-mobile-css">Lịch
-						Sử Mua</a></li>
-			</ul>
+
 			<!-- Hiển thị nút bars -->
 		</div>
 
@@ -429,21 +476,7 @@ form#locgia input[type="submit"]:hover {
 		}
 		%>
 
-		<script src="assets/ThongBao.js"></script>
-		<%
-	if (request.getAttribute("checkDK") != null) {
-		boolean checkDK = (boolean) request.getAttribute("checkDK");
-		if (checkDK == true) {
-	%>
-		<script type="text/javascript">
-			createToast('success', 'fa-solid fa-circle-exclamation',
-					'Thành công',
-					'Bạn đã đăng kí thành công tài khoản. Bây giờ hãy đăng nhập!!');
-		</script>
-		<%
-	}
-	}
-	%>
+	
 	
 	
 	<script src="assets/ThongBao.js"></script>
@@ -461,23 +494,56 @@ form#locgia input[type="submit"]:hover {
 	}
 	}
 	%>
-
-<script src="assets/ThongBao.js"></script>
+	
+		<script src="assets/ThongBao.js"></script>
 		<%
 	if (request.getAttribute("checkEmail") != null) {
 		boolean checkEmail = (boolean) request.getAttribute("checkEmail");
 		if (checkEmail == true) {
 	%>
 		<script type="text/javascript">
+			createToast('success', 'fa-solid fa-circle-exclamation',
+					'Thành công',
+					'Bạn đã đăng kí thành công tài khoản. Bây giờ hãy đăng nhập!!');
+		</script>
+		<%
+	}else{%>
+	<script type="text/javascript">
 			createToast('warning', 'fa-solid fa-circle-exclamation',
 					'Cảnh báo',
 					'Email bạn nhập không hợp lệ. Vui lòng nhập email hợp lệ!!');
 		</script>
-		<%
-	}
+	
+	<%}	
 	}
 	%>
-	
+
+<%--  <%
+        if (request.getAttribute("checkEmail") != null) {
+            boolean checkEmail = (boolean) request.getAttribute("checkEmail");
+            boolean checkDK = request.getAttribute("checkDK") != null ? (boolean) request.getAttribute("checkDK") : false;
+
+            if (!checkEmail) {
+    %>
+                <script type="text/javascript">
+                    createToast('warning', 'fa-solid fa-circle-exclamation',
+                        'Cảnh báo',
+                        'Email bạn nhập không hợp lệ. Vui lòng nhập email hợp lệ!!');
+                </script>
+    <%
+            } else if (checkDK) {
+    %>
+                <script type="text/javascript">
+                    createToast('success', 'fa-solid fa-circle-check',
+                        'Thành công',
+                        'Bạn đã đăng kí thành công tài khoản. Bây giờ hãy đăng nhập!!');
+                </script>
+    <%
+            }
+        }
+    %>
+ --%>	
+ 
 	<script src="assets/ThongBao.js"></script>
 		<%
 	if (request.getAttribute("checkPass") != null) {
@@ -490,8 +556,8 @@ form#locgia input[type="submit"]:hover {
 					'Bạn đã nhập mật khẩu chưa đúng quy định mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số
 					');
 		</script>
-		<%
-	}
+	<%
+		}
 	}
 	%>
 	
@@ -638,7 +704,7 @@ form#locgia input[type="submit"]:hover {
                     <div style="display: inline-block;">
                         <input id="emailInput" class="FormSV-input" type="email" name="txtemail"  placeholder="Nhập email" required>
                     </div>
-					<script src="assets/checkDangKi.js"></script>
+					<!-- <script src="assets/checkDangKi.js"></script> -->
                     <div style="display: inline-block;">
                         <input class="FormSV-input" type="text" name="txtun" placeholder="Nhập tài khoản" required>
                     </div>
@@ -854,9 +920,17 @@ for (int i = 1; i <= soTrang; i++) {
 }
 %> --%>
 	<!-- Phần footer -->
-	
-	
-	
+	<div style="padding: 10px"></div>
+	<ul class="animation">
+      <li class="animation-li" style="--delay: 1.4s; --color: #ffff00"></li>
+      <li class="animation-li" style="--delay: 1.2s; --color: #76ff03"></li>
+      <li class="animation-li" style="--delay: 1s; --color: #f06292"></li>
+      <li class="animation-li" style="--delay: 0.8s; --color: #4fc3f7"></li>
+      <li class="animation-li" style="--delay: 0.6s; --color: #ba68c8"></li>
+      <li class="animation-li" style="--delay: 0.4s; --color: #f57c00"></li>
+      <li class="animation-li" style="--delay: 0.2s; --color: #673ab7"></li>
+    </ul>
+	<div style="padding: 10px"></div>
 	<div id="footer" class="footer-contact"
 		style="background-color: #446879; color: white;">
 		<h2 class="section-heading" style="text-align: center;">
@@ -906,18 +980,18 @@ for (int i = 1; i <= soTrang; i++) {
 
 				<div class="col-md-3 col-sm-6 col-xs-12  footer-item">
 					<h1 class="footer-tt" style="color: white;">Thanh Toán</h1>
-					<a class="footer-pay"> <img src="./ASSETS/logo/MoMo_Logo1.png"
+					<a class="footer-pay"> <img src=""
 						alt="" class="footer-momo-img">
 						<p class="footer-text" style="color: white;">Momo</p>
 					</a> <a href="" class="footer-pay"> <img
-						src="./ASSETS/logo/logo-visa.jpg" alt="" class="footer-momo-img">
+						src="" alt="" class="footer-momo-img">
 						<p class="footer-text" style="color: white;">Visa</p>
 					</a> <a href="" class="footer-pay"> <img
-						src="./ASSETS/logo/Logo-VietinBank.webp" alt=""
+						src="" alt=""
 						class="footer-momo-img">
 						<p class="footer-text" style="color: white;">Vietinbank</p>
 					</a> <a href="" class="footer-pay"> <img
-						src="./ASSETS/logo/Icon-Vietcombank.webp" alt=""
+						src="" alt=""
 						class="footer-momo-img">
 						<p class="footer-text" style="color: white;">Vietcombank</p>
 					</a> 

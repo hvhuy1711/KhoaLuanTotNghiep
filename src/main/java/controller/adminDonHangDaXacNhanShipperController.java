@@ -41,14 +41,6 @@ public class adminDonHangDaXacNhanShipperController extends HttpServlet {
 			dsdhadmin = dhad.getDHDDAdmin(1);
 			request.setAttribute("adminxacnhan", dsdhadmin);
 			HttpSession session =request.getSession();
-//			adminxacnhanbo adbo = new adminxacnhanbo();
-//			ArrayList<choxacnhanbean> dsadmin;
-//			dsadmin = adbo.xacnhansp();
-//			request.setAttribute("adminxacnhan", dsadmin);
-//			if(session.getAttribute("checkUpdateDH") != null) {
-//				request.setAttribute("checkUpdateDH", (boolean)session.getAttribute("checkUpdateDH"));
-//				session.removeAttribute("checkUpdateDH");
-//			}
 			if (session.getAttribute("checkUpdateShipper") != null) {
 				request.setAttribute("checkUpdateShipper", (boolean) session.getAttribute("checkUpdateShipper"));
 				session.removeAttribute("checkUpdateShipper");

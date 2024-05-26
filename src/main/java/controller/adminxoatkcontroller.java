@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.DonHangDaDatBean;
+import bean.giospbean;
 import bean.khachhangthibean;
 import bean.loaispbean;
+import bo.DonHangDaDatBo;
+import bo.giospbo;
 import bo.khachhangbo;
 
 /**
@@ -37,17 +41,46 @@ public class adminxoatkcontroller extends HttpServlet {
 		try {
 			response.setCharacterEncoding("utf-8");
 			request.setCharacterEncoding("utf-8");
-//			HttpSession session =request.getSession();
-//			String khxoa = request.getParameter("khxoa");
 			String makh = request.getParameter("makh");
 			HttpSession session = request.getSession();
 			khachhangbo khbo = new khachhangbo();
-			if(makh != null) {
-				int makhInt = Integer.parseInt(makh);
-				khbo.xoatk(makhInt);
-				boolean checkXoaTK= true;
-				session.setAttribute("checkXoaTK", (boolean) checkXoaTK);
+			if (makh != null) {
+			    int makhInt = Integer.parseInt(makh);
+			    giospbo giobo = new giospbo();
+			    ArrayList<giospbean> dsgio = giobo.getAlldsgio();
+
+			    boolean hasItemsInCart = false;
+			    if (dsgio != null) {
+			        for (giospbean ds : dsgio) {
+			            if (ds.getMaKhachHang() == makhInt) {
+			                hasItemsInCart = true;
+			                break; // Không cần kiểm tra thêm, chỉ cần biết khách hàng có giỏ hàng là đủ
+			            }
+			        }
+			    }
+
+			    DonHangDaDatBo dhbo = new DonHangDaDatBo();
+			    ArrayList<DonHangDaDatBean> dsdh = dhbo.getAllDHDD();
+
+			    boolean hasOrders = false;
+			    if (dsdh != null) {
+			        for (DonHangDaDatBean ds : dsdh) {
+			            if (ds.getMaKhachHang() == makhInt) {
+			                hasOrders = true;
+			                break; // Không cần kiểm tra thêm, chỉ cần biết khách hàng có đơn hàng là đủ
+			            }
+			        }
+			    }
+
+			    if (hasItemsInCart || hasOrders) {
+			        session.setAttribute("checkXoaTK", false);
+			    } else {
+			        khbo.xoatk(makhInt);
+			        session.setAttribute("checkXoaTK", true);
+			    }
 			}
+
+			
 			if (session.getAttribute("checkXoaTK") != null) {
 				request.setAttribute("checkXoaTK", (boolean) session.getAttribute("checkXoaTK"));
 				session.removeAttribute("checkXoaTK");

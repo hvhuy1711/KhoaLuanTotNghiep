@@ -204,7 +204,12 @@
 				'Xóa tài khoản thành công!!');
 	</script>
 	<%
-	}
+	}else{%>
+	<script type="text/javascript">
+		createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+				'Tài khoản này còn hoạt động!! Không thể xóa!!');
+	</script>
+	<%}
 	}
 	%>
 	
@@ -233,11 +238,39 @@
 		<td><%=s.getTenDN() %></td>
 		<td><%=s.getMatKhau() %></td>
 		
-		<td><a href="adminxoatkcontroller?makh=<%=s.getMaKhachHang() %>"
+		<td><a data-toggle="modal" data-target="#myModalXoa<%=s.getMaKhachHang()%>" 
 		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
 			<i class="fa-solid fa-trash-can"></i>
 		</a></td>
 	</tr>
+	
+	 <!-- Modal xóa -->
+	<div class="container">
+  <div class="modal fade" id="myModalXoa<%=s.getMaKhachHang()%>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thông báo xóa</h4>
+        </div>
+        <div class="modal-body text-center">
+          <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn xóa khách hàng này?</h2>
+          <div style="margin-bottom: 20px "> 
+          	<a style="border: 1px solid red;border-radius:20px;text-decoration:none; background-color:red;color:white;font-size:18px;font-weight:bold; padding: 10px 40px;margin-right: 20px " href="adminxoatkcontroller?makh=<%=s.getMaKhachHang() %>">Có</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold;border-radius: 20px;font-size: 18px">Không</button>
+   		</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+  </div>
+  
+</div>
+</div>
+</div>
 <%} %>
 </table>
 

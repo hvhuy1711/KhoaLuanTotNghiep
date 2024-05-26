@@ -72,30 +72,6 @@ public class adminsanphamcontroller extends HttpServlet {
 				}
 			}
 
-			// Xử lí chọn
-			if (tab != null && tab.equals("chon")) {
-				String maspchon = request.getParameter("msp");
-				String tenspchon = request.getParameter("tsp");
-				String soluongchon = request.getParameter("sl");
-				String giacuchon = request.getParameter("giacu");
-				String giamoichon = request.getParameter("giamoi");
-				String anhchon = request.getParameter("anh");
-				String maloaichon = request.getParameter("maloai");
-				String hangchon = request.getParameter("hang");
-				String ngaynhapchon = request.getParameter("ngaynhap");
-				String mota = request.getParameter("mota");
-				request.setAttribute("masanpham", maspchon);
-				request.setAttribute("tensanpham", tenspchon);
-				request.setAttribute("soluong", soluongchon);
-				request.setAttribute("giacu", giacuchon);
-				request.setAttribute("giamoi", giamoichon);
-				request.setAttribute("anh", anhchon);
-				request.setAttribute("maloai", maloaichon);
-				request.setAttribute("hang", hangchon);
-				request.setAttribute("ngaynhap", ngaynhapchon);
-				request.setAttribute("mota", mota);
-			}
-			
 			// Xử lí cập nhật
 			if (request.getParameter("butupdate") != null) {
 
@@ -141,9 +117,7 @@ public class adminsanphamcontroller extends HttpServlet {
 						} else// Neu la control
 						{
 							String tentk = fileItem.getFieldName();
-							/*
-							 * if (tentk.equals("masanpham")) { masanpham = fileItem.getString(); }
-							 */
+							
 							if (tentk.equals("tensanpham")) {
 								tensanpham = fileItem.getString();
 							}
@@ -177,7 +151,13 @@ public class adminsanphamcontroller extends HttpServlet {
 					long giamoi1 = Long.parseLong(giacu);
 					long chieckhau1 = Long.parseLong(giamoi);
 					long gianhap1 = Long.parseLong(gianhap);
-					sbo.Suasp(masanpham, tensanpham, gianhap1, giamoi1, chieckhau1, anh, hang, maloai, mota);
+					ArrayList<String> dsSP = sbo.getTenSanPham();
+					if(dsSP == null || dsSP.contains(tensanpham)) {
+						session.setAttribute("checkSuaSP", false);
+					}else {						
+						sbo.Suasp(masanpham, tensanpham, gianhap1, giamoi1, chieckhau1, anh, hang, maloai, mota);
+						session.setAttribute("checkSuaSP", false);
+					}
 					System.out.println("Sửa thành công");
 					response.sendRedirect("adminsanphamcontroller");
 					return;
@@ -208,6 +188,14 @@ public class adminsanphamcontroller extends HttpServlet {
 			if (session.getAttribute("checkXoaSP") != null) {
 				request.setAttribute("checkXoaSP", (boolean) session.getAttribute("checkXoaSP"));
 				session.removeAttribute("checkXoaSP");
+			}
+			if (session.getAttribute("checkSuaSP") != null) {
+				request.setAttribute("checkSuaSP", (boolean) session.getAttribute("checkSuaSP"));
+				session.removeAttribute("checkSuaSP");
+			}
+			if (session.getAttribute("checkThemSP") != null) {
+				request.setAttribute("checkThemSP", (boolean) session.getAttribute("checkThemSP"));
+				session.removeAttribute("checkThemSP");
 			}
 			
 			ArrayList<sanphamfullbean> ds = sbo.getsanpham();

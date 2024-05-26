@@ -186,16 +186,16 @@
 				%>
 				<li class="active"><a href="giospcontroller"><i
 						class="fa-solid fa-cart-shopping"></i> Giỏ Hàng</a> <%
- ArrayList<giospbean> dsgio = (ArrayList<giospbean>) request.getAttribute("dsgio");
- if (dsgio != null) {
- 	if (dsgio.size() != 0) {
- 		int n = dsgio.size();
- 		if (n > 0) {
- %> <span class="giohang"><%=n%></span> <%
- }
- }
- }
- %></li>
+				 ArrayList<giospbean> dsgio = (ArrayList<giospbean>) request.getAttribute("dsgio");
+				 if (dsgio != null) {
+				 	if (dsgio.size() != 0) {
+				 		int n = dsgio.size();
+				 		if (n > 0) {
+				 %> <span class="giohang"><%=n%></span> <%
+				 }
+				 }
+				 }
+				 %></li>
 
 				<%
 				}
@@ -503,6 +503,21 @@
 		}
 		}
 		%>
+		
+			<script src="assets/ThongBao.js"></script>
+		<%
+		if (request.getAttribute("checkHuyDon") != null) {
+			boolean checkHuyDon = (boolean) request.getAttribute("checkHuyDon");
+			if (checkHuyDon == true) {
+		%>
+		<script type="text/javascript">
+			createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+					'Bạn đã hủy đơn thành công!!');
+		</script>
+		<%
+		}
+		}
+		%>
 
 		<!-- Hiển thị modal đăng nhập -->
 		<!-- 	<div class="modal fade" id="myModal" role="dialog">
@@ -628,7 +643,7 @@
 					<th>Ngày đặt</th>
 					<th>Trả hàng</th>
 					<th>Xem chi tiết</th>
-					<th>Nút mua</th>
+					<th>Mua lại</th>
 					<th>Trạng thái hàng</th>
 		
 				</tr>
@@ -736,11 +751,46 @@
 				<td>
 				<a href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
 				</td>
-			<%}else{ %>
+			<%}else if (dsdonhang.get(i).getTrangThai() == 0){ %>
 				<td>
+				<a data-toggle="modal" data-target="#myModalXoa<%=dsdonhang.get(i).getMaChiTiet()%>"  style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Hủy Đơn Hàng</a>
+				</td>
+			<%}else{ %>
+			<td>
 				<a class="disabled" href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
 				</td>
 			<%} %>
+			
+<!-- Modal xóa -->
+<div class="container">
+  <div class="modal fade" id="myModalXoa<%=dsdonhang.get(i).getMaChiTiet()%>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thông báo xóa</h4>
+        </div>
+        <div class="modal-body text-center">
+          <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn hủy khách hàng này không?</h2>
+          <div style="margin-bottom: 20px "> 
+          	<a style="border: 1px solid red;border-radius:20px;text-decoration:none; background-color:red;color:white;font-size:18px;font-weight:bold; padding: 10px 40px;margin-right: 20px " href="HuyDonController?maCT=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>&maLS=<%=dsdonhang.get(i).getMaLichSu()%>&maHoaDon=<%=dsdonhang.get(i).getMaHoaDon() %> ">
+          	Có</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold;border-radius: 20px;font-size: 18px">Không</button>
+   		</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+  </div>
+  
+</div>
+</div>
+</div>
+
+<!-- Hết modal xóa -->
 			<td><a
 				data-toggle="modal" data-target="#myModal<%=dsdonhang.get(i).getMaChiTiet()%>"
 				style="border: 1px solid #ccc;cursor:pointer; padding: 7px; background-color: #446879; color: #fff; border-radius: 10px">
@@ -748,7 +798,7 @@
 				</td>
 				
 			<td><a
-				href="chitietsanphamcontroller?ctsp=<%=dsdonhang.get(i).getMaSanPham()%>"
+				href="chitietsanphamcontroller?ctsp=<%=dsdonhang.get(i).getMaSanPham()%>&maloai=<%=dsdonhang.get(i).getMaLoai() %>"
 				style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
 					<i class="fas fa-shopping-cart"></i></a></td>
 			<% if (dsdonhang.get(i).getTrangThai() == 1 ){ %>

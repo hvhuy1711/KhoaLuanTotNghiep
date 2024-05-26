@@ -43,10 +43,6 @@ public class adminxacnhancontroller extends HttpServlet {
 			dsdhadmin = dhad.getDHDDAdmin(0);
 			request.setAttribute("adminxacnhan", dsdhadmin);
 			HttpSession session =request.getSession();
-//			adminxacnhanbo adbo = new adminxacnhanbo();
-//			ArrayList<choxacnhanbean> dsadmin;
-//			dsadmin = adbo.xacnhansp();
-//			request.setAttribute("adminxacnhan", dsadmin);
 			if(session.getAttribute("checkUpdateXacNhan") != null) {
 				request.setAttribute("checkUpdateXacNhan", (boolean)session.getAttribute("checkUpdateXacNhan"));
 				session.removeAttribute("checkUpdateXacNhan");

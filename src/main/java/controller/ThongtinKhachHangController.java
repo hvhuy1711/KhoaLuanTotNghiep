@@ -37,11 +37,7 @@ public class ThongtinKhachHangController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			khachhangbo khbo = new khachhangbo();
 			HttpSession session = request.getSession();
-//			khachhangthibean khnew = khbo.get1KhachHang(makh);
-//			session.setAttribute("dn", (khachhangthibean) khnew);
 			khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-//			System.out.println(kh);
-//			khachhangthibean kh = khbo.get1KhachHang(makhlong);
 			session.setAttribute("dn", (khachhangthibean) kh);
 			if(session.getAttribute("checkMKSQL") != null) {
 				request.setAttribute("checkMKSQL", (boolean)session.getAttribute("checkMKSQL"));
@@ -68,10 +64,10 @@ public class ThongtinKhachHangController extends HttpServlet {
 				request.setAttribute("checkDiaChi", (boolean)session.getAttribute("checkDiaChi"));
 				session.removeAttribute("checkDiaChi");
 			}
-			if(session.getAttribute("checkSoDT") != null) {
-				request.setAttribute("checkSoDT", (boolean)session.getAttribute("checkSoDT"));
-				session.removeAttribute("checkSoDT");
-			}
+//			if(session.getAttribute("checkSoDT") != null) {
+//				request.setAttribute("checkSoDT", (boolean)session.getAttribute("checkSoDT"));
+//				session.removeAttribute("checkSoDT");
+//			}
 			RequestDispatcher rd = request.getRequestDispatcher("ThongTinCaNhan.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

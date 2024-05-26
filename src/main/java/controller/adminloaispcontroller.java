@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,11 +47,15 @@ public class adminloaispcontroller extends HttpServlet {
 			HttpSession session = request.getSession();
 			ArrayList<loaispbean> ds = lbo.getloaisp();
 			if(request.getParameter("butadd") != null) {
-				lbo.ThemspLoai( tenloai);
-				boolean checkThemLoai = true;
-				session.setAttribute("checkThemLoai", (boolean) checkThemLoai);
-			}
+				ArrayList<String> dsDM = lbo.getTenDanhMuc();
+				if (dsDM == null || dsDM.contains(tenloai)) {
+				    session.setAttribute("checkThemLoai", false);
+				}else {
+					lbo.ThemspLoai( tenloai);
+					session.setAttribute("checkThemLoai", true);
+				}
 			
+			}
 			if (tab != null && tab.equals("xoa")) {
 				sanphambo sbo = new sanphambo();
 				sanphamfullbean dssp = sbo.get1sanphamMaLoai(mlxoa);
@@ -64,18 +69,6 @@ public class adminloaispcontroller extends HttpServlet {
 					session.setAttribute("checkXoaLoai", (boolean) checkXoaLoai);
 				}
 			}
-			
-			
-			/*
-			 * else if (request.getParameter("butupdate") != null) { lbo.SuaspLoai(ml,
-			 * tenloai); }else { String maloai = request.getParameter("ml"); String
-			 * tenloaimoi = request.getParameter("tl"); if(tab!=null && tab.equals("xoa"))
-			 * lbo.XoaspLoai(maloai); else if (tab != null && tab.equals("chon")) {
-			 * request.setAttribute("ml", maloai); request.setAttribute("tenloai",
-			 * tenloaimoi); }else if (request.getParameter("butupdate") != null) {
-			 * lbo.SuaspLoai(ml, tenloai); response.sendRedirect("adminloaispcontroller");
-			 * return; } }
-			 */
 			 
 			 if (session.getAttribute("checkXoaLoai") != null) {
 					request.setAttribute("checkXoaLoai", (boolean) session.getAttribute("checkXoaLoai"));

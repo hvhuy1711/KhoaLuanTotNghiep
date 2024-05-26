@@ -87,8 +87,6 @@ public class xacnhanspcontroller extends HttpServlet {
 					}
 				}
 			}
-			
-			//xử lí mới
 				
 			request.setAttribute("dn", kh);
 			RequestDispatcher rd = 

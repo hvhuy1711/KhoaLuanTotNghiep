@@ -47,11 +47,10 @@ public class adminCNSizeController extends HttpServlet {
 			String btnUpKT = request.getParameter("btnUpKT");
 			String btnXoa = request.getParameter("btnXoa");
 			//sử lí lại
-//			String makichthuocxoa = request.getParameter("makichthuocxoa");
 			HttpSession session = request.getSession();
 			KichThuocBo kt = new KichThuocBo();
+			int masanphamInt = Integer.parseInt(masanpham);
 			int makichthuocInt = Integer.parseInt(makichthuoc);
-
 			if(btnXoa != null) {
 				kt.XoaKichThuoc(makichthuocInt);
 				boolean checkXoaKt = true;
@@ -60,12 +59,10 @@ public class adminCNSizeController extends HttpServlet {
 			
 			if(btnUpKT != null) {
 				int soluongsizeInt = Integer.parseInt(soluongsize);
-				kt.UpdateKTSize(makichthuocInt, soluongsizeInt, tenkichthuoc);
+				kt.UpdateKTSize(masanphamInt, soluongsizeInt, tenkichthuoc);
 				boolean checkUpSize = true;
 				session.setAttribute("checkUpSize", (boolean) checkUpSize);
 			}
-//			System.out.println(masanpham);
-			int masanphamInt = Integer.parseInt(masanpham);
 			ArrayList<KichThuocBean> dskt = kt.dskichThuoc(masanphamInt);
 			request.setAttribute("dskichthuoc", dskt);
 			request.setAttribute("maspchon", masanpham);

@@ -39,7 +39,6 @@ public class adminxacnhanspkhcontroller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// dùng để set Damua = 1
 			response.setCharacterEncoding("utf-8");
 			request.setCharacterEncoding("utf-8");
 			String mact= request.getParameter("mact");
@@ -106,7 +105,6 @@ public class adminxacnhanspkhcontroller extends HttpServlet {
 					dhdd.UpdateTrangThaiTraAdmin(mactInt);
 					DonHangDaDatBo dhad = new DonHangDaDatBo(); 
 					DonHangDaDatBean dsdh = dhad.getDHDDDanhGia(mactInt);
-//					dhad.UpdateTrangThaiCT();
 					String thanhtoan = null;
 					if(dsdh.getTrangThaiDon() == 0 ) {
 						thanhtoan = "Thanh toán trực tiếp";

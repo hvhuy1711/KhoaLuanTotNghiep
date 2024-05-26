@@ -28,10 +28,20 @@
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="ChiTietSanPham.css">
-
 <link rel="stylesheet" href="Thongbao.css">
 <style type="text/css">
-
+.giohang {
+	display: block;
+	position: absolute;
+	color: #fff;
+	background-color: red;
+	top: 5px;
+	right: 0;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+}
 /* tablet */
 @media ( min-width : 739px) and (max-width:1023px) {
 	.item {
@@ -203,16 +213,13 @@ h2 {
 <body>
 
 	<div id="main">
-
-		
-
-		<div id="header" style="height: 120px; background-color: #446879;">
+<div id="header" style="height: 120px; background-color: #446879;">
 			<div
 				style="position: relative; display: flex; justify-content: space-between;">
 				<img class="header-img-rps" alt="" src="baithijava/logotc4.jpg"
 					style="width: 50px; height: 50px; margin-top: 15px; margin-left: 30px;">
 				<p class="header-p-rps"
-					style="color: #fff; margin-top: 30px; font-size: 17px;">Chào
+					style="color: #fff; margin-top: 30px; font-size: 17px;font-weight: bold;">Chào
 					mừng bạn đến với Hv Huy Shop</p>
 				<form action="sanphamcontroller" method="post" style="">
 					<input style="width: 400px; margin-top: 30px; margin-right: 30px;"
@@ -222,107 +229,109 @@ h2 {
 				</form>
 			</div>
 			<ul id="nav">
-				<!--  <li class="active">
-                <a href="sanphamcontroller"><img alt="" src="baithijava/logotc4.jpg" style=" width: 50px;height: 50px;"></a></li> -->
-				<li class="active"><a href="sanphamcontroller">Trang Chủ</a></li>
-				<li><a href="sanphamcontroller">Sản phẩm <i
+			<li class="active"><a href="sanphamcontroller">Trang Chủ</a></li>
+				<li>
+                <a href="sanphamcontroller">Sản phẩm <i class="fa-solid fa-caret-down nav-arrow-down"></i></a>
+                <ul class="subnav">
+                    <% 
+                    ArrayList<loaispbean> dsloaiheader = (ArrayList<loaispbean>) request.getAttribute("dsloai");
+                    if (dsloaiheader != null) {
+                        for (loaispbean l : dsloaiheader) {
+                    %>
+                    <li>
+                        <a style="cursor: pointer; text-decoration: none; font-weight: bold;" href="sanphamcontroller?ml=<%=l.getMaLoai()%>"> 
+                            <%=l.getTenLoai()%>
+                        </a>
+                    </li>
+                    <% 
+                        } 
+                    } 
+                    %>
+                </ul>
+            </li>
+				<%
+				if (session.getAttribute("dn") == null) {
+				%>
+
+				<li class="active"><a href="" data-toggle="modal"
+					data-target="#myModal"> <i class="fa-solid fa-cart-shopping"></i>
+						Giỏ Hàng
+				</a></li>
+
+				<%
+				} else {
+				%>
+				<li class="active"><a href="giospcontroller"><i
+						class="fa-solid fa-cart-shopping"></i> Giỏ Hàng</a> <%
+				 ArrayList<giospbean> dsgio = (ArrayList<giospbean>)request.getAttribute("dsgio");
+				 if (dsgio != null){
+					  if (dsgio.size() != 0) {
+				 	int n = dsgio.size();
+				 	if (n > 0) {
+				 %> <span class="giohang"><%=n%></span> <%
+				 }
+				 }
+				 }
+				 %></li>
+
+				<%
+				}
+				%>
+
+				<li><a href="">Thương hiệu <i
 						class="fa-solid fa-caret-down nav-arrow-down"></i></a>
 					<ul class="subnav">
 						<%
-						ArrayList<loaispbean> dsloaiheader = (ArrayList<loaispbean>) request.getAttribute("dsloai");
-						if (dsloaiheader != null) {
-							for (loaispbean l : dsloaiheader) {
+						ArrayList<String> dshang = (ArrayList<String>) request.getAttribute("dsHang");
+						int nhang = dshang.size();
+						if (dshang != null) {
+							for (int i = 0;i<nhang ;i++) {
 						%>
 						<li><a
 							style="cursor: pointer; text-decoration: none; font-weight: bold;"
-							href="sanphamcontroller?ml=<%=l.getMaLoai()%>"> <%=l.getTenLoai()%>
+							href="sanphamcontroller?tenhang=<%=dshang.get(i)%>"> <%=dshang.get(i)%>
 						</a></li>
-
 						<%
 						}
 						}
 						%>
 					</ul></li>
-					<%
-					if (session.getAttribute("dn") == null) {
-						%>
-					
-					<li class="active"><a href="" data-toggle="modal" data-target="#myModal">
-									<i class="fa-solid fa-cart-shopping"></i>
-									Giỏ Hàng </a></li>
-									
-							<%}else{ %>		
-				<li class="active"><a href="giospcontroller"><i class="fa-solid fa-cart-shopping"></i>
-				Giỏ Hàng</a> <%
- ArrayList<giospbean> dsgio = new ArrayList<giospbean>();
- if (dsgio.size() != 0) {
- 	int n = dsgio.size();
- 	if (n > 0) {
- %> <span class="giohang"><%=n%></span> <%
- }
- }
- %></li>
- 
- <%} %>
-<li><a href="">Thương hiệu <i
-						class="fa-solid fa-caret-down nav-arrow-down"></i></a>
-					<ul class="subnav">
-						<%-- <%
-						ArrayList<sanphamfullbean> dssp = (ArrayList<sanphamfullbean>) request.getAttribute("dssanpham");
-						if (dssp != null) {
-							for (sanphamfullbean l : dssp) {
-						%> --%>
-						<li><a
-							style="cursor: pointer; text-decoration: none; font-weight: bold;"
-							href="sanphamcontroller?hang=Nike"> Nike
-						</a></li>
-						<li><a
-							style="cursor: pointer; text-decoration: none; font-weight: bold;"
-							href="sanphamcontroller?hang=Adidas"> Adidas
-						</a></li>
+				<%
+				if (session.getAttribute("dn") == null) {
+				%>
+				<li class="active"><a href="" data-toggle="modal"
+					data-target="#myModal"> Lịch Sử Mua </a></li>
 
-						<%-- <%
-						}
-						}
-						%> --%>
-					</ul></li>
-				<!-- <li><a href="thanhtoanspcontroller">Thanh Toán</a></li>
-				<li><a href="choxacnhancontroller">Chờ xác nhận</a></li>
-				<li><a href="lichsuspcontroller">Lịch Sử Mua</a></li> -->
-				<!-- <li><a href="SignUPIN.jsp">Sign in</a></li> -->
-
-				<!-- <li>
-               <a  class="footer-Evaluate footer-group js-buy-btn-Evaluate ">Đánh Giá</a></li>   -->
+				<%
+				} else {
+					%>
+				<li class="active"><a href="LichSuMuaController">Lịch Sử
+						Mua</a></li>
+				<%
+				} 
+				%>
 			</ul>
 			<ul class="nav navbar-nav navbar-right ">
 				<li>
 					<%
-					if (session.getAttribute("dn") == null) {
-					%> <a href="" data-toggle="modal" data-target="#myModaldk"
-					style="color: #fff; margin-right: 15px;" class="header-nav-re"><span
-						class="glyphicon glyphicon-user"
-						style="color: #fff; margin-right: 15px;"></span> Đăng kí</a> <%
- }
- %>
-				</li>
-				<li>
-					<%
 					if (session.getAttribute("dn") != null) {
-						khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-					%> <a a href="ThongtinKhachHangController" style="color: white"><span
-						style="display: inline-block; width: 20px; background-color: pink; color: white; border-radius: 50%; text-align: center; margin-right: 5px; font-weight: 600;"><%=kh.getHoTen().toUpperCase().charAt(0)%></span><%=kh.getHoTen()%>
+						khachhangthibean kh1 = (khachhangthibean) session.getAttribute("dn");
+						if(kh1.getHoTen() != null){
+					%> <a href="ThongtinKhachHangController" style="color: white"><span
+						style="display: inline-block; width: 20px; background-color: pink; color: white; border-radius: 50%; text-align: center; margin-right: 5px; font-weight: 600;"><%=kh1.getHoTen().toUpperCase().charAt(0)%></span><%=kh1.getHoTen()%>
 				</a> <%
+				}
  } else {
- %> <a href="" data-toggle="modal" data-target="#myModal"
-					style="color: #fff; margin-right: 15px;" class="header-nav-re"><span
-						class="glyphicon glyphicon-log-in"></span> Đăng nhập</a> <%
+ %> <a  href="" data-toggle="modal" data-target="#myModal"
+					style="color: #fff; margin-right: 40px;" class="header-nav-re"><i class="fas fa-user" style="font-size: 24px; margin-right: 10px;"></i></a> <%
  }
  %>
 				</li>
 				<li>
 					<%
 					if (session.getAttribute("dn") != null) {
-					%> <a href="dangxuatcontroller" class=" head er-nav-re"><span
+					%> <a href="dangxuatcontroller" class=" header-nav-re"
+					style="text-decoration: none; color: white;"><span
 						class="glyphicon glyphicon-log-in"></span> Đăng xuất</a> <%
  }
  %>
@@ -361,35 +370,7 @@ h2 {
 						xác nhận</a></li>
 				<li><a href="lichsuspcontroller" class="nav-mobile-css">Lịch
 						Sử Mua</a></li>
-				<%-- <li >
-			        <%
-			      		if (session.getAttribute("dn") == null){%>
-			      			<a href="" data-toggle="modal" data-target="#myModaldk" style="color: #fff;margin-right: 15px; " class="header-nav-re nav-mobile-css"><span class="glyphicon glyphicon-user" style="color: #fff;margin-right: 15px;"></span> Đăng kí</a>    	      	
-			      	<%}%>
-		      	</li>
-		        <li>
-		       		 <%
-						//session.removeAttribute("dn")
-						if (session.getAttribute("dn") != null){ 
-							String tenkh = (String)session.getAttribute("dn");
-						%>
-						<a href = "" style="color:white"><span style=" display: inline-block;width: 20px; background-color: pink; color: white; border-radius: 50%; text-align: center; margin-right: 5px; font-weight: 600;" ><%=tenkh.toUpperCase().charAt(0)%></span><%=tenkh %> </a> 
-						<%}else{%>
-						 <a href="" data-toggle="modal" data-target="#myModal" style="color: #fff;margin-right: 15px;" class="nav-mobile-css header-nav-re"><span class="glyphicon glyphicon-log-in" ></span> Đăng nhập</a>
-					<%} %>
-				</li>
-				<li>
-		         	<%	if (session.getAttribute("dn") != null){%>
-		      		<a href="dangxuatcontroller" class= "nav-mobile-css header-nav-re"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất</a>	    
-		      		<%}%>
-		      	</li> --%>
-
 			</ul>
-
-			<!--  <div class="search-btn">
-            <i class="search-icon ti-search"></i>
-        </div> -->
-
 			<!-- Hiển thị nút bars -->
 		</div>
 
@@ -421,7 +402,7 @@ h2 {
 								<span style="margin-top: 10px">Bạn chưa có tài khoản?<a
 									href="" data-toggle="modal" data-target="#myModaldk"
 									data-dismiss="modal">Đăng kí</a></span><br>
-								<button class="FormSV-Buttom" style="width: 100%">Đăng
+								<button name="btndn" class="FormSV-Buttom" style="width: 100%">Đăng
 									Nhập</button>
 								<div
 									style="padding-bottom: 14px; display: flex; align-items: center;">
@@ -561,16 +542,16 @@ h2 {
 	<div class="notifications"></div>
 	<script src="assets/ThongBao.js"></script>
 	<%
-	if (request.getAttribute("chechDanhGia") != null) {
-		boolean chechDanhGia = (boolean) request.getAttribute("chechDanhGia");
-		if (chechDanhGia == true) {
+	if (request.getAttribute("checkDanhGia") != null) {
+		boolean checkDanhGia = (boolean) request.getAttribute("checkDanhGia");
+		if (checkDanhGia == true) {
 	%>
 	<script type="text/javascript">
 		createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
 				'Bạn đã đánh giá thành công sản phẩm');
 	</script>
-	<%
-	}
+	
+	<%}
 	}
 	%>
 	
@@ -663,7 +644,7 @@ h2 {
 			if(kh != null){
 			%>
 			
-			<form action="giospcontroller" method="get" id="themGio">
+			<form action="giospcontroller" method="post" id="themGio">
 				<input style="display: none;" form="themGio" value="<%=sp.getMaSanPham()%>" name="ms">
 		<%-- 		<input style="display: none;" form="themGio" value="<%=sp.getMaSanPham()%>" name="msTT"> --%>
 				<input style="display: none;" form="themGio" value="<%=kh.getMaKhachHang()%>" name="mkh">
@@ -833,14 +814,15 @@ h2 {
 	</div>
 	<hr>
 	
-	<h1>Danh sach các sản phẩm liên quan</h1>
+	<h1>Danh sách các sản phẩm tương tự</h1>
 	<div style="padding: 20px"></div>
 		<div class= "container">
 		<div class = "row">
 	<%ArrayList<sanphamfullbean> dsspTM = (ArrayList<sanphamfullbean>)request.getAttribute("dsspTM");
 	if(dsspTM != null){
 		for(sanphamfullbean ds : dsspTM){%>
-				<div class="col-sm-4 col-xs-6 col-md-3 text-center"
+		<a href="chitietsanphamcontroller?ctsp=<%=ds.getMaSanPham()%>&maloai=<%=ds.getMaLoai()%>">
+			<div class="col-sm-4 col-xs-6 col-md-3 text-center"
 							style="border: 2px solid #446789;border-radius:10px; ">
 							<img style="width: 100%;margin-top:5px; border-image: linear-gradient(to bottom, #446789, pink) 1;border: 1px solid; height: 250px;" src="<%=ds.getAnh()%>">
 							<div>
@@ -868,6 +850,8 @@ h2 {
 								<hr>
 							</div>
 						</div>
+		</a>
+				
 					<%}
 	}
 	%>
@@ -876,6 +860,7 @@ h2 {
 		</div>
 	
 <hr>
+ <h1 class= "text-center">Đánh giá sản phẩm</h1>
 	<div class="product-info-tabs" style="background-color: #bcd8e5">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			
@@ -883,53 +868,30 @@ h2 {
 				data-toggle="tab" href="#review" role="tab" aria-controls="review"
 				aria-selected="false">Đánh Giá </a></li>
 		</ul>
-	
 		<div class="tab-content" id="myTabContent">
-			<%-- <div class="tab-pane fade show active" id="description"
-				role="tabpanel" aria-labelledby="description-tab">Bảng size bên shop cho các bạn tham khảo:
-		<%ArrayList<KichThuocBean> dskt1 = (ArrayList<KichThuocBean>)request.getAttribute("dskt");
-			if (dskt1 != null){
-				for (KichThuocBean ds : dskt1){%>
-				<p><%=ds.getTenKichThuoc() %>:</p> <span><%=ds.getSoLuongSize() %> sản phẩm</span>
-				<%}
-			}
-			%>
-			</div> --%>
 			<div class="tab-pane fade show active" id="description"
 				role="tabpanel" aria-labelledby="description-tab">Bảng size bên shop cho các bạn tham khảo:</div>
 		<div class="tab-pane fade" id="review" role="tabpanel"
 				aria-labelledby="review-tab">
-				<!-- <div>
-
-					<div>
-						<img alt=""
-							src="http://windows79.com/wp-content/uploads/2021/02/Thay-the-hinh-dai-dien-tai-khoan-nguoi-dung-mac.png" width="60px">
-						<h1 style="font-size: 20px; display: contents"></h1>
-
-						<p></p>
-						<p class="mb-20"></p>
-					</div>
-
-				</div> -->
-				<form class="review-form" action="DanhGiaController" method="get">
+				<form class="review-form" action="DanhGiaController" method="post">
 					<div class="form-group">
 						<label>Đánh giá của bạn</label>
 						<div class="reviews-counter">
 							<div class="rate">
-								<input type="radio" id="star5" name="rate" value="5" onchange="updateRating(this.value)" />
+								<input type="radio" id="star5" name="rate" value="5" required onchange="updateRating(this.value)" />
 								<label for="star5" title="text">5 stars</label>
-								<input type="radio" id="star4" name="rate" value="4" onchange="updateRating(this.value)" />
+								<input type="radio" id="star4" name="rate" value="4" required onchange="updateRating(this.value)" />
 								<label for="star4" title="text">4 stars</label>
-								<input type="radio" id="star3" name="rate" value="3" onchange="updateRating(this.value)" />
+								<input type="radio" id="star3" name="rate" value="3" required onchange="updateRating(this.value)" />
 								<label for="star3" title="text">3 stars</label>
-								<input type="radio" id="star2" name="rate" value="2" onchange="updateRating(this.value)" />
+								<input type="radio" id="star2" name="rate" value="2" required onchange="updateRating(this.value)" />
 								<label for="star2" title="text">2 stars</label>
-								<input type="radio" id="star1" name="rate" value="1" onchange="updateRating(this.value)" />
+								<input type="radio" id="star1" name="rate" value="1" required onchange="updateRating(this.value)" />
 								<label for="star1" title="text">1 star</label>
-								
 								<!-- Thẻ input để lưu trữ số sao đã chọn -->
 								<input type="text" name="sosao" id="sosao" value="" style="display: none;">
 									<input type="text" name="masp" id="masp" value="<%=sp.getMaSanPham() %>" style="display: none;">
+									<input type="text" name="maloai" id="maloai" value="<%=sp.getMaLoai() %>" style="display: none;">
 								<script>
 								    function updateRating(value) {
 								        // Lấy thẻ input theo id và gán giá trị được chọn từ radio button vào
@@ -943,7 +905,7 @@ h2 {
 					<hr>
 					<div class="form-group">
 						<label>Nội Dung</label>
-						<textarea name="nd" class="form-control" rows="10" name="comment"></textarea>
+						<textarea name="nd" class="form-control" rows="10" name="comment" required="required"></textarea>
 					</div>
 					<%ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>)request.getAttribute("dskh");
 					khachhangthibean kh1 = (khachhangthibean)session.getAttribute("dn");
@@ -976,9 +938,14 @@ h2 {
 					}
 					%>
 					<%if(session.getAttribute("dn") == null){ %>
-					<button data-toggle="modal" data-target="#myModal" class="round-black-btn">Gửi Bình Luận</button>
+					<div style="display: flex;justify-content: flex-end; align-items: center;">
+						<button style="border: 2px solid; padding: 10px;border-radius: 10px;font-weight: bold;" data-toggle="modal"
+					data-target="#myModal" class="round-black-btn">Gửi Bình Luận</button>
+					</div>
 					<%}else{ %>
-					<button class="round-black-btn">Gửi Bình Luận</button>
+					<div style="display: flex;justify-content: flex-end; align-items: center;">
+						<button style="border: 2px solid; padding: 10px;border-radius: 10px;font-weight: bold;" class="round-black-btn">Gửi Bình Luận</button>
+					</div>
 					<%} %>
 				</form>
 			</div>
@@ -987,9 +954,10 @@ h2 {
 	
 	<%} %>
 	
-		    <h1 class= "text-center">Đánh giá sản phẩm</h1>
 	<%ArrayList<DanhGiaBean> dsdg = (ArrayList<DanhGiaBean>)request.getAttribute("dsdg");
-	if(dsdg!=null){
+	if(dsdg!=null){%>
+		    <h1 class= "text-center">Danh sách sản phẩm</h1>
+	<%
 	for(DanhGiaBean ds : dsdg){%>
 		<div class="containers">
 		    <div class="reviews">

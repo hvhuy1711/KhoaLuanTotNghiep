@@ -121,9 +121,8 @@ public class sanphamdao {
 
 	    String sql = "select * from SanPham where MaLoai = ?";
 	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
-
+	    cmd.setString(1, MaLoai); 
 	    ResultSet rs = cmd.executeQuery();
-
 	    if (rs.next()) {
 	    	int masp = rs.getInt("MaSanPham");
 			String tensp = rs.getString("TenSanPham");
@@ -239,4 +238,24 @@ public class sanphamdao {
 		return kq;
 	}
 
+	public ArrayList<String> getTenSanPham() throws Exception{
+		 ArrayList<String> listTenSP = new ArrayList<>(); // Changed to ArrayList<String>
+
+		    ketnoidao kn = new ketnoidao();
+		    kn.ketnoi();
+		    String sql = "SELECT DISTINCT TenSanPham\r\n"
+		    		+ "FROM SanPham";
+		    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+
+		    ResultSet rs = cmd.executeQuery();
+
+		    while (rs.next()) {
+		        String tensp = rs.getString("TenSanPham");
+		        listTenSP.add(tensp); // Add Hang value to the list
+		    }
+
+		    rs.close();
+		    kn.cn.close();
+		    return listTenSP; 
+	}
 }

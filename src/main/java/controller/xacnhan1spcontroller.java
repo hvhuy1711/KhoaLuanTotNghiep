@@ -53,13 +53,6 @@ public class xacnhan1spcontroller extends HttpServlet {
 					request.setAttribute("giosp", giosp);
 					
 				}}
-//				long makh = kh.getMaKhachHang();
-//			if (btnMua1SP!= null) {
-//				request.setAttribute("maSPMUA", maSPMUA);
-//				request.setAttribute("tenSPMUA", tenSPMUA);
-//				request.setAttribute("slMua", slMua);
-//				request.setAttribute("KichThuoc", KichThuoc);
-//			}
 			request.setAttribute("dn", kh);
 			RequestDispatcher rd = 
 					request.getRequestDispatcher("thanhtoansp.jsp");

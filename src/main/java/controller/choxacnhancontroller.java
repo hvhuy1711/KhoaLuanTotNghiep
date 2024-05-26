@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.choxacnhanbean;
 import bean.giospbean;
 import bean.khachhangthibean;
-import bo.choxacnhanbo;
 import bo.giospbo;
 
 /**
@@ -64,41 +62,6 @@ public class choxacnhancontroller extends HttpServlet {
 				}
 
 			}
-			// xử lí thanh toán tiền mặt
-//			if (checktm != null) {
-//				HttpSession session = request.getSession();
-//				khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-//				long makh = kh.getMaKhachHang();
-//				giospbo gh = new giospbo();
-//				ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
-//				if (dsgiott != null) {
-//					request.setAttribute("dsgio", dsgiott);
-//					response.sendRedirect("xulithanhToanTienMatController");
-//					return;
-//				}
-//			}
-//			HttpSession session =request.getSession();
-//			khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
-//			if( kh != null ) {
-//				if(btnThanhToan != null) {}
-//				choxacnhanbo cxnbo = new choxacnhanbo();
-//				ArrayList<choxacnhanbean> dschoxacnhan;
-//				long makh = khxn.getMaKhachHang();
-//				dschoxacnhan = cxnbo.choxacnhan(makh);
-//				request.setAttribute("choxacnhansp", dschoxacnhan);
-//			}
-
-//				if (session.getAttribute("gh") != null) {
-//					giohangbo gh = (giohangbo)session.getAttribute("gh");
-//		      		int n = gh.ds.size();
-//		      		if( n>0 ) {
-//		      			request.setAttribute("sh", (int)n);	
-//		      		}else {
-//		      			request.setAttribute("sh", (int)0);
-//		      		}
-//				}else {
-//					request.setAttribute("sh", (int)0);
-//				}
 			RequestDispatcher rd = request.getRequestDispatcher("thanhtoanCK.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

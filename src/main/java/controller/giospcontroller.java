@@ -84,7 +84,6 @@ public class giospcontroller extends HttpServlet {
 							response.sendRedirect("giospcontroller");
 							return;
 						} else {
-//							System.out.println(ds.getMaSanPham());
 							gh.UpdateSLGio(ds.getSoLuongMua() + 1, ds.getMaGioHang());
 							boolean checkUpdate = true;
 							session.setAttribute("checkUpdate", (boolean) checkUpdate);
@@ -127,37 +126,11 @@ public class giospcontroller extends HttpServlet {
 				response.sendRedirect("giospcontroller");
 				return;
 			}
-
-			// Xử lí xoá chọn
-
-//			String btnXoaChon = request.getParameter("btnXoaChon");
-//			if (btnXoaChon != null) {
-//				Enumeration<String> d = request.getParameterNames();
-//				while (d.hasMoreElements()) {
-//					String name = d.nextElement();
-//					String value = request.getParameter(name);
-//					String sizexoachon = request.getParameter("sizexoachon");
-//					System.out.println(sizexoachon);
-//					if (value.equals("on")) {
-//						gh.DeleteGioChon1(Integer.parseInt(name), sizexoachon);
-//						gh.DeleteGioChon(Integer.parseInt(name));
-//					}
-//				}
-//				boolean checkDeleteChon = true;
-//				session.setAttribute("checkDeleteChon", (boolean) checkDeleteChon);
-//				request.setAttribute("dsgio", dsgio);
-//				response.sendRedirect("giospcontroller");
-//				return;
-//			}
 			
 			//sử lí mua chọn
 			
-			
-			
 			String btnXoaChon = request.getParameter("btnXoaChon");
 			if (btnXoaChon != null) {
-			    // Lấy danh sách giỏ hàng của khách hàng từ đối tượng `gh`
-
 			    // Tạo một tập hợp để lưu trữ các mã sản phẩm và kích thước đã chọn từ form
 			    Set<String> selectedProducts = new HashSet<>();
 			    Enumeration<String> parameterNames = request.getParameterNames();
@@ -168,15 +141,12 @@ public class giospcontroller extends HttpServlet {
 			            selectedProducts.add(name); // Thêm mã sản phẩm đã chọn vào tập hợp
 			        }
 			    }
-//			    System.out.println("mảng sp xóa " + selectedProducts);
 			    ArrayList<giospbean> dsGioHang = gh.getdsgio(makh);
 			    // Duyệt qua danh sách giỏ hàng để xử lý xóa sản phẩm đã chọn
 			    for (giospbean item : dsGioHang) {
 			        int productId = item.getMaSanPham();
-//			        System.out.println("id sp:" + productId);
 			        String productSize = item.getGhiChu();
 			        String productKey = productId + productSize;
-//			        System.out.println("id size: " + productKey);
 
 			        // Kiểm tra xem sản phẩm có trong danh sách cần xóa không
 			        if (selectedProducts.contains(productKey)) {
@@ -197,7 +167,6 @@ public class giospcontroller extends HttpServlet {
 //			Sử lí xóa tất cả.
 			String xoaall = request.getParameter("btnxoaAll");
 			if (xoaall != null) {
-//					HttpSession session = request.getSession();
 				khachhangthibean kh1 = (khachhangthibean) session.getAttribute("dn");
 				gh.DeleteGioKH((int) kh1.getMaKhachHang());
 				boolean checkDeleteAll = true;
@@ -251,9 +220,6 @@ public class giospcontroller extends HttpServlet {
 			//--bấm trừ
 			
 			String btnDown = request.getParameter("btnDown");
-//			String masl = request.getParameter("masl");
-//			String kt = request.getParameter("kt");
-//			String slmua = request.getParameter("slmua");
 			if (btnDown != null) {
 			    if(masl != null && kt != null & slmua != null ) {
 			        int maspInt = Integer.parseInt(masl);
@@ -287,7 +253,6 @@ public class giospcontroller extends HttpServlet {
 				ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(maspInt);
 				for(KichThuocBean dsktsp : dskt) {
 					if (dsktsp != null) {
-//						int maspInt = Integer.parseInt("");
 						if (gccn.equals(dsktsp.getTenKichThuoc()) && maspInt == dsktsp.getMaSanPham()) {
 							int slmInt = Integer.parseInt(slm);
 							if (slmInt >= dsktsp.getSoLuongSize()) {
@@ -349,136 +314,19 @@ public class giospcontroller extends HttpServlet {
 
 			loaispbo lbo = new loaispbo();
 			ArrayList<loaispbean> dsloai = lbo.getloaisp();
-//			ArrayList<giospbean> ds = new ArrayList<giospbean>();
-//			ArrayList<giospbean> dsgiohang = gh.getdsgio(makh);
-//			request.setAttribute("dsgio", dsgiohang);
-			// Chuyen ve htsach.jsp: ds va dsloai
-//			String msTT = request.getParameter("msTT");
-//			sanphambo sp = new sanphambo();
-//			int maInt = Integer.parseInt(msTT);
-//			ArrayList<sanphamfullbean> dsSPTM = sp.getSanPhamTM(maInt);
-//			request.setAttribute("dsSPTM", dsSPTM);
-//			String maspsize = request.getParameter("maspsize");
-//			KichThuocBo ktbo = new KichThuocBo();
-//			int maspsizeInt = Integer.parseInt(maspsize);
-//			ArrayList<KichThuocBean> dskt = ktbo.dskichThuoc(maspsizeInt);
-//			request.setAttribute("dskt", dskt);
+
 			ArrayList<KichThuocBean> dskt = (ArrayList<KichThuocBean>)request.getAttribute("dskt");
 			if (dskt != null) {
 				System.out.println(2);
 				System.out.println(dskt);
 				request.setAttribute("dskt", dskt);
 			}
-//			ArrayList<giospbean> dsgiosp = (ArrayList<giospbean>)request.getAttribute("dsgiosp");
-//			if (dskt != null) {
-//				System.out.println(2);
-//				System.out.println(dskt);
-//				request.setAttribute("dsgiosp", dsgiosp);
-//			}
-//			request.setAttribute("maspTT", ctsp);
+
 			sanphambo sbo = new sanphambo();
 			ArrayList<String> dsHang = sbo.getHang();
 			request.setAttribute("dsHang", dsHang);
 			request.setAttribute("dssanpham", dsgio);
 			request.setAttribute("dsloai", dsloai);
-			// Chuyen ve gio.jsp: tongtien
-
-//				if(ts != null){
-//			 		HttpSession session = request.getSession();
-//					if (session.getAttribute("gh") == null){
-//						session.setAttribute("gh", hang);
-//					}
-//					//luu session ra biến
-//					hang = (giospbo)session.getAttribute("gh");
-//					long gl = Long.parseLong(giamoi);
-//					long sll = Long.parseLong(sl);
-//					//gọi hàm thêm
-//					hang.add(ts, sll, gl, anh,ms);
-//					//luu vào lại session
-//					session.setAttribute("gh", hang);
-//					//response.sendRedirect("gio.jsp");
-//					response.sendRedirect("giospcontroller");
-//					return;
-//				}
-//				
-//				//Xử lí xoá chọn
-//				String btnXoaChon = request.getParameter("btnXoaChon");
-//				if(btnXoaChon != null){
-//					Enumeration<String> d = request.getParameterNames();
-//					giospbo gh = new giospbo();
-//					HttpSession session = request.getSession();
-//					gh = (giospbo)session.getAttribute("gh");
-//					while(d.hasMoreElements()){
-//						String name = d.nextElement();
-//						String value = request.getParameter(name);
-//						if(value.equals("on")){
-//							gh.XoaHang(name);
-//						}
-//					}
-//					session.setAttribute("gh", gh);
-//					response.sendRedirect("giospcontroller");
-//					
-//				}
-//				
-//				//Xu li tra hàng
-//				
-//				String tra = request.getParameter("delete");
-//				if (tra != null){
-//					giospbo hang = new giospbo();
-//					String trats = request.getParameter("tsx");
-//			 		HttpSession session = request.getSession();
-//					if (session.getAttribute("gh") == null){
-//						session.setAttribute("gh", hang);
-//					}
-//					hang = (giospbo)session.getAttribute("gh");
-//					//gọi hàm xoá
-//					hang.XoaHang(trats);
-//					//luu vào lại session
-//					session.setAttribute("gh", hang);
-//					response.sendRedirect("giospcontroller");
-//					return;
-//				}
-//				//Xử lí xoá tất cả
-//				response.setCharacterEncoding("utf-8");
-//				request.setCharacterEncoding("utf-8");
-//				String xoaall = request.getParameter("btnxoaAll");	
-//		 		HttpSession session = request.getSession();
-//					if (xoaall != null){
-//						session.removeAttribute("gh"); 
-//					}
-//					
-//				//Xử lí cap nhat
-//					// lấy tên sach cần sửa
-//					String tss= request.getParameter("tss");
-//					String slm= request.getParameter("soluong");
-//					//Lưu session ra biến
-//					if (tss != null && slm != null) {
-//						giospbo gh = (giospbo)session.getAttribute("gh");
-//						// Sửa lai so luong
-//						gh.Sua(tss, Long.parseLong(slm));
-//						//Lưu biến vào sesion
-//						session.setAttribute("gh", gh);
-//						response.sendRedirect("giospcontroller");
-//						return;
-//					}
-//					
-//					giospbo gh;
-//					ArrayList<giospbean> ds = new ArrayList<giospbean>();
-//					long tongtien = 0;
-//					if(session.getAttribute("gh") != null) {
-//						gh = (giospbo)session.getAttribute("gh");
-//						ds = gh.ds;
-//						tongtien = gh.Tongtien();
-//					}
-//					loaispbo lbo = new loaispbo();
-//					ArrayList<loaispbean> dsloai= lbo.getloaisp();
-//					//Chuyen ve htsach.jsp: ds va dsloai
-//					request.setAttribute("dssanpham", ds);
-//					request.setAttribute("dsloai", dsloai);
-//					//Chuyen ve gio.jsp: tongtien
-//					request.setAttribute("tongtien", tongtien);
-//					
-			// điều hướng về trang gio.jsp
 
 			if (session.getAttribute("checkThem") != null) {
 				request.setAttribute("checkThem", (boolean) session.getAttribute("checkThem"));

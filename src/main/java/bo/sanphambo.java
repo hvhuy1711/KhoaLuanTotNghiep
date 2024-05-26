@@ -24,6 +24,9 @@ public class sanphambo {
 		return sdao.getHang();
 	}
 	
+	public ArrayList<String> getTenSanPham() throws Exception{
+		return sdao.getTenSanPham();
+	}
 	public sanphamfullbean get1sanpham(String MaSanPham) throws Exception {
 		return sdao.get1sanpham(MaSanPham);
 	}

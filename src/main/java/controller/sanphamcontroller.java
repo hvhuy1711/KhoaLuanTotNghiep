@@ -69,13 +69,9 @@ public class sanphamcontroller extends HttpServlet {
 			    boolean checkGia = (ds != null);
 			    session.setAttribute("checkGia", checkGia);
 			}
-//			System.out.println(sbo.maxGia());
 			request.setAttribute("maxGia" ,sbo.maxGia());
-			// else
-			// ds = sbo.getsach();//Lay ve tat ca sach
 			loaispbo lbo = new loaispbo();
 			ArrayList<loaispbean> dsloai = lbo.getloaisp();
-			// Chuyen ve htsach.jsp: ds va dsloai
 			if (session.getAttribute("checkdangnhap") != null) {
 				request.setAttribute("checkdangnhap", (boolean) session.getAttribute("checkdangnhap"));
 				session.removeAttribute("checkdangnhap");
@@ -84,7 +80,6 @@ public class sanphamcontroller extends HttpServlet {
 			request.setAttribute("dsloai", dsloai);
 			request.setAttribute("dsHang", dsHang);
 			giospbo gh = new giospbo();
-//			HttpSession session2 = request.getSession();
 			if (session.getAttribute("dn") != null) {
 				khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
 				if (kh != null) {

@@ -37,6 +37,7 @@ public class DanhGiaController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			String sosao = request.getParameter("sosao");
 			String masp = request.getParameter("masp");
+			String maloai = request.getParameter("maloai");
 			String nd = request.getParameter("nd");
 			HttpSession session = request.getSession();
 			khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
@@ -48,6 +49,7 @@ public class DanhGiaController extends HttpServlet {
 				boolean checkDanhGia =true;
 				session.setAttribute("checkDanhGia", (boolean) checkDanhGia);
 				session.setAttribute("ctsp", masp);
+				session.setAttribute("maloai", maloai);
 				RequestDispatcher rd = 
 						request.getRequestDispatcher("chitietsanphamcontroller");
 				rd.forward(request, response);

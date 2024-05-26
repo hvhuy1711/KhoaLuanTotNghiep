@@ -52,7 +52,6 @@ public class CNTTKhachHangController extends HttpServlet {
 				session.removeAttribute("dn");
 				khachhangthibean khnew = khbo.get1KhachHang(makh);
 				session.setAttribute("dn", (khachhangthibean) khnew);
-//				int maspInt = Integer.parseInt(masp);
 				session.setAttribute("maSPMUA", masp);
 				session.setAttribute("KichThuoc", kichthuoc);
 				response.sendRedirect("kiemTraTTKHController");

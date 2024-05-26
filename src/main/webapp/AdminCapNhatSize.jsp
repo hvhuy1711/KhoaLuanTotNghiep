@@ -332,7 +332,7 @@
 							</div> 
 							<div class="form-row" style="margin-top: 10px; padding: 0 40px 10px">
 							<input name="btnThemKT" type="submit" value="Thêm Kích Thước" 
-				style="width: 150px; height: 45px; background-color: #446879; color: #fff; font-weight: bold; outline: none; border: 2px solid #ccc; border-radius: 10px; margin-right: 15px">
+				style="width: 150px; height: 45px; background-color: #446879; color: #fff; font-weight: bold; outline: none; border: 2px solid #ccc; border-radius: 10px; margin:0 auto">
 								</div>
 						</form>
 					</div>
@@ -377,7 +377,7 @@
 		<%ArrayList<KichThuocBean> dskichthuoc = (ArrayList<KichThuocBean>)request.getAttribute("dskichthuoc");
 		if (dskichthuoc != null){
 			for(KichThuocBean ds : dskichthuoc){%>
-				<form action="adminCNSizeController" method="get">
+				<form action="adminCNSizeController" method="post">
 					<div class="form-row">
 					 	<input style="display: none" class="input"
 						name="masanpham" type="text"
@@ -388,15 +388,14 @@
 						value="<%=ds.getTenKichThuoc()%>"
 						placeholder="Nhập tên kích thước" required="required"> <br>
 					<span class="labelspan">Số lượng:</span> <input class="input"
-						name="soluongsize" type="text" value="<%=ds.getSoLuongSize() %>"
+						name="soluongsize" type="number" value="<%=ds.getSoLuongSize() %>"
 						placeholder="Nhập số luọng" required="required"> <br>
 						<%-- <input style="display: none;" class="input"
 						name="masanpham" type="text" value="<%=ds.getMaSanPham()%>"> --%>
 						<input style="display: none;" class="input"
 						name="makichthuoc" type="text" value="<%=ds.getMaKichThuoc()%>">
-					<input style="margin: 0 20px" type="submit" value="Cập nhật" name="btnUpKT">
-					<input style="margin: 0 20px" type="submit" value="Xóa" name="btnXoa">
-					<%-- <a href="adminCNSizeController?btnXoaKT&makichthuocxoa=<%=ds.getMaKichThuoc()%>">Xóa</a> --%>
+					<input style="margin: 0 20px;padding: 5px;color: white; background-color: #446879;font-weight: bold;border: 1px solid;border-radius: 10px;" type="submit" value="Cập nhật" name="btnUpKT">
+					<input style="margin: 0 20px;padding: 5px;color: white; background-color: #446879;font-weight: bold;border: 1px solid;border-radius: 10px;" type="submit" value="Xóa" name="btnXoa">
 					</div>
 				</form>
 				<%			
@@ -411,7 +410,8 @@
 			<th>Giá</th>
 			<th>Chiếc khấu</th>
 			<th>Ảnh</th>
-			<th>Nút chọn</th>
+			<th>Nút kích thước</th>
+			<th>Thêm ảnh</th>
 			<th>Cập nhật</th>
 			<th>Nút xoá</th>
 
@@ -434,44 +434,50 @@
 									<span class="labelspan">Mã sản phẩm:</span> <input class="input"
 										class="input" name="masanpham" type="text"
 										value="<%=loai.getMaSanPham()%>"
-										placeholder=""> <br>
+										placeholder="" required="required"> <br>
 								</div> 
 							<div class="form-row">
 									<span class="labelspan">Tên sản phẩm:</span> <input class="input"
 										class="input" name="tensanpham" type="text"
 										value="<%=loai.getTenSanPham()%>"
-										placeholder="Nhập tên sản phẩm"> <br>
+										placeholder="Nhập tên sản phẩm" required="required"> <br>
 								</div> 
 								<div class="form-row">
-									<span class="labelspan">Giá:</span> <input class="input"
+									<span class="labelspan">Giá nhập:</span> <input class="input"
+										class="input" name="gianhap" type="text"
+										value="<%=loai.getSoLuong()%>"
+										placeholder="Nhập giá nhập" required="required"> <br>
+								</div> 
+								<div class="form-row">
+									<span class="labelspan">Giá bán:</span> <input class="input"
 										class="input" name="giacu" type="text"
 										value="<%=loai.getGia()%>"
-										placeholder="Nhập giá"> <br>
+										placeholder="Nhập giá" required="required"> <br>
 								</div> 
 								<div class="form-row">
 									<span class="labelspan">Chiếc khấu:</span> <input class="input"
 										class="input" name="giamoi" type="text"
 										value="<%=loai.getChiecKhau()%>"
-										placeholder="Nhập giá mới"> <br>
+										placeholder="Nhập giá mới" required="required"> <br>
 								</div> 
 							<div class="text-center">
 								<img style="width: 50px;" alt=""
-									src="<%=loai.getAnh()%>">
+									src="<%=loai.getAnh()%>" >
 								<div style="position: relative; display: inline-block;">
 									<p>Chọn ảnh thay đổi</p>
-									<input id="imageInput" name="anh" type="file" multiple onchange="displayImage()">
+									<input id="imageInput" name="anh" type="file" multiple onchange="displayImage()" required="required">
 								</div>
 								<div style="position: relative; display: inline-block;">
-								<p>Thay đổi thành</p>
+								<p id = "anhSwap" style="display: none">Thay đổi thành</p>
 								<img id="selectedImage" style="width: 50px;" alt=""
 									src="">
 								</div>
-								
 							</div>
 							
 								<script>
 							    function displayImage() {
 							        var input = document.getElementById('imageInput');
+							        var anhSwap = document.getElementById('anhSwap');
 							        var selectedImage = document.getElementById('selectedImage');
 							        var currentImage = document.getElementById('currentImage');
 							
@@ -481,10 +487,12 @@
 							            reader.onload = function(e) {
 							                selectedImage.setAttribute('src', e.target.result);
 							            }
-							
+							            
 							            reader.readAsDataURL(input.files[0]);
+							            anhSwap.style.display = 'block'; 
 							        } else {
 							            selectedImage.src = "";
+							            anhSwap.style.display = 'none'; 
 							        }
 							    }
 							</script>
@@ -492,76 +500,49 @@
 									<span class="labelspan">Thương hiệu:</span> <input class="input"
 										class="input" name="hang" type="text"
 										value="<%=loai.getHang()%>"
-										placeholder="Nhập hãng"> <br>
+										placeholder="Nhập hãng" required="required"> <br>
 								</div> 
 							<div class = "form-row">
 									<span>Chọn danh mục:</span>
-									<%ArrayList<loaispbean> dsloai1 = (ArrayList<loaispbean>) request.getAttribute("dsloai");%>
-									<select id="loaiSelectmd" name="loai" style="border: 2px solid #46789; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 47px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
-									    <% if (dsloai1 != null) {
-									        int n = dsloai1.size();
-									        for (int i = 0; i < n; i++) {
-									            loaispbean ds1 = dsloai1.get(i);
-									    %>
-									    <option value="<%= ds1.getMaLoai() %>"><%= ds1.getTenLoai() %></option>
-									    
-									    <% }
-									    } %>
-									</select>
-
-							</div>
-								<input id="maloaiInputmd" style="display: none;"
-								class="input" name="maloai" type="text"
-								value="<%=request.getAttribute("maloai")%>">
-								<script type="text/javascript">
-									    // Lấy giá trị từ input ẩn
-									    var maloaiInputmd = document.getElementById('maloaiInputmd').value;
-									    
-									    // Lấy select box
-									    var loaiSelectmd = document.getElementById('loaiSelectmd');
-									    
-									    // Lặp qua từng option trong select box
-									    for (var i = 0; i < loaiSelectmd.options.length; i++) {
-									        // So sánh giá trị của option với giá trị từ input ẩn
-									        if (loaiSelectmd.options[i].value === maloaiInputmd) {
-									            // Nếu bằng nhau, đặt option này làm giá trị mặc định cho select box
-									            loaiSelectmd.options[i].selected = true;
-									            break;  // Thoát khỏi vòng lặp sau khi tìm thấy giá trị tương ứng
-									        }
-									    }
-									</script>
-
-								
-								<script>
-									document.addEventListener('DOMContentLoaded', function() {
-									    // Lấy các phần tử cần thiết
-									    var loaiSelect = document.getElementById('loaiSelectmd');
-									    var maloaiInput = document.getElementById('maloaiInputmd');
-									
-									    // Thiết lập sự kiện khi thay đổi chọn
-									    loaiSelect.addEventListener('change', function() {
-									        // Lấy giá trị của option đã chọn
-									        var selectedOption = loaiSelect.options[loaiSelect.selectedIndex];
-									        
-									        // Gán giá trị của option cho input
-									        maloaiInput.value = selectedOption.value;
-									    });
-									});
-								</script>
+									<%
+								ArrayList<loaispbean> dsloai1 = (ArrayList<loaispbean>) request.getAttribute("dsloai");
+								int maloai = loai.getMaLoai();
+								String maString = String.valueOf(maloai);
+								%>
+						<select id="loaiSelectmd" name="maloai" style="border: 2px solid #446789; width:100%; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 60px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
+						    <% 
+						    if (dsloai1 != null) {
+						        // Vòng lặp để hiển thị tùy chọn đã chọn
+						        for (loaispbean ds1 : dsloai1) {
+						            if (maString.equals(ds1.getMaLoai())) {
+						    %>
+						    <option value="<%= ds1.getMaLoai() %>" selected><%= ds1.getTenLoai() %></option>
+						    <%
+						            }
+						        }
+						        
+						        // Vòng lặp để hiển thị các tùy chọn còn lại
+						        for (loaispbean ds1 : dsloai1) {
+						            if (!maString.equals(ds1.getMaLoai())) {
+						    %>
+						    <option value="<%= ds1.getMaLoai() %>"><%= ds1.getTenLoai() %></option>
+						    <%
+						            }
+						        }
+						    }
+						    %>
+						</select>
+						 	</div>
 							<div class="form-row">
 									<span class="labelspan">Mô tả sản phẩm:</span> <input class="input"
 										class="input" name="mota" type="text"
 										value="<%=loai.getMoTaSanPham()%>"
-										placeholder="Nhập mô tả sản phẩm"> <br>
+										placeholder="Nhập mô tả sản phẩm" required="required"> <br>
 								</div> 
 								 
 							<div class="form-row" style="margin-top: 10px; padding: 0 40px 10px">
 							<input name="butchon" type="submit" value="Cập nhật" 
-				style="width: 150px; height: 45px; background-color: #446879; color: #fff; font-weight: bold; outline: none; border: 2px solid #ccc; border-radius: 10px; margin-right: 15px">
-		
-							<!-- <a 	href="btnupdate"
-								style="float:right;text-align:center; width:100%;text-decoration:none; border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-								Cập nhật </a> -->
+				style="width: 150px;display:block; height: 45px; background-color: #446879; color: #fff; font-weight: bold; outline: none; border: 2px solid #ccc; border-radius: 10px; margin:0 auto">
 								</div>
 						</form>
 					</div>
@@ -571,8 +552,7 @@
 				</div>
 			</div>
 		</div>
-		
-		
+			
 	
 		<tr style="font-weight: bold;">
 			<td><%=loai.getMaSanPham()%></td>
@@ -580,47 +560,59 @@
 			<td><%=loai.getGia()%></td>
 			<td><%=loai.getChiecKhau()%></td>
 			<td><img style="width: 40px;" alt="" src="<%=loai.getAnh()%>"></td>
-			<%-- 	<td><a
+			<td><a
 				href="adminCapNhatSizeController?msp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
 		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
 		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>"
 				style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-				Cập nhật kích thước </a></td> --%>
-			<td><a
-				href="adminCapNhatSizeController?msp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
+				<i class="fa-solid fa-pen-ruler"></i> </a></td>
+					<td><a href="adminThemAnhController?masp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
 		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
-		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>&tab=chon"
-				style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-					Chọn </a></td>
-					
-					<%-- <script>
-								// Đợi cho modal hiển thị và sau đó xử lý sự kiện
-						$('#myModal<%=loai.getMaSanPham()%>').on('shown.bs.modal', function () {
-						    // Lấy mã danh mục sản phẩm của sản phẩm được chọn
-						    var selectedLoai = document.getElementById('maloaiInputmd').value;
-						    
-						    // Lặp qua tất cả các tùy chọn trong thẻ select
-						    var loaiSelect = document.getElementById('loaiSelectmd');
-						    for (var i = 0; i < loaiSelect.options.length; i++) {
-						        var option = loaiSelect.options[i];
-						        if (option.value === selectedLoai) {
-						            // Đặt thuộc tính "selected" cho tùy chọn được chọn
-						            option.selected = true;
-						        }
-						    }
-						});
-					</script> --%>
+		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>"
+		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
+		<i class="fa-solid fa-camera"></i></a></td>
+			
 					<td>
-					<input id = "updateButton" type="submit" value="Cập nhật" data-toggle="modal"
+					<a data-toggle="modal"
 							data-target="#myModal<%=loai.getMaSanPham()%>"
-							style=" border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-						</td>	
+							style=" border: 1px solid #ccc; padding: 7px; border-radius: 10px;cursor:pointer; background-color: #446879; color: #fff; font-weight: bold;">
+							<i class="fa-solid fa-pen-to-square"></i></a>
+					</td>	
 			<td><a
-				href="adminsanphamcontroller?mspx=<%=loai.getMaSanPham()%>&tab=xoa"
+				 data-toggle="modal" data-target="#myModalXoa<%=loai.getMaLoai()%>" 
 				style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
 					<i class="fa-solid fa-trash-can"></i>
 			</a></td>
 		</tr>
+		
+		<!-- Modal xóa -->
+	<div class="container">
+  <div class="modal fade" id="myModalXoa<%=loai.getMaLoai()%>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thông báo xóa</h4>
+        </div>
+        <div class="modal-body text-center">
+          <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn xóa danh mục này?</h2>
+          <div style="margin-bottom: 20px "> 
+          	<a style="border: 1px solid red;border-radius:20px;text-decoration:none; background-color:red;color:white;font-size:18px;font-weight:bold; padding: 10px 40px;margin-right: 20px "
+          	href="adminsanphamcontroller?mspx=<%=loai.getMaSanPham()%>&tab=xoa">Có</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold;border-radius: 20px;font-size: 18px">Không</button>
+   		</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+  </div>
+  
+</div>
+</div>
+</div>
 		<%
 		}
 		%>
