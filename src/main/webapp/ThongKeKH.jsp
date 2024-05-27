@@ -350,221 +350,155 @@
 	</div>
 
 	<div style="padding: 50px"></div>
-	<h1 class="text-center" style="padding: 20px">Thống kê</h1>
+	<h1 class="text-center" style="padding: 20px">Thống kê sản phẩm</h1>
 	<div style="display: flex;justify-content: space-around;margin: 30px 100px">
 		<a href="adminThongKeController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo sản phẩm</a>
 		<a href="adminThongKeKHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo khách hàng</a>
 		<a href="adminThongKeDHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo đơn hàng</a>
 	</div>
-	<h1 class="text-center" style="padding: 20px">Danh sách sản phẩm</h1>
+	<h1 class="text-center" style="padding: 20px">Thống kê Khách hàng</h1>
 	<div class="container">
 		<div class="row">
 			<%
-			ArrayList<sanphamfullbean> dssp = (ArrayList<sanphamfullbean>) request.getAttribute("dssp");
-			if (dssp != null) {
-				for (sanphamfullbean s : dssp) {
+			ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
+			if (dskh != null) {
+				for (khachhangthibean s : dskh) {
 			%>
-			<div class="col-sm-4 col-xs-6 col-md-3 text-center"
+			<div class="col-sm-4 col-xs-6 col-md- text-center"
 				style="border: 2px solid #446789; border-radius: 10px; padding: 25px">
-				<img alt="" src="<%=s.getAnh()%>"
-					style="width: 100%; height: 250px;">
+				<h1 style="font-size: 30px; font-weight: bold; color: red;">Khách
+					hàng</h1>
 				<h1
-					style="font-size: 30px; font-weight: bold; color: red; height: 35px; overflow: hidden; display: block; text-overflow: ellipsis; white-space: nowrap;"><%=s.getTenSanPham()%></h1>
-
+					style="font-size: 25px; font-weight: bold; color: red; margin-bottom: 20px"><%=s.getHoTen()%></h1>
 				<div style="">
 					<a data-toggle="modal"
-						data-target="#myModalKT<%=s.getMaSanPham()%>"
-						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Kích
-						Thước</a> <a data-toggle="modal"
-						data-target="#myModalXCC<%=s.getMaSanPham()%>"
+						data-target="#myModalGH<%=s.getMaKhachHang()%>"
+						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Giỏ
+						hàng</a> <a data-toggle="modal"
+						data-target="#myModalXKH<%=s.getMaKhachHang()%>"
 						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Xem
-						chi tiết</a> <a data-toggle="modal"
-						data-target="#myModalAnh<%=s.getMaSanPham()%>"
-						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white;">Ảnh</a>
+						chi tiết</a>
+				</div>
+			</div>
+
+			<!-- Modal giỏ hàng -->
+			<div class="containerss">
+				<div class="modal fade" id="myModalGH<%=s.getMaKhachHang()%>"
+					role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Thông tin sản phẩm</h4>
+							</div>
+							<div class="modal-body">
+								<%
+								ArrayList<giospbean> gio = (ArrayList<giospbean>) request.getAttribute("dsgio");
+								if (gio == null) {
+								%>
+								<h1>Danh sách giỏ đang trống</h1>
+								<%
+								} else {
+								int dem = 1;
+								for (giospbean ds1 : gio) {
+									if (ds1.getMaKhachHang() == s.getMaKhachHang()) {
+								%>
+								<div class="product-details">
+									<p>
+										Sản phẩm số
+										<%=dem%>:
+									</p>
+									<div class="row">
+										<div class="col-sm-6">
+											<img alt="" src="<%=ds1.getAnh()%>">
+										</div>
+										<div class="col-sm-6">
+											<p>
+												<span>Tên sản phẩm:</span>
+												<%=ds1.getTenSanPham()%></p>
+											<p>
+												<span>Giá:</span>
+												<%=ds1.getGia()%>đ
+											</p>
+											<p>
+												<span>Giảm giá:</span>
+												<%=ds1.getChiecKhau()%>%
+											</p>
+											<p>
+												<span>Số lượng mua:</span>
+												<%=ds1.getSoLuongMua()%></p>
+											<p>
+												<span>Kích thước:</span>
+												<%=ds1.getGhiChu()%></p>
+										</div>
+									</div>
+									<hr>
+									<hr>
+								</div>
+								<%
+								dem++;
+								}
+								}
+								}
+								%>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
 
+
+
+			<!-- 	Modal xem xem chi tiết khách hàng -->
+	<div class="containers">
+	    <div class="modal fade" id="myModalXKH<%=s.getMaKhachHang()%>" role="dialog">
+	        <div class="modal-dialog">
+	            <!-- Modal content-->
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title">Thông tin khách hàng</h4>
+	                </div>
+	                <div class="modal-body text-center">
+	                    <%
+	                    ArrayList<khachhangthibean> dskh2 = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
+	                    if (dskh2 != null) {
+	                        for (khachhangthibean d : dskh2) {
+	                            if (d.getMaKhachHang() == s.getMaKhachHang()) {
+	                    %>
+	                    <div class="text-center customer-details">
+	                        <p><span>Tên khách hàng:</span><input value="<%=d.getHoTen()%>" disabled="disabled"></p>
+	                        <p><span>Địa chỉ:</span><input value="<%=d.getDiaChi()%>" disabled="disabled"></p>
+	                        <p><span>Số điện thoại:</span><input value="<%=d.getSoDT()%>" disabled="disabled"></p>
+	                        <p><span>Tên đăng nhập:</span><input value="<%=d.getTenDN()%>" disabled="disabled"></p>
+	                        <p><span>Email:</span><input value="<%=d.getEmail()%>" disabled="disabled"></p>
+	                    </div>
+	                    <%
+	                    }
+	                    }
+	                    }
+	                    %>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 			<%
 			}
 			}
 			%>
 		</div>
 	</div>
-
-	<%
-	ArrayList<sanphamfullbean> dssp1 = (ArrayList<sanphamfullbean>) request.getAttribute("dssp");
-	if (dssp1 != null) {
-		for (sanphamfullbean s : dssp1) {
-	%>
-
-
-
-
-	<!-- Modol Kich thước -->
-	<div class="containers">
-		<div class="modal fade" id="myModalKT<%=s.getMaSanPham()%>"
-			role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" style="font-size: 30px">Thông tin
-							kích thước</h4>
-					</div>
-					<div class="modal-body text-center">
-						<%
-						ArrayList<KichThuocBean> dskt = (ArrayList<KichThuocBean>) request.getAttribute("dskt");
-						if (dskt != null) {
-							for (KichThuocBean ds : dskt) {
-								if (ds.getMaSanPham() == s.getMaSanPham()) {
-						%>
-						<div class="text-center"
-							style="display: block; text-align: center; margin: 20px">
-							<span style="font-size: 18px; margin-right: 20px">Tên kích
-								thước:</span><input
-								style="color: red; width: 100px; text-align: center; margin-right: 20px"
-								value="<%=ds.getTenKichThuoc()%>" disabled="disabled"> <span
-								style="font-size: 18px; margin-right: 20px">Số lượng:</span><input
-								style="color: red; width: 100px; text-align: center;"
-								value="<%=ds.getSoLuongSize()%>" disabled="disabled">
-						</div>
-						<%
-						}
-						}
-						}
-						%>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal Xem chi tiết -->
-	<div class="containers">
-        <div class="modal fade" id="myModalXCC<%=s.getMaSanPham()%>" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <i class="fas fa-times" data-dismiss="modal"></i>
-                        <h4 class="modal-title">Thông tin sản phẩm</h4>
-                    </div>
-                    <div class="modal-body text-center">
-                        <%
-                        ArrayList<sanphamfullbean> ds = (ArrayList<sanphamfullbean>) request.getAttribute("dssp");
-                        if (ds != null) {
-                            for (sanphamfullbean ds1 : ds) {
-                                if (ds1.getMaSanPham() == s.getMaSanPham()) {
-                        %>
-                        <div class="text-center product-details">
-                            <img alt="" src="<%=ds1.getAnh()%>">
-                            <p style="font-size: 30px; color: red">
-                                <%=ds1.getTenSanPham()%>
-                            </p>
-                            <p>
-                                <span>Giá nhập:</span>
-                                <input value="<%=ds1.getSoLuong()%>đ" disabled="disabled">
-                            </p>
-                            <p>
-                                <span>Giá bán:</span>
-                                <input value="<%=ds1.getGia()%>đ" disabled="disabled">
-                            </p>
-                            <p>
-                                <span>Chiếc khấu:</span>
-                                <input value="<%=ds1.getChiecKhau()%>%" disabled="disabled">
-                            </p>
-                            <p>
-                                <span>Thương hiệu:</span>
-                                <input value="<%=ds1.getHang()%>" disabled="disabled">
-                            </p>
-                            <p>
-                                <span>Ngày nhập hàng:</span>
-                                <input value="<%=ds1.getNgayNhap()%>" disabled="disabled">
-                            </p>
-                            <p class="mota">
-                                <%=ds1.getMoTaSanPham()%>
-                            </p>
-                        </div>
-                        <%
-                        }
-                        }
-                        }
-                        %>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-	<!-- Modal Ảnh sản phẩm -->
-	<div class="containers">
-		<div class="modal fade" id="myModalAnh<%=s.getMaSanPham()%>"
-			role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" style="font-size: 30px">Thông tin ảnh
-							minh họa</h4>
-					</div>
-					<div class="modal-body text-center">
-						<%
-						ArrayList<AnhBean> anh = (ArrayList<AnhBean>) request.getAttribute("dsAnh");
-						if (anh == null) {
-						%>
-						<h1>Danh sách sản phẩm đang trống</h1>
-						<%
-						} else {
-						int n = anh.size();
-						int demsp = 1;
-						for (int i = 0; i < n; i++) {
-							if (anh.get(i).getMaSanPham() == s.getMaSanPham()) {
-						%>
-						<div class="text-center" style="text-align: center; margin: 20px">
-							<p style="font-size: 30px">
-								Ảnh minh họa
-								<%=demsp%>:
-							</p>
-							<img style="width: 50%" alt="" src="<%=anh.get(i).getTenAnh()%> ">
-						</div>
-						<%
-						demsp++;
-						}
-						}
-						}
-						%>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<%
-	}
-	}
-	%>
 
 </body>
 </html>

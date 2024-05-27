@@ -68,7 +68,31 @@ public class sanphamcontroller extends HttpServlet {
 			    ds = sbo.timGia(minGia, maxGiasp);
 			    boolean checkGia = (ds != null);
 			    session.setAttribute("checkGia", checkGia);
-			}
+			} else {
+                // Nếu không có bộ lọc nào, lấy tất cả sản phẩm
+                ds = sbo.getsanpham();
+            }
+			// phân trang
+			// Thêm phân trang vào đây
+			int page = 1;
+            int recordsPerPage = 10;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+
+            int totalRecords = ds.size();
+            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+            int start = (page - 1) * recordsPerPage;
+            int end = Math.min(start + recordsPerPage, totalRecords);
+            ArrayList<sanphamfullbean> dsPage = new ArrayList<>(ds.subList(start, end));
+
+            request.setAttribute("dssanpham", dsPage);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+
+			//hết phân trang
+			
 			request.setAttribute("maxGia" ,sbo.maxGia());
 			loaispbo lbo = new loaispbo();
 			ArrayList<loaispbean> dsloai = lbo.getloaisp();
@@ -76,7 +100,7 @@ public class sanphamcontroller extends HttpServlet {
 				request.setAttribute("checkdangnhap", (boolean) session.getAttribute("checkdangnhap"));
 				session.removeAttribute("checkdangnhap");
 			}
-			request.setAttribute("dssanpham", ds);
+//			request.setAttribute("dssanpham", ds);
 			request.setAttribute("dsloai", dsloai);
 			request.setAttribute("dsHang", dsHang);
 			giospbo gh = new giospbo();

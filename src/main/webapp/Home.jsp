@@ -191,6 +191,27 @@ form#locgia input[type="submit"] {
 form#locgia input[type="submit"]:hover {
   background-color: #45a049;
 }
+
+.pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
 </style>
 
 
@@ -721,7 +742,6 @@ form#locgia input[type="submit"]:hover {
                     </div>
                 </form>
             </div>
-                   <!--  <p id="emailMessage"></p> -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -729,12 +749,8 @@ form#locgia input[type="submit"]:hover {
     </div>
 </div>
 </div>
-
-		<!-- Hết modal đăng kí -->
-
+<!-- Hết modal đăng kí -->
 	</div>
-
-
 	<!-- Body -->
 
 	<div id="myCarousel" class="carousel slide text-center" data-ride="carousel" style="margin: 0 60px;width: 90%;height: 90%">
@@ -800,26 +816,7 @@ form#locgia input[type="submit"]:hover {
 				 <%		}
 				 	}
 				 %>
-				<div style="padding: 10px"></div>	
-				<%-- <h2 style="font-size: 1.5em;font-weight: bold;">Danh mục</h2>
-				<hr>
-				<%
-				ArrayList<loaispbean> dsloai = (ArrayList<loaispbean>) request.getAttribute("dsloai");
-				if (dsloai != null) {
-					for (loaispbean loai : dsloai) {
-				%>
-
-				<p>
-					<label for="checkbox<%=loai.getMaLoai()%>"> <a
-						style="cursor: pointer; color: black; text-decoration: none; font-weight: bold;border-bottom: 1px solid;padding: 7px "
-						href="sanphamcontroller?ml=<%=loai.getMaLoai()%>"><%=loai.getTenLoai()%></a>
-					</label>
-				</p>
-				<%
-				}
-				}
-				%> --%>
-			
+				<div style="padding: 10px"></div>			
 				<hr>
 				<h2 style="font-size: 1.5em;font-weight: bold;color:#45a049 ">Lọc sản phẩm theo giá</h2>
 				<hr>
@@ -846,7 +843,7 @@ form#locgia input[type="submit"]:hover {
 					<a href="chitietsanphamcontroller?ctsp=<%=s.getMaSanPham()%>&maloai=<%=s.getMaLoai()%>">
 
 						<div class="col-sm-4 col-xs-6 col-md-3 text-center"
-							style="border: 2px solid #446789;border-radius:10px; ">
+							style="border: 2px solid #446789;border-radius:10px;">
 							<img style="width: 100%;margin-top:5px; border-image: linear-gradient(to bottom, #446789, pink) 1;border: 1px solid; height: 250px;" src="<%=s.getAnh()%>">
 							<div>
 								<br>
@@ -886,39 +883,39 @@ form#locgia input[type="submit"]:hover {
 			</div>
 		</div>
 	</div>
-	<%-- <%
-		// Số sản phẩm trên mỗi trang
-		int soSanPhamTrenTrang = 20;
-		// Tổng số sản phẩm
-		int tongSoSanPham = ds.size();
-		// Số trang cần hiển thị
-		int soTrang = (int) Math.ceil((double) tongSoSanPham / soSanPhamTrenTrang);
-		
-		// Trang hiện tại
-		int trangHienTai = 1;
-		if (request.getParameter("trang") != null) {
-		    trangHienTai = Integer.parseInt(request.getParameter("trang"));
-		}
-		
-		// Vị trí bắt đầu và kết thúc của dữ liệu trên trang hiện tại
-		int viTriBatDau = (trangHienTai - 1) * soSanPhamTrenTrang;
-		int viTriKetThuc = Math.min(viTriBatDau + soSanPhamTrenTrang, tongSoSanPham);
-		
-		// Hiển thị sản phẩm trên từng trang
-		for (int i = viTriBatDau; i < viTriKetThuc; i++) {
-		    sanphambean s = ds.get(i);
-		    // Hiển thị thông tin sản phẩm
-		%>
-<%
-}
+	<div class="pagination">
+        <%
+            int currentPage = (int) request.getAttribute("currentPage");
+            int totalPages = (int) request.getAttribute("totalPages");
 
-// Hiển thị các liên kết phân trang
-for (int i = 1; i <= soTrang; i++) {
-%>
-    <a href="?trang=<%= i %>"><%= i %></a>
-<%
-}
-%> --%>
+            String ml = request.getParameter("ml");
+            String key1 = request.getParameter("txttim");
+            String hang = request.getParameter("tenhang");
+            String minGia = request.getParameter("minGia");
+            String maxGiasp = request.getParameter("maxGiasp");
+
+            String queryParams = "";
+            if (ml != null) queryParams += "&ml=" + ml;
+            if (key1 != null) queryParams += "&txttim=" + key1;
+            if (hang != null) queryParams += "&tenhang=" + hang;
+            if (minGia != null) queryParams += "&minGia=" + minGia;
+            if (maxGiasp != null) queryParams += "&maxGiasp=" + maxGiasp;
+
+            if (currentPage > 1) {
+        %>
+        <a href="sanphamcontroller?page=<%= currentPage - 1 %><%= queryParams %>">&laquo; Quay lại</a>
+        <% 
+            }
+            for (int i = 1; i <= totalPages; i++) {
+        %>
+        <a href="sanphamcontroller?page=<%= i %><%= queryParams %>" class="<%= (i == currentPage) ? "active" : "" %>"><%= i %></a>
+        <% 
+            }
+            if (currentPage < totalPages) {
+        %>
+        <a href="sanphamcontroller?page=<%= currentPage + 1 %><%= queryParams %>">Tiếp theo &raquo;</a>
+        <% } %>
+    </div>	
 	<!-- Phần footer -->
 	<div style="padding: 10px"></div>
 	<ul class="animation">

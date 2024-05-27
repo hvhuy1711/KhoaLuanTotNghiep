@@ -274,7 +274,7 @@
 	<%}
 	}
 	%>
-	<%-- 
+	
 	<script src="assets/ThongBao.js"></script>
 	<%
 	if (request.getAttribute("checkCN") != null) {
@@ -288,7 +288,8 @@
 	<%
 	}
 	}
-	%> --%>
+	%> 
+	
 	<script src="assets/ThongBao.js"></script>
 	<%
 	if (request.getAttribute("checkXoa") != null) {

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("stck").style.display = "block"
 			paid_content.innerHTML = paidContent;
 			paid_price.innerHTML = paidPrice;
-			 startCountdown(5 * 60, countdown); // 5 phút
+			 startCountdown(30, countdown); // 5 phút
 			setInterval(() => {
 				fetchDataAndProcess(paidPrice, paidContent);
 			}, 5000);
@@ -72,20 +72,37 @@ function fetchDataAndProcess(price, content) {
 		});
 }
 
-function startCountdown(duration, display) {
-    let timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
+function redirectToServlet() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:8080/BaiThiJava/giospcontroller', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Xử lý kết quả nếu cần
+            } else {
+                console.error('There was a problem with the request.');
+            }
         }
-    }, 1000);
+    };
+    xhr.send();
 }
+
+    // Hàm bắt đầu đếm ngược
+    function startCountdown(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+                redirectToServlet(); // Chuyển hướng đến trang servlet sau khi hết thời gian
+            }
+        }, 1000);
+    }
 

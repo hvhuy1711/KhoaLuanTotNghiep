@@ -520,7 +520,7 @@
 	</div>
 
 	<div style="text-align: center;color: red;font-size: 30px" id= "ttheader">Vui lòng quét QR để thanh toán</div>
-	<script src="assets/ThanhToanSp.js"></script>
+	<script src="assets/checkthanhtoan.js"></script>
 	<div class="center-container">
 		<button class="course_item_btn" data-coursesID="<%=magio%>"
 			data-coursesPrice="<%=tongtien%>">Hiện Mã QR</button>
@@ -539,8 +539,8 @@
 	<div class="courses_wrapper">
 		<div class="courses_inner"></div>
 		<div class="courses_qr" style="text-align: center;">
-			<img class="courses_qr_img" />
 			<div id="countdown"></div>
+			<img class="courses_qr_img" />
 			<div id="ndck" style="display: none">
 				<p style="font-weight: bold; font-size: 20px;" >
 					Nội dung chuyển khoản: <span id="paid_content"></span>
