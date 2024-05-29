@@ -497,9 +497,6 @@ form#locgia input[type="submit"]:hover {
 		}
 		%>
 
-	
-	
-	
 	<script src="assets/ThongBao.js"></script>
 		<%
 	if (request.getAttribute("checkSoDt") != null) {
@@ -538,32 +535,6 @@ form#locgia input[type="submit"]:hover {
 	<%}	
 	}
 	%>
-
-<%--  <%
-        if (request.getAttribute("checkEmail") != null) {
-            boolean checkEmail = (boolean) request.getAttribute("checkEmail");
-            boolean checkDK = request.getAttribute("checkDK") != null ? (boolean) request.getAttribute("checkDK") : false;
-
-            if (!checkEmail) {
-    %>
-                <script type="text/javascript">
-                    createToast('warning', 'fa-solid fa-circle-exclamation',
-                        'Cảnh báo',
-                        'Email bạn nhập không hợp lệ. Vui lòng nhập email hợp lệ!!');
-                </script>
-    <%
-            } else if (checkDK) {
-    %>
-                <script type="text/javascript">
-                    createToast('success', 'fa-solid fa-circle-check',
-                        'Thành công',
-                        'Bạn đã đăng kí thành công tài khoản. Bây giờ hãy đăng nhập!!');
-                </script>
-    <%
-            }
-        }
-    %>
- --%>	
  
 	<script src="assets/ThongBao.js"></script>
 		<%

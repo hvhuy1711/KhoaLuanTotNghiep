@@ -993,7 +993,6 @@ h2 {
 			         <span style="opacity: 0.5">Nội dung đánh giá:</span> 
 		            <div class="reviewer" style="font-size: 26px"><%=ds.getNoiDungDanhGia() %></div>
 		        </div>
-		        <!-- Thêm các đánh giá khác ở đây -->
 		    </div>
 		</div>
 	<%}}%>

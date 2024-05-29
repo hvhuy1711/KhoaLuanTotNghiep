@@ -17,7 +17,6 @@ import bo.ChiTietHoaDonBo;
 import bo.DonHangDaDatBo;
 import bo.HoaDonBo;
 import bo.LichSuBo;
-import bo.chitietspbo;
 import bo.lichsuspbo;
 import bo.sanphambo;
 

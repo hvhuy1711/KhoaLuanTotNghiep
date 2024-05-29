@@ -64,10 +64,6 @@ public class ThongtinKhachHangController extends HttpServlet {
 				request.setAttribute("checkDiaChi", (boolean)session.getAttribute("checkDiaChi"));
 				session.removeAttribute("checkDiaChi");
 			}
-//			if(session.getAttribute("checkSoDT") != null) {
-//				request.setAttribute("checkSoDT", (boolean)session.getAttribute("checkSoDT"));
-//				session.removeAttribute("checkSoDT");
-//			}
 			RequestDispatcher rd = request.getRequestDispatcher("ThongTinCaNhan.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

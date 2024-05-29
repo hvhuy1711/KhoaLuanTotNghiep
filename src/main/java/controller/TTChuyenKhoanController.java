@@ -47,42 +47,9 @@ public class TTChuyenKhoanController extends HttpServlet {
 			if (dstt != null) {
 				request.setAttribute("dstt", (ArrayList<giospbean>) dstt);
 			}
-//			HttpSession session = request.getSession();
-//			khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-////			khachhangthibean khdn = (khachhangthibean)request.getAttribute("dn");
-//			long makh = kh.getMaKhachHang();
-////			System.out.println(makh);
-//			giospbo gh = new giospbo();
-//			
-//			ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
-//			if (dsgiott != null) {
-////				System.out.println(dsgiott);
-//				request.setAttribute("dstt", (ArrayList<giospbean>) dsgiott);
-//			}
 			request.setAttribute("dsHang", dsHang);
-
 			RequestDispatcher rd = request.getRequestDispatcher("thanhtoanCK.jsp");
 			rd.forward(request, response);
-//			response.setCharacterEncoding("utf-8");
-//			request.setCharacterEncoding("utf-8");
-//			sanphambo sbo = new sanphambo();
-//			ArrayList<String> dsHang = sbo.getHang();
-//
-//			HttpSession session = request.getSession();
-//			khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
-////			khachhangthibean khdn = (khachhangthibean)request.getAttribute("dn");
-//			long makh = kh.getMaKhachHang();
-////			System.out.println(makh);
-//			giospbo gh = new giospbo();
-//			ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
-//			if (dsgiott != null) {
-////				System.out.println(dsgiott);
-//				request.setAttribute("dstt", (ArrayList<giospbean>) dsgiott);
-//			}
-//			request.setAttribute("dsHang", dsHang);
-//
-//			RequestDispatcher rd = request.getRequestDispatcher("thanhtoanCK.jsp");
-//			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

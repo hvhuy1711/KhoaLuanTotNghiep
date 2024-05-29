@@ -57,31 +57,8 @@ public class ThanhToanTMController extends HttpServlet {
 				ArrayList<HoaDonBean> dshd = hd.GetDSHoaDon(makh);
 				request.setAttribute("dshd", dshd);
 			} 
-//				HoaDonBean hdkh = hd.GetHoaDon(makh);
-				
-//				int maHdCuoiCung = -1; // Khởi tạo giá trị mặc định, có thể thay đổi tùy theo yêu cầu
-//				if (!dshd.isEmpty()) {
-//				    for (HoaDonBean hoaDon : dshd) {
-//				        maHdCuoiCung = hoaDon.getMaHoaDon();
-//				    }
-//				}
-//				System.out.println("Mã hóa đơn cuối cùng: " + maHdCuoiCung);
-//				ChiTietHoaDonBo ct = new ChiTietHoaDonBo();
-//				for (giospbean gio : dsxacnhan) {
-////					if () {
-//						ct.ThemCTHD(maHdCuoiCung, gio.getMaSanPham(), 0, gio.getGhiChu(), gio.getGia(), (int)gio.getSoLuongMua());
-//						System.out.println("thành công thêm chi tiết");
-////					}
-//				}
-//				LichSuBo lsbo = new LichSuBo();
-//				lsbo.ThemLichSu(makh,maHdCuoiCung, "TongTien", 0 ,null);
-//				System.out.println("Đã thêm lịch sử");
-//				gh.DeleteGioKH((int)makh);
-//				System.out.println("Đã xóa gio hàng");
 			RequestDispatcher rd = request.getRequestDispatcher("ThemChiTietLSController");
 			rd.forward(request, response);
-//			RequestDispatcher rd = request.getRequestDispatcher("sanphamcontroller");
-//			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

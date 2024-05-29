@@ -534,10 +534,6 @@ h2 {
 
 <%DonHangDaDatBean sp = (DonHangDaDatBean)request.getAttribute("dsspma");
 	if(sp != null){
-		 /* khachhangthibean kh = (khachhangthibean) session.getAttribute("dn"); 
-		if (kh == null ){
-			
-		} */
 	
 %>
 <div style="padding: 50px"></div>
@@ -567,10 +563,6 @@ h2 {
 <h1 style="margin-left: 40px;color: red">Đánh giá sản phẩm ở phía dưới</h1>
 <div class="product-info-tabs" style="background-color: #bcd8e5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <!-- <li class="nav-item"><a class="nav-link active"
-            id="description-tab" data-toggle="tab" href="#description"
-            role="tab" aria-controls="description" aria-selected="true">Mô
-                Tả</a></li> -->
         <li class="nav-item" style="font-size: 18px;font-weight: bold;"><a class="nav-link" id="review-tab"
             data-toggle="tab" href="#review" role="tab" aria-controls="review"
             aria-selected="false">Đánh Giá </a></li>

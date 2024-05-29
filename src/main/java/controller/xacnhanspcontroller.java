@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.giospbean;
 import bean.khachhangthibean;
-import bo.chitietspbo;
 import bo.giospbo;
 import bo.hoadonspbo;
 

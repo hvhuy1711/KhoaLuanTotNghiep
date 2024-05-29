@@ -128,10 +128,6 @@
 
 			</ul>
 
-			<!--  <div class="search-btn">
-            <i class="search-icon ti-search"></i>
-        </div> -->
-
 			<!-- Hiển thị nút bars -->
 
 
@@ -311,13 +307,6 @@
 										value="<%=request.getAttribute("maspchon") %>"
 										placeholder="Nhập mã sản phẩm" required="required"> <br>
 							</div>
-							<!-- <div class="form-row" style="display: none">
-					
-									<span  class="labelspan">Mã kích thước:</span> <input class="input"
-										class="input" name="makichthuoc" type="text"
-										value=""
-										placeholder="Nhập mã kích thước"> <br>
-							</div> -->
 							<div class="form-row">
 									<span class="labelspan">Tên kích thước:</span> <input class="input"
 										class="input" name="tenkichthuoc" type="text"

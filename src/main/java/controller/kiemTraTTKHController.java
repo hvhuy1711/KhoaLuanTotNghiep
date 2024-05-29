@@ -46,35 +46,6 @@ public class kiemTraTTKHController extends HttpServlet {
 			String maSPMUA = request.getParameter("maSPMUA");
 			String tenSPMUA = request.getParameter("tenSPMUA");
 			String slMua = request.getParameter("slMua");
-//			String KichThuoc = request.getParameter("KichThuoc");
-//			 if(btnDatMua != null) {
-//				 HttpSession session = request.getSession();
-//					khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
-//						long makh = kh.getMaKhachHang(); 
-//						giospbo gh = new giospbo();
-//						ArrayList<giospbean> dsgiokh = gh.getdsgio(makh);
-//							if (dsgiokh != null) {
-//								session.setAttribute("dsgio", dsgiokh);
-//							}
-//			 }
-			//xử lí mới
-//			String btnMuaChon = request.getParameter("btnMuaChon");
-//			if (btnMuaChon != null) {
-//			    // Lấy danh sách giỏ hàng của khách hàng từ đối tượng `gh`
-//
-//			    // Tạo một tập hợp để lưu trữ các mã sản phẩm và kích thước đã chọn từ form
-//			    Set<String> selectedProducts = new HashSet<>();
-//			    Enumeration<String> parameterNames = request.getParameterNames();
-//			    while (parameterNames.hasMoreElements()) {
-//			        String name = parameterNames.nextElement();
-//			        String value = request.getParameter(name);
-//			        if (value.equals("on")) {
-//			            selectedProducts.add(name); // Thêm mã sản phẩm đã chọn vào tập hợp
-//			        }
-//			    } 
-//			    request.setAttribute("selectedProducts", selectedProducts);		    
-//			}
-			
 			HttpSession session = request.getSession();
 			khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
 			long makh = kh.getMaKhachHang();

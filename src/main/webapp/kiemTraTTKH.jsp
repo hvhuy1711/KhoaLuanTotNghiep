@@ -453,9 +453,6 @@
 			<div class="col-sm-12 text-left">
 				<h2 style="margin-top: 120px;">Danh sách thanh toán</h2>
 				<%
-				//hiển thị giỏ hàng
-				//if(request.getAttribute("dsSpThanhToan")!=null){
-				/* 	giospbean dsthanhtoan =(giospbean) request.getAttribute("giosp"); */
 				 ArrayList<giospbean> dsthanhtoan = (ArrayList<giospbean>) request.getAttribute("dsgio");
 				request.setAttribute("dsthanhtoan", dsthanhtoan); 
 				if (dsthanhtoan != null) {
@@ -526,26 +523,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 	<div class = "container text-center" style=" display:block; padding: 30px; border: 1px solid #ccc; box-shadow: 2px">
- 		<h2 style="padding-bottom: 10px">Thông tin của bạn</h2>
- 		
- 		<form>
-		    <div class="form-group row">
-		      <div class="col-xs-6">
-		      	<label for="pwd">Nhập họ tên:</label>
-		        <input class="form-control" id="ex1" type="text" placeholder="Họ Và Tên">
-		      </div>
-		      <div class="col-xs-6" style="float: right;">
-		      	<label for="pwd">Nhập số điện thoại:</label>
-		        <input class="form-control" id="ex2" type="text" placeholder="Số điện thoại" >
-		      </div>
-		    </div>
-		      <div style="">
-		      	<label for="pwd">Nhập email:</label>
-		        <input class="form-control" id="ex2" type="email" placeholder="Email" >
-		      </div>
-		  </form>
- 	</div> -->
 <h1 style="color: red;text-align: center;">Bạn phải kiểm tra thông tin giao hàng trước</h1>
 	<div class="container text-center"
 		style="display: block; padding: 30px; border: 1px solid #ccc;border-radius: 20px; box-shadow: 2px">
