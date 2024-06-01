@@ -543,6 +543,22 @@
 	}
 	}
 	%>
+	
+	
+	<script src="assets/ThongBao.js"></script>
+	<%
+	if (request.getAttribute("checkSoLuong") != null) {
+		boolean checkSoLuong = (boolean) request.getAttribute("checkSoLuong");
+		if (checkSoLuong == true) {
+	%>
+	<script type="text/javascript">
+		createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+				'Sản phẩm bạn chọn mua đã vượt quá số lượng cho phép!!');
+	</script>
+	<%
+	}
+	}
+	%>
 
 	<div class="container" style="top: 150px; position: relative;">
 		<div class="row">
@@ -642,11 +658,8 @@
 							 <a style="border: 1px solid #446789;padding: 10px; border-radius: 15px; margin-left: 25px; background-color: #446789;color: white;font-weight: bold;text-decoration: none;" id="updateSizeLink" href="capNhatSizeController?maspsize=<%=s.getMaSanPham()%>&tensp=<%=s.getTenSanPham()%>&kichthuocsp=<%=s.getGhiChu()%>" >Cập nhật kích thước</a>
 							<div >
 							 <%ArrayList<KichThuocBean> dskt = (ArrayList<KichThuocBean>)request.getAttribute("dskt");
-							/*  ArrayList<giospbean> dsgiosp = (ArrayList<giospbean>)request.getAttribute("dsgiosp"); */
 							 String tensp = (String)request.getAttribute("tensp");
 							 String kichthuocsp = (String)request.getAttribute("kichthuocsp");
-							/*  for (giospbean gio : dsgiosp){ */
-							/* 	if(mgLong== s.getMaGioHang()){ */
 									if (dskt != null && tensp.equals(s.getTenSanPham()) && kichthuocsp.equals(s.getGhiChu())){
 											for (KichThuocBean ds : dskt){
 									%>	
@@ -660,24 +673,6 @@
 								%> 
 								<script src="assets/KichThuoc.js"></script>
 							</div>
-							<%--  <%ArrayList<KichThuocBean> dskt = (ArrayList<KichThuocBean>)request.getAttribute("dskt");
-							/*  ArrayList<giospbean> dsgiosp = (ArrayList<giospbean>)request.getAttribute("dsgiosp"); */
-							 String tensp = (String)request.getAttribute("tensp");
-							 String kichthuocsp = (String)request.getAttribute("kichthuocsp");
-							/*  for (giospbean gio : dsgiosp){ */
-							/* 	if(mgLong== s.getMaGioHang()){ */
-									if (dskt != null && tensp.equals(s.getTenSanPham()) && kichthuocsp.equals(s.getGhiChu())){
-											for (KichThuocBean ds : dskt){
-									%>	
-									<a id="kichThuocInput" 
-										   href="giospcontroller?btnUpKT&tensp=<%=tensp%>&tenKT=<%=ds.getTenKichThuoc()%>&maspSize=<%=ds.getMaSanPham()%>">
-										   <%=ds.getTenKichThuoc()%>
-										</a>   
-									<% 
-										}
-								}
-								%> 
-								<script src="assets/KichThuoc.js"></script> --%>
 								
  					</form>
  				

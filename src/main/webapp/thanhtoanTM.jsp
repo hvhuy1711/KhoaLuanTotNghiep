@@ -32,6 +32,36 @@
     opacity: 0.5; /* Làm mờ nút */
     pointer-events: none; /* Ngăn không cho nhấp vào nút */
 }
+  .customer-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    font-size:18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  .customer-info h3 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .customer-info-item {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .customer-info-item .label {
+  	font-size: 18px;
+    font-weight: bold;
+    width: 180px;
+    color: #555;
+  }
+
+  .customer-info-item .value {
+    color: #333;
+  }
 </style>
 
 </head>
@@ -390,21 +420,19 @@
 
 <div class="container text-center">
 		<div class="row content">
-			<div class="col-sm-12 text-left">
-				<h2 style="margin-top: 120px;">Danh sách thanh toán</h2>
+			<div class="col-sm-12 text-left" style="border: 2px solid #446879; padding: 20px; border-radius: 10px">
+				<h2 style="margin-top: 120px;">Thông tin thanh toán</h2>
 				<%
-				//hiển thị giỏ hàng
-				//if(request.getAttribute("dsSpThanhToan")!=null){
 				ArrayList<giospbean> dsthanhtoan = (ArrayList<giospbean>) request.getAttribute("dstt");
 				if (dsthanhtoan != null) {
 					long tongtien = 0;
 					for (giospbean h : dsthanhtoan) {
 				%>
-				<div class="row" style="display: block;">
-					<div class="col-sm-1">
+				<div class="row" style="display: block;border: 2px solid #446879; padding: 20px; border-radius: 10px">
+					<div class="col-sm-2">
 						<img style="width: 100%" alt="" src="<%=h.getAnh()%>">
 					</div>
-					<div class="col-sm-11">
+					<div class="col-sm-10" >
 						<h3><%=h.getTenSanPham()%></h3>
 						<% 		
 						double giaLong = h.getGia();
@@ -420,12 +448,46 @@
 						x
 						<form style="display: inline-block;">
 							<input
-								style="width: 60px; margin-bottom: 20px; display: inline-block;"
+								style="width: 60px; margin-bottom: 20px; display: inline-block; text-align: center"
 								name="soluong" disabled="disabled" type="text"
 								value="<%=h.getSoLuongMua()%>">
 						</form>
+						<div>
+							<span>Kích thước: </span>
+							<input 
+							style="width: 60px; margin-bottom: 20px; display: inline-block;text-align: center;"
+							name="kichthuoc" disabled="disabled" type="text"
+							value="<%=h.getGhiChu()%>">
+						</div>
 					</div>
 				</div>
+				<% khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
+					if(kh != null){
+					%>
+					<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto;">
+					  <h3 style="margin-bottom: 20px; color: #333;">Thông tin nhận hàng</h3>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Họ tên người nhận:</span>
+					    <span style="color: #333;"><%= kh.getHoTen() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Số điện thoại người nhận:</span>
+					    <span style="color: #333;"><%= kh.getSoDT() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Địa chỉ người nhận:</span>
+					    <span style="color: #333;"><%= kh.getDiaChi() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Email:</span>
+					    <span style="color: #333;"><%= kh.getEmail() %></span>
+					  </div>
+					</div>
+					<% }
+					%>
+
+					
+
 				 <%
 				 	double soLuongMua = h.getSoLuongMua();
 			        double giassp = h.getGia();

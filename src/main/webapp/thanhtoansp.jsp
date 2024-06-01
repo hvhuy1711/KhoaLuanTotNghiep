@@ -475,7 +475,7 @@
 						</form>
 						
 						<div>
-							<span>Kích thích: </span>
+							<span>Kích thước: </span>
 							<input 
 							style="width: 60px; margin-bottom: 20px; display: inline-block;text-align: center;"
 							name="kichthuoc" disabled="disabled" type="text"

@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.KichThuocBean;
 import bean.giospbean;
 import bean.khachhangthibean;
+import bo.KichThuocBo;
 import bo.giospbo;
 
 /**
@@ -56,14 +58,22 @@ public class kiemTraTTKHController extends HttpServlet {
 					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc1);
 					if (dsgiott != null) {
 						request.setAttribute("dsgio", dsgiott);
-						
 					}
 					session.removeAttribute("KichThuoc");
 					session.removeAttribute("maSPMUA");
 				}else {
 					int maSPMUAInt = Integer.parseInt(maSPMUA);
+					int slMuaInt = Integer.parseInt(slMua);
 					giospbo gh = new giospbo();
 					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
+					KichThuocBo ktbo = new KichThuocBo();
+					ArrayList<KichThuocBean> dsKt = ktbo.dskichThuoc(maSPMUAInt);
+					for (KichThuocBean ds : dsKt) {
+						if(ds.getSoLuongSize() < slMuaInt) {
+							session.setAttribute("checkSoLuong", true);
+							response.sendRedirect("giospcontroller");
+						}
+					}
 					if (dsgiott != null) {
 						request.setAttribute("dsgio", dsgiott);
 					}

@@ -372,6 +372,10 @@ public class giospcontroller extends HttpServlet {
 				request.setAttribute("checkUpdateKT", (boolean) session.getAttribute("checkUpdateKT"));
 				session.removeAttribute("checkUpdateKT");
 			}
+			if (session.getAttribute("checkSoLuong") != null) {
+				request.setAttribute("checkSoLuong", (boolean) session.getAttribute("checkSoLuong"));
+				session.removeAttribute("checkSoLuong");
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("Giosp.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

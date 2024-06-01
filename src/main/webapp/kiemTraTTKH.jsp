@@ -605,11 +605,6 @@
 		
 			%>
 	<div
-	<%-- <%khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
-	 if (kh != null){
-		 if(kh.getEmail() != null )
-	 }
-	%> --%>
 		style="display: block; float: right; padding: 20px; margin: 20px">
 			<div id= "ttdathang" style=" margin-bottom: 50px;">
 				<a style="padding: 15px 73px;font-size: 16px; font-weight:bold; background-color: red; color: #fff; border-radius: 5px; text-decoration: none; margin: 0 10px 20px 0" href="xacnhanspcontroller?btnTT&maSPMUA=<%=ds.getMaSanPham()%>&KichThuoc=<%=ds.getGhiChu()%>">Tiếp tục</a>

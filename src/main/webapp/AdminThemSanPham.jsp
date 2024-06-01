@@ -408,13 +408,23 @@
 			%>
 		</div>
 		<div class="text-center">
-			<img style="width: 50px;" alt=""
+			<img id="previewImg" style="width: 50px;" alt=""
 				src="<%=request.getAttribute("anh")%>">
 			<div style="position: relative; display: inline-block;">
 				<p>Chọn ảnh</p>
-				<input name="anh" type="file" multiple required="required">
+				<input name="anh" type="file" multiple required="required" onchange="previewImage(event)">
 			</div>
 		</div>
+		<script>
+		    function previewImage(event) {
+		      var reader = new FileReader();
+		      reader.onload = function() {
+		        var output = document.getElementById('previewImg');
+		        output.src = reader.result;
+		      }
+		      reader.readAsDataURL(event.target.files[0]);
+		    }
+		  </script>
 		<br>
 		<div class="form-row">
 			<%
@@ -603,7 +613,7 @@
 								int maloai = loai.getMaLoai();
 								String maString = String.valueOf(maloai);
 								%>
-						<select id="loaiSelectmd" name="maloai" style="border: 2px solid #446789; width:100%; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 60px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
+						<select id="loaiSelectmd" name="maloai" style="border: 2px solid #446789; width:100%; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 30px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
 						    <% 
 						    if (dsloai1 != null) {
 						        // Vòng lặp để hiển thị tùy chọn đã chọn

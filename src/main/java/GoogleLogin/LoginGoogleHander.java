@@ -41,11 +41,8 @@ public class LoginGoogleHander extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
-//		System.out.println(code);
 		String accessToken = getToken(code);
 		UserGoogleBto user = getUserInfo(accessToken);
-//		System.out.println(user);
-//		UserGoogleBto u = new UserGoogleBto();
 		khachhangbo khbo = new khachhangbo();
 		HttpSession session = request.getSession();
 		khachhangthibean dngg;

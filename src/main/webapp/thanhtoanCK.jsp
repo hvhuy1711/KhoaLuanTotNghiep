@@ -457,8 +457,8 @@
 
 	<div class="container text-center">
 		<div class="row content">
-			<div class="col-sm-12 text-left">
-				<h2 style="margin-top: 120px;">Danh sách thanh toán</h2>
+			<div class="col-sm-12 text-left" style="border: 2px solid #446879; padding: 20px; border-radius: 10px">
+				<h2 style="margin-top: 120px;">Thông tin thanh toán</h2>
 				<%
 				//hiển thị giỏ hàng
 				//if(request.getAttribute("dsSpThanhToan")!=null){
@@ -468,11 +468,11 @@
 					String magio = null;
 					for (giospbean h : dsthanhtoan) {
 				%>
-				<div class="row" style="display: block;">
-					<div class="col-sm-1">
+				<div class="row" style="display: block;border: 2px solid #446879; padding: 20px; border-radius: 10px">
+					<div class="col-sm-2">
 						<img style="width: 100%" alt="" src="<%=h.getAnh()%>">
 					</div>
-					<div class="col-sm-11">
+					<div class="col-sm-10" >
 						<h3><%=h.getTenSanPham()%></h3>
 						<% 		
 						double giaLong = h.getGia();
@@ -491,8 +491,40 @@
 								name="soluong" disabled="disabled" type="text"
 								value="<%=h.getSoLuongMua()%>">
 						</form>
+						<div>
+							<span>Kích thước: </span>
+							<input 
+							style="width: 60px; margin-bottom: 20px; display: inline-block;text-align: center;"
+							name="kichthuoc" disabled="disabled" type="text"
+							value="<%=h.getGhiChu()%>">
+						</div>
 					</div>
 				</div>
+				
+				<% khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
+					if(kh != null){
+					%>
+					<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto;">
+					  <h3 style="margin-bottom: 20px; color: #333;">Thông tin nhận hàng</h3>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Họ tên người nhận:</span>
+					    <span style="color: #333;"><%= kh.getHoTen() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Số điện thoại người nhận:</span>
+					    <span style="color: #333;"><%= kh.getSoDT() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Địa chỉ người nhận:</span>
+					    <span style="color: #333;"><%= kh.getDiaChi() %></span>
+					  </div>
+					  <div style="display: flex; margin-bottom: 10px;">
+					    <span style="font-weight: bold; width: 180px; color: #555;">Email:</span>
+					    <span style="color: #333;"><%= kh.getEmail() %></span>
+					  </div>
+					</div>
+					<% }
+					%>
 				
 				<%
 				 	double soLuongMua = h.getSoLuongMua();
@@ -535,11 +567,11 @@
       <li class="animation-li" style="--delay: 0.4s; --color: #f57c00"></li>
       <li class="animation-li" style="--delay: 0.2s; --color: #673ab7"></li>
     </ul>
-	<div style="padding: 10px"></div>	
 	<div class="courses_wrapper">
 		<div class="courses_inner"></div>
 		<div class="courses_qr" style="text-align: center;">
 			<div id="countdown"></div>
+			<a href="sanphamcontroller" id="back" style="display: none; border: 1px solid yellow; background-color:yellow; border-radius: 10px; text-decoration: none;padding: 10px">Hủy thanh toán</a>
 			<img class="courses_qr_img" />
 			<div id="ndck" style="display: none">
 				<p style="font-weight: bold; font-size: 20px;" >
