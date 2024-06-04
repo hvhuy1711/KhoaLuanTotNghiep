@@ -487,7 +487,7 @@
 						x
 						<form style="display: inline-block;">
 							<input
-								style="width: 60px; margin-bottom: 20px; display: inline-block;"
+								style="width: 60px; margin-bottom: 20px; display: inline-block;text-align: center"
 								name="soluong" disabled="disabled" type="text"
 								value="<%=h.getSoLuongMua()%>">
 						</form>
@@ -501,7 +501,31 @@
 					</div>
 				</div>
 				
-				<% khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
+				
+				
+				<%
+				 	double soLuongMua = h.getSoLuongMua();
+			        double giassp = h.getGia();
+			        double chiecKhausp = h.getChiecKhau();
+			        double thanhTien = soLuongMua * (giassp - (giassp * (chiecKhausp / 100)));
+        			tongtien += thanhTien; 
+					magio = "THANH TOAN GIO " + String.valueOf(h.getMaGioHang()) + String.valueOf(h.getMaKhachHang()) +String.valueOf(h.getMaSanPham()) + String.valueOf(h.getGhiChu());
+        					%> 
+        			<%} %>
+        			<%DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        			String tongTienFormatted = decimalFormat.format(tongtien); 
+        			%>
+				<p
+					style="font-size: 20px; font-weight: 600; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px; padding-right: 80px;">
+					Tổng tiền:
+					<%=tongTienFormatted%>
+					VNĐ
+				</p>
+
+			</div>
+		</div>
+	</div>
+	<% khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
 					if(kh != null){
 					%>
 					<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto;">
@@ -525,34 +549,9 @@
 					</div>
 					<% }
 					%>
-				
-				<%
-				 	double soLuongMua = h.getSoLuongMua();
-			        double giassp = h.getGia();
-			        double chiecKhausp = h.getChiecKhau();
-			        double thanhTien = soLuongMua * (giassp - (giassp * (chiecKhausp / 100)));
-        			tongtien += thanhTien; 
-					magio = "THANH TOAN GIO " + String.valueOf(h.getMaGioHang()) + String.valueOf(h.getMaKhachHang()) +String.valueOf(h.getMaSanPham()) + String.valueOf(h.getGhiChu());
-        					%> 
-        			<%} %>
-        			<%DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        			String tongTienFormatted = decimalFormat.format(tongtien); 
-        			%>
-				
-				
-				<p
-					style="font-size: 20px; font-weight: 600; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px; padding-right: 80px;">
-					Tổng tiền:
-					<%=tongTienFormatted%>
-					VNĐ
-				</p>
-
-			</div>
-		</div>
-	</div>
 
 	<div style="text-align: center;color: red;font-size: 30px" id= "ttheader">Vui lòng quét QR để thanh toán</div>
-	<script src="assets/checkthanhtoan.js"></script>
+	<script src="assets/HienQRCode.js"></script>
 	<div class="center-container">
 		<button class="course_item_btn" data-coursesID="<%=magio%>"
 			data-coursesPrice="<%=tongtien%>">Hiện Mã QR</button>
@@ -571,7 +570,7 @@
 		<div class="courses_inner"></div>
 		<div class="courses_qr" style="text-align: center;">
 			<div id="countdown"></div>
-			<a href="sanphamcontroller" id="back" style="display: none; border: 1px solid yellow; background-color:yellow; border-radius: 10px; text-decoration: none;padding: 10px">Hủy thanh toán</a>
+			<a href="sanphamcontroller" id="back" style="margin: 0 auto;display:none; border: 1px solid red; background-color:red ;color:white;font-weight:bold; border-radius: 10px; text-decoration: none;padding: 10px">Hủy thanh toán</a>
 			<img class="courses_qr_img" />
 			<div id="ndck" style="display: none">
 				<p style="font-weight: bold; font-size: 20px;" >
@@ -585,29 +584,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function startCountdown() {
-			var countDownDate = new Date().getTime() + 60000; // 1 phút
-			var countdownDiv = document.getElementById('countdown');
-
-			var x = setInterval(function() {
-				var now = new Date().getTime();
-				var distance = countDownDate - now;
-
-				var minutes = Math.floor((distance % (1000 * 60 * 60))
-						/ (1000 * 60));
-				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-				countdownDiv.textContent = minutes + "m " + seconds + "s ";
-
-				if (distance < 0) {
-					clearInterval(x);
-					countdownDiv.textContent = "Hết hạn";
-					// Có thể thực hiện các hành động khác khi hết hạn
-				}
-			}, 1000);
-		}
-	</script>
 	<p style="font-size: 30px;color: red; float: right;display: none;" id="htttp">Nhấp vào đây để hoàn tất thanh toán</p><br>
 	<div style="padding: 20px"></div>
 	<a id="httt" href="ThanhToanCKController?btnHTTT&ghichuGio=<%=magio%>" onclick="disableButton(this)"

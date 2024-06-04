@@ -64,7 +64,7 @@ public class adminxacnhanspkhcontroller extends HttpServlet {
 			        double thanhTientt = (gia * (1 - (chiecKhau / 100)));
 			        DecimalFormat decimalFormat = new DecimalFormat("#,###");
         			String GiaFormatted = decimalFormat.format(thanhTientt);
-					String nodungEmail = "Bạn đặt sản phẩm của chúng tôi với tên sản phẩm là:" + String.valueOf(dsdh.getTenSanPham()) +"--- Giá là:" +String.valueOf(GiaFormatted) + "--- Số lượng là:" + String.valueOf(dsdh.getSoLuongMua()) + "--- Kích thước là:" + dsdh.getGhiChuLS() + "--- Phương thức thanh toán:" + thanhtoan +"ĐÃ ĐƯỢC PHÊ DUYỆT!!ĐƠN HÀNG ĐANG DƯỢC GIAO";
+					String nodungEmail = "Bạn đặt sản phẩm của chúng tôi với tên sản phẩm là:" + String.valueOf(dsdh.getTenSanPham()) +"--- Giá là:" +String.valueOf(GiaFormatted) + "--- Số lượng là:" + String.valueOf(dsdh.getSoLuongMua()) + "--- Kích thước là:" + dsdh.getGhiChuLS() + "--- Phương thức thanh toán:" + thanhtoan +"ĐÃ ĐƯỢC PHÊ DUYỆT!!ĐƠN HÀNG ĐANG ĐƯỢC GIAO";
 					Email.sendEmail(dsdh.getEmail(), "Thông báo đặt hàng", nodungEmail);
 					boolean checkUpdateXacNhan = true;
 					session.setAttribute("checkUpdateXacNhan", (boolean) checkUpdateXacNhan);

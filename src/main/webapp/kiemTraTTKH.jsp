@@ -21,6 +21,7 @@
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="Thongbao.css">
 <style type="text/css">
 /* tablet */
 @media ( min-width : 739px) and (max-width:1023px) {
@@ -572,7 +573,7 @@
 				</div>
 				<div class="col-xs-6" style="float: right; margin-bottom: 20px">
 					<label for="pwd" style="float: left;">Email:</label> <input class="form-control"
-						id="ex2" type="text" value="<%=kh1.getEmail() %>" readonly placeholder="Ghi chú">
+						id="ex2" type="text" value="<%=kh1.getEmail() %>" readonly placeholder="Nhập email">
 				</div>
 				<div class = "col-xs-12 center" style="margin-top: 25px ">
 					<a style="padding: 15px 73px;font-size: 16px; font-weight:bold; background-color: #446879; color: #fff; border-radius: 5px; text-decoration: none; margin: 20px 10px 20px 0">
@@ -596,18 +597,31 @@
 		<%
 		} 
 		} %>
+		
+			<script src="assets/ThongBao.js"></script>
+		<%if (request.getAttribute("checkSDT") != null) {
+			boolean checkSDT = (boolean) request.getAttribute("checkSDT");
+			if (checkSDT == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+					'Bạn đã nhập không đúng định dạng số điện thoại'); 
+		</script>
+		<%
+		} 
+		} %>
 	
 	<div style="padding: 20px"></div>
 
-<%ArrayList<giospbean> dsgio = (ArrayList<giospbean>)request.getAttribute("dsgio"); 
+<%-- <%ArrayList<giospbean> dsgio = (ArrayList<giospbean>)request.getAttribute("dsgio"); 
 		if(dsgio != null){
 			for(giospbean ds : dsgio){
-		
-			%>
+			%> --%>
 	<div
 		style="display: block; float: right; padding: 20px; margin: 20px">
 			<div id= "ttdathang" style=" margin-bottom: 50px;">
-				<a style="padding: 15px 73px;font-size: 16px; font-weight:bold; background-color: red; color: #fff; border-radius: 5px; text-decoration: none; margin: 0 10px 20px 0" href="xacnhanspcontroller?btnTT&maSPMUA=<%=ds.getMaSanPham()%>&KichThuoc=<%=ds.getGhiChu()%>">Tiếp tục</a>
+				<a style="padding: 15px 73px;font-size: 16px; font-weight:bold; background-color: red; color: #fff; border-radius: 5px; text-decoration: none; margin: 0 10px 20px 0" 
+				href="xacnhanspcontroller?btnTT">Tiếp tục</a>
         		<input style="float: right;display:none; font-size:16px; border:none;padding:15px 60px
         		;border-radius:10px; margin-top: 12px;background-color: red; color: #fff;font-weight: bold; margin-bottom: 25px">    				
        		</div>
@@ -616,10 +630,10 @@
 			lại trang chủ</a> 
 			
 	</div>
-			<%
+<%-- 			<%
 				}
 		}
-%>
+%> --%>
 <div style="padding: 80px"></div>
 	<div id="footer" class="footer-contact"
 		style="background-color: #446879; color: white;">

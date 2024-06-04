@@ -45,7 +45,34 @@ public class adminloaispcontroller extends HttpServlet {
 			String mlxoa = request.getParameter("mlxoa");
 			String tenloai = request.getParameter("txttenloai");
 			HttpSession session = request.getSession();
+			String key = request.getParameter("key");
 			ArrayList<loaispbean> ds = lbo.getloaisp();
+			ArrayList<loaispbean> searchResults = new ArrayList<loaispbean>();
+			if (key != null && !key.isEmpty()) {
+			    for (loaispbean sp : ds) {
+			        if (sp.getTenLoai().toLowerCase().contains(key.toLowerCase())) {
+			            searchResults.add(sp);
+			        }
+			    }
+			} else {
+			    searchResults = ds;
+			}
+			int page = 1;
+            int recordsPerPage = 10;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+
+            int totalRecords = searchResults.size();
+            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+            int start = (page - 1) * recordsPerPage;
+            int end = Math.min(start + recordsPerPage, totalRecords);
+            ArrayList<loaispbean> dsPage = new ArrayList<>(searchResults.subList(start, end));
+//            request.setAttribute("dsloai" , searchResults);
+            request.setAttribute("dsloai", dsPage);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
 			if(request.getParameter("butadd") != null) {
 				ArrayList<String> dsDM = lbo.getTenDanhMuc();
 				if (dsDM == null || dsDM.contains(tenloai)) {
@@ -83,7 +110,7 @@ public class adminloaispcontroller extends HttpServlet {
 				request.setAttribute("checkThemLoai", (boolean) session.getAttribute("checkThemLoai"));
 				session.removeAttribute("checkThemLoai");
 			}
-			request.setAttribute("dsloai" , lbo.getloaisp());
+			
 			RequestDispatcher rd = 
 					request.getRequestDispatcher("Adminsploai.jsp");
 			rd.forward(request, response);

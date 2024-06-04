@@ -50,33 +50,45 @@ public class kiemTraTTKHController extends HttpServlet {
 			String slMua = request.getParameter("slMua");
 			HttpSession session = request.getSession();
 			khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
+			giospbo gh = new giospbo();
 			long makh = kh.getMaKhachHang();
-				if (session.getAttribute("maSPMUA") != null && (String)session.getAttribute("KichThuoc") != null) {
-					int maSPMUAInt = Integer.parseInt((String)session.getAttribute("maSPMUA"));
-					String KichThuoc1 = (String)session.getAttribute("KichThuoc");
-					giospbo gh = new giospbo();
-					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc1);
-					if (dsgiott != null) {
-						request.setAttribute("dsgio", dsgiott);
-					}
-					session.removeAttribute("KichThuoc");
-					session.removeAttribute("maSPMUA");
-				}else {
-					int maSPMUAInt = Integer.parseInt(maSPMUA);
-					int slMuaInt = Integer.parseInt(slMua);
-					giospbo gh = new giospbo();
-					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
-					KichThuocBo ktbo = new KichThuocBo();
-					ArrayList<KichThuocBean> dsKt = ktbo.dskichThuoc(maSPMUAInt);
-					for (KichThuocBean ds : dsKt) {
-						if(ds.getSoLuongSize() < slMuaInt) {
-							session.setAttribute("checkSoLuong", true);
-							response.sendRedirect("giospcontroller");
-						}
-					}
-					if (dsgiott != null) {
-						request.setAttribute("dsgio", dsgiott);
-					}
+			ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
+			if (dsgiott != null) {
+				request.setAttribute("dsgio", dsgiott);
+			}
+//				if (session.getAttribute("maSPMUA") != null && (String)session.getAttribute("KichThuoc") != null) {
+//					int maSPMUAInt = Integer.parseInt((String)session.getAttribute("maSPMUA"));
+//					String KichThuoc1 = (String)session.getAttribute("KichThuoc");
+//					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc1);
+//					if (dsgiott != null) {
+//						request.setAttribute("dsgio", dsgiott);
+//					}
+//					session.removeAttribute("KichThuoc");
+//					session.removeAttribute("maSPMUA");
+//				}else {
+//					int maSPMUAInt = Integer.parseInt(maSPMUA);
+//					int slMuaInt = Integer.parseInt(slMua);
+//					giospbo gh = new giospbo();
+//					ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
+//					KichThuocBo ktbo = new KichThuocBo();
+//					ArrayList<KichThuocBean> dsKt = ktbo.dskichThuoc(maSPMUAInt);
+//					for (KichThuocBean ds : dsKt) {
+//						if(ds.getSoLuongSize() < slMuaInt) {
+//							session.setAttribute("checkSoLuong", true);
+//							response.sendRedirect("giospcontroller");
+//						}
+//					}
+//					if (dsgiott != null) {
+//						request.setAttribute("dsgio", dsgiott);
+//					}
+//				}
+				if (session.getAttribute("checkUpdateTT") != null) {
+					request.setAttribute("checkUpdateTT", (boolean) session.getAttribute("checkUpdateTT"));
+					session.removeAttribute("checkUpdateTT");
+				}
+				if (session.getAttribute("checkSDT") != null) {
+					request.setAttribute("checkSDT", (boolean) session.getAttribute("checkSDT"));
+					session.removeAttribute("checkSDT");
 				}
 					RequestDispatcher rd = 
 							request.getRequestDispatcher("kiemTraTTKH.jsp");

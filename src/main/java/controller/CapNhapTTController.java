@@ -61,12 +61,12 @@ public class CapNhapTTController extends HttpServlet {
 			    } else {
 			        if (!isValidVietnameseEmail(email)) {
 			            session.setAttribute("checkEmail", true);
-			            response.sendRedirect("ThongtinKhachHangController"); // Thêm dòng này để quay lại trang thông tin khách hàng
+			            response.sendRedirect("ThongtinKhachHangController");
 			            return;
 			        }
 			        if (!isValidPhoneNumber(soDt)) {
 			            session.setAttribute("checkSoDt", true);
-			            response.sendRedirect("ThongtinKhachHangController"); // Thêm dòng này để quay lại trang thông tin khách hàng
+			            response.sendRedirect("ThongtinKhachHangController"); 
 			            return;
 			        }
 			        khbo.UpdateTTKHEmail(makh, ht, soDt, Diachi, email);
@@ -79,15 +79,15 @@ public class CapNhapTTController extends HttpServlet {
 			    }
 			}
 
-			if (session.getAttribute("checkEmail") != null) {
-				request.setAttribute("checkEmail", (boolean) session.getAttribute("checkEmail"));
-				session.removeAttribute("checkEmail");
-			}
-			
-			if (session.getAttribute("checkSoDt") != null) {
-				request.setAttribute("checkSoDt", (boolean) session.getAttribute("checkSoDt"));
-				session.removeAttribute("checkSoDt");
-			}
+//			if (session.getAttribute("checkEmail") != null) {
+//				request.setAttribute("checkEmail", (boolean) session.getAttribute("checkEmail"));
+//				session.removeAttribute("checkEmail");
+//			}
+//			
+//			if (session.getAttribute("checkSoDt") != null) {
+//				request.setAttribute("checkSoDt", (boolean) session.getAttribute("checkSoDt"));
+//				session.removeAttribute("checkSoDt");
+//			}
 			RequestDispatcher rd = request.getRequestDispatcher("ThongTinCaNhan.jsp");
 			rd.forward(request, response);
 			

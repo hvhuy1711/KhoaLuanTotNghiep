@@ -678,12 +678,12 @@
  				
 
 					</div>
-					 <div class="col-sm-2">
+					 <%-- <div class="col-sm-2">
 						<a href="kiemTraTTKHController?btnMua1SP&maSPMUA=<%=s.getMaSanPham()%>&tenSPMUA=<%=s.getTenSanPham() %>&slMua=<%=s.getSoLuongMua() %>
 						&KichThuoc=<%=s.getGhiChu() %>"
 							style="text-align: center; display: flex; border: 1px solid;border-radius:5px;text-decoration:none;background-color:red;color:white;font-weight:bold; margin: 20px; flex-direction: column; justify-content: center; padding: 10px;">Mua
 							ngay</a>
-					</div> 
+					</div>  --%>
 				</div>
 
 
@@ -723,15 +723,15 @@
 						value="Xác nhận đặt mua"
 						style="font-size: 14px; float: right; border: none; padding: 10px; border-radius: 10px; margin: 10px; background-color: red; color: #fff; font-weight: bold">
 						 -->
+				 <a href="kiemTraTTKHController"
+					style="font-size: 14px; padding: 15px; background-color: red; color: #fff; border-radius: 10px; float: right; text-decoration: none; margin: 10px; font-weight: bold">Xác
+					Nhận Đặt Mua</a> 
 					<a href="giospcontroller?btnxoaAll"
 						style="font-size: 14px; padding: 15px; background-color: #446879; color: #fff; border-radius: 10px; float: right; text-decoration: none; margin: 10px; font-weight: bold">Trả
 						Lại Toàn Bộ</a>
 					 <a href="sanphamcontroller"
 						style="font-size: 14px; padding: 15px; background-color: #446879; color: #fff; border-radius: 10px; float: right; text-decoration: none; margin: 10px; font-weight: bold">Quay lại</a>
 				</div>
-				<!-- <a href="xacnhanspcontroller"
-					style="font-size: 14px; padding: 10px; background-color: #446879; color: #fff; border-radius: 10px; float: right; text-decoration: none; margin: 10px; font-weight: bold">Xác
-					Nhận Đặt Mua</a>  -->
 			</div>
 			<%
 			}

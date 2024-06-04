@@ -19,7 +19,13 @@ public class HoaDonBo {
 	public ArrayList<HoaDonBean> GetDSHoaDon(long MaKhachHang) throws Exception{
 		return hddao.GetDSHoaDon(MaKhachHang); 
 	}
+	
+	public ArrayList<HoaDonBean> GetALLDSHoaDon() throws Exception{
+		return hddao.GetALLDSHoaDon();
+	}
+	
 	public int DeleteHoaDon(int MaHoaDon) throws Exception{
 		return hddao.DeleteHoaDon(MaHoaDon);
 	}
+	
 }

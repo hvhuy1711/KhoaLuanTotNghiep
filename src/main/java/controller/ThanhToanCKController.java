@@ -48,7 +48,6 @@ public class ThanhToanCKController extends HttpServlet {
 			long makh = kh.getMaKhachHang();
 			giospbo gh = new giospbo();
 			ArrayList<giospbean> dsxacnhan = gh.getdsgio(makh);
-//			int magio = dsxacnhan.
 			if(btnHTTT != null) {
 				HoaDonBo hd = new HoaDonBo();
 				hd.ThemHD(makh,  1);

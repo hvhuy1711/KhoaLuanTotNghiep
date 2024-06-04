@@ -36,6 +36,26 @@ public class HoaDonDao {
 		return kq;
 	}
 	
+	public ArrayList<HoaDonBean> GetALLDSHoaDon() throws Exception{
+		ArrayList<HoaDonBean> hd = new ArrayList<HoaDonBean>();
+		ketnoidao kn = new ketnoidao();
+		kn.ketnoi();
+		String sql = "select * from HoaDon";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		ResultSet rs = cmd.executeQuery();
+		while (rs.next()) {
+			int MaHoaDon = rs.getInt("MaHoaDon");
+			long makh = rs.getLong("MaKhachHang");
+			Date NgayMua =rs.getDate("NgayMua");
+			int TrangThai = rs.getInt("TrangThaiDon");
+			hd.add(new HoaDonBean(MaHoaDon, makh, NgayMua, TrangThai));
+		}
+		rs.close();
+		cmd.close();
+		kn.cn.close();
+		return hd;
+	}
+	
 
 public ArrayList<HoaDonBean> GetDSHoaDon(long MaKhachHang) throws Exception{
 	ArrayList<HoaDonBean> hd = new ArrayList<HoaDonBean>();

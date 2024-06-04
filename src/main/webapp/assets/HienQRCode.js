@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("stck").style.display = "block"
 			paid_content.innerHTML = paidContent;
 			paid_price.innerHTML = paidPrice;
-			startCountdown(5*60, countdown); // 5 phút
+			startCountdown(30, countdown); // 5 phút
 			setInterval(() => {
 				fetchDataAndProcess(paidPrice, paidContent);
 			}, 5000);
@@ -91,6 +91,3 @@ function fetchDataAndProcess(price, content) {
         }
     }, 1000);
 }
-
-
-

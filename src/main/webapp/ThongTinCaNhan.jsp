@@ -61,7 +61,114 @@
 </style>
 </head>
 <body
-	style="padding: 30px 30px 30px 30px; background-color: #f4f4f4; margin: 30px 30px 30px; border: 1px solid; border-radius: 22px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
+	style="padding: 30px; background-color: #f4f4f4; margin: 30px 30px 30px; border: 1px solid; border-radius: 22px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
+	
+<!-- 	hiển thị đỏi mk thành công-->
+	<div class="notifications"></div>
+		<script src="assets/ThongBao.js"></script>
+		<%if (request.getAttribute("checkDoiTC") != null) {
+			boolean checkDoiTC = (boolean) request.getAttribute("checkDoiTC");
+			if (checkDoiTC == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+					'Đổi mật khẩu thành công'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		
+		<!-- Hiển thi sai mât khẩu -->
+		<%if (request.getAttribute("checkMKSQL") != null) {
+			boolean checkMKSQL = (boolean) request.getAttribute("checkMKSQL");
+			
+			if (checkMKSQL == false) {
+		%>
+		<script type="text/javascript">
+			 createToast('error', 'fa-solid fa-circle-exclamation', 'Thất bại',
+					'Bạn đã nhập sai mật khẩu'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		
+		<!-- hiển thị sai mật khẩu nhập lại -->
+		<%if (request.getAttribute("checkTMK") != null) {
+			boolean checkTMK = (boolean) request.getAttribute("checkTMK");
+			
+			if (checkTMK == false) {
+		%>
+		<script type="text/javascript">
+			 createToast('error', 'fa-solid fa-circle-exclamation', 'Thất bại',
+					'Bạn đã nhập sai mật khẩu nhập lại'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		
+		<!-- Hiển thị cập nhật thành công -->
+		<%if (request.getAttribute("checkHoTen") != null) {
+			boolean checkHoTen = (boolean) request.getAttribute("checkHoTen");
+			
+			if (checkHoTen == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+					'Bạn cần cập nhật họ tên'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		<%if (request.getAttribute("checkDiaChi") != null) {
+			boolean checkDiaChi = (boolean) request.getAttribute("checkDiaChi");
+			
+			if (checkDiaChi == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+					'Bạn cần cập nhật địa chỉ'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		<%if (request.getAttribute("checkUpdate") != null) {
+			boolean checkUpdate = (boolean) request.getAttribute("checkUpdate");
+			if (checkUpdate == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
+					'Bạn đã cập nhật thành công'); 
+		</script>
+		<%
+		} 
+		} %>
+		
+		<%if (request.getAttribute("checkSoDt") != null) {
+			boolean checkSoDt = (boolean) request.getAttribute("checkSoDt");
+			if (checkSoDt == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+					'Bạn cập nhật số điện thoại chưa đúng quy định'); 
+		</script>
+		<%} }%>
+		
+		<%if (request.getAttribute("checkEmail") != null) {
+			boolean checkEmail = (boolean) request.getAttribute("checkEmail");
+			if (checkEmail == true) {
+		%>
+		<script type="text/javascript">
+			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
+					'Bạn cập nhật email chưa đúng quy định'); 
+		</script>
+		<%
+		} 
+		} %>
 	<header style="display: block; border:">
 		<h1>Hồ sơ của tôi</h1>
 		<p>Quản lí thông tin hồ sơ bảo mật và tài khoản</p>
@@ -147,20 +254,10 @@
 								} %>
 						</div>
 
-
-						<!-- <div style="width: 50%; padding: 5px;">
-						<label for="gioiTinh">Giới tính:</label> <select name="gioiTinh"
-							id="gioiTinh"
-							style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
-							<option value="Nam">Nam</option>
-							<option value="Nữ">Nữ</option>
-						</select>
-					</div> -->
-
 					</div>
 					<div
 						style="float: right; width: 50%; padding: 5px; text-align: right; margin: 5px;font-size: 16px">
-						<a href="CapNhapTTController?btnsua"
+						<a href="CapNhapTTController"
 							style="border: 1px solid; border-radius: 5px; padding: 5px; color: black; display: inline-block; text-decoration: none;">
 							<input form="capnhat-<%=kh.getMaKhachHang()%>" type="submit"
 							name="btnsua" value="Cập nhật" style="border: none">
@@ -237,116 +334,6 @@
 		</div>
 	</div>
 	
-<!-- 	hiển thị đỏi mk thành công-->
-	<div class="notifications"></div>
-		<script src="assets/ThongBao.js"></script>
-		<%if (request.getAttribute("checkDoiTC") != null) {
-			boolean checkDoiTC = (boolean) request.getAttribute("checkDoiTC");
-			if (checkDoiTC == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
-					'Đổi mật khẩu thành công'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		
-		<!-- Hiển thi sai mât khẩu -->
-		<%if (request.getAttribute("checkMKSQL") != null) {
-			boolean checkMKSQL = (boolean) request.getAttribute("checkMKSQL");
-			
-			if (checkMKSQL == false) {
-		%>
-		<script type="text/javascript">
-			 createToast('error', 'fa-solid fa-circle-exclamation', 'Thất bại',
-					'Bạn đã nhập sai mật khẩu'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		
-		<!-- hiển thị sai mật khẩu nhập lại -->
-		<%if (request.getAttribute("checkTMK") != null) {
-			boolean checkTMK = (boolean) request.getAttribute("checkTMK");
-			
-			if (checkTMK == false) {
-		%>
-		<script type="text/javascript">
-			 createToast('error', 'fa-solid fa-circle-exclamation', 'Thất bại',
-					'Bạn đã nhập sai mật khẩu nhập lại'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		
-		<!-- Hiển thị cập nhật thành công -->
-		<%if (request.getAttribute("checkHoTen") != null) {
-			boolean checkHoTen = (boolean) request.getAttribute("checkHoTen");
-			
-			if (checkHoTen == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
-					'Bạn cần cập nhật họ tên'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		<%if (request.getAttribute("checkDiaChi") != null) {
-			boolean checkDiaChi = (boolean) request.getAttribute("checkDiaChi");
-			
-			if (checkDiaChi == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
-					'Bạn cần cập nhật địa chỉ'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		<%if (request.getAttribute("checkUpdate") != null) {
-			boolean checkUpdate = (boolean) request.getAttribute("checkUpdate");
-			System.out.println(5);
-			System.out.println(checkUpdate);
-			if (checkUpdate == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('success', 'fa-solid fa-circle-exclamation', 'Thành công',
-					'Bạn đã cập nhật thành công'); 
-		</script>
-		<%
-		} 
-		} %>
-		
-		<%if (request.getAttribute("checkSoDT") != null) {
-			boolean checkSoDT = (boolean) request.getAttribute("checkSoDT");
-			if (checkSoDT == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
-					'Bạn cập nhật số điện thoại chưa đúng quy định'); 
-		</script>
-	
-		<%}
-		} %>
-		
-		<%if (request.getAttribute("checkEmail") != null) {
-			boolean checkEmail = (boolean) request.getAttribute("checkEmail");
-			if (checkEmail == true) {
-		%>
-		<script type="text/javascript">
-			 createToast('warning', 'fa-solid fa-circle-exclamation', 'Cảnh báo',
-					'Bạn cập nhật email chưa đúng quy định'); 
-		</script>
-		<%
-		} 
-		} %>
 	
 
 	<footer>

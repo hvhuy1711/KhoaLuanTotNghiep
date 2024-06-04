@@ -51,7 +51,35 @@ public class adminThongKeController extends HttpServlet {
 			 request.setCharacterEncoding("utf-8");
 			 response.setCharacterEncoding("utf-8");
 			 sanphambo sbo = new sanphambo();
-			 ArrayList<sanphamfullbean> dssp= sbo.getsanpham(); 
+			 ArrayList<sanphamfullbean> dssp= sbo.getsanpham();
+			 String keyword = request.getParameter("productName");
+			ArrayList<sanphamfullbean> searchResults = new ArrayList<>();
+			if (keyword != null && !keyword.isEmpty()) {
+			    for (sanphamfullbean sp : dssp) {
+			        if (sp.getTenSanPham().toLowerCase().contains(keyword.toLowerCase())) {
+			            searchResults.add(sp);
+			        }
+			    }
+			} else {
+			    searchResults = dssp;
+			}
+//			 request.setAttribute("dssp", searchResults);
+			 int page = 1;
+	            int recordsPerPage = 10;
+	            if (request.getParameter("page") != null) {
+	                page = Integer.parseInt(request.getParameter("page"));
+	            }
+
+	            int totalRecords = searchResults.size();
+	            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+	            int start = (page - 1) * recordsPerPage;
+	            int end = Math.min(start + recordsPerPage, totalRecords);
+	            ArrayList<sanphamfullbean> dsPage = new ArrayList<>(searchResults.subList(start, end));
+
+	            request.setAttribute("dssp", dsPage);
+	            request.setAttribute("currentPage", page);
+	            request.setAttribute("totalPages", totalPages);
 			 KichThuocBo ktbo = new KichThuocBo();
 			 ArrayList<KichThuocBean> dskt = ktbo.getDSKT();
 			 loaispbo lbo = new loaispbo();
@@ -70,11 +98,11 @@ public class adminThongKeController extends HttpServlet {
 				    int dsint = dsdhht.size();
 				    for (int i = 0; i < dsint; i++) {
 				        double soLuongMua = dsdh.get(i).getSoLuongMua();
-				        System.out.println(soLuongMua);
+//				        System.out.println(soLuongMua);
 				        double gia = dsdh.get(i).getDonGiaSP();
-				        System.out.println(gia);
+//				        System.out.println(gia);
 				        double chiecKhau = dsdh.get(i).getChiecKhau();
-				        System.out.println(chiecKhau);
+//				        System.out.println(chiecKhau);
 				        double thanhTien = soLuongMua * (gia - (gia * (chiecKhau / 100)));
 				        tontienht += thanhTien;
 				    }
@@ -100,7 +128,7 @@ public class adminThongKeController extends HttpServlet {
 			 ThongKeBo tkbo = new ThongKeBo();
 			 ArrayList<ThongKeBean> dstk = tkbo.GetThongKe();
 			 request.setAttribute("dstk", dstk);
-			 request.setAttribute("dssp", dssp);
+			
 			 request.setAttribute("dskt", dskt);
 			 request.setAttribute("dsloai", dsloai);
 			 request.setAttribute("dsAnh", dsAnh);

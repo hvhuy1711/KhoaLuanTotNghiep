@@ -75,6 +75,44 @@
         bottom: -10px; /* Đặt checkbox ở phía dưới cùng của container ảnh */
         left: 108px; /* Đặt checkbox ở bên trái của container ảnh */
     }
+    
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card-header {
+        font-weight: bold;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .btn {
+        margin: 5px;
+    }
+    .modal-header {
+        background-color: #446879;
+        color: #fff;
+    }
+    .modal-title {
+        margin: 0;
+    }
+    .modal-body {
+        padding: 20px;
+    }
+    .modal-footer {
+        padding: 10px;
+    }
+    .form {
+        padding: 20px;
+    }
+    .form-row {
+        margin-bottom: 15px;
+    }
 </style>
 </head>
 <body>
@@ -403,27 +441,46 @@
     </div>
     </form>
     <%} %>
-	<p class="text-center" style="margin-top: 20px; font-size: 30px">Danh
-		sách các sản phẩm</p>
-	<table class="table table-hover text-center" style="border: 1px solid #ccc;">
-		<tr style="background-color: #446879; color: #fff">
-			<th>Mã sản phẩm</th>
-			<th style="text-align: center;">Tên sản phẩm</th>
-			<th>Giá</th>
-			<th>Chiếc khấu</th>
-			<th>Ảnh</th>
-			<th>Nút kích thước</th>
-			<th>Thêm ảnh</th>
-			<th>Cập nhật</th>
-			<th>Nút xoá</th>
-
-		</tr>
-		<%
-		ArrayList<sanphamfullbean> ds = (ArrayList<sanphamfullbean>) request.getAttribute("dssanpham");
-		for (sanphamfullbean loai : ds) {
-		%>
-		
-<div class="modal fade" id="myModal<%=loai.getMaSanPham()%>" role="dialog">
+ <p class="text-center" style="margin-top: 20px; font-size: 30px">Danh sách các sản phẩm</p>
+    <div style="border: 2px solid #446789; padding: 20px; margin: 20px; border-radius: 20px">
+        <div class="row">
+            <% 
+            ArrayList<sanphamfullbean> ds = (ArrayList<sanphamfullbean>) request.getAttribute("dssanpham");
+            for (sanphamfullbean loai : ds) {
+            %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: #446879; color: #fff">
+                        <h5 class="card-title">Mã sản phẩm: <%=loai.getMaSanPham()%></h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Tên sản phẩm:</strong> <%=loai.getTenSanPham()%></p>
+                        <p class="card-text"><strong>Giá:</strong> <%=loai.getGia()%>đ</p>
+                        <p class="card-text"><strong>Giảm giá:</strong> <%=loai.getChiecKhau()%>%</p>
+                        <img style="width: 70px; height: 70px;" alt="" src="<%=loai.getAnh()%>">
+                        <div class="d-flex justify-content-between">
+                        	<a  href="adminThemAnhController?masp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
+		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
+		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>" class="btn btn-warning btn-sm">
+                                <i class="fa-solid fa-camera"></i></i> Cập nhật ảnh
+                            </a>
+                            <a href="adminCapNhatSizeController?msp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
+		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
+		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>" class="btn btn-warning btn-sm">
+                                <i class="fa-solid fa-pen-to-square"></i> Cập nhật size
+                            </a>
+                            <a data-toggle="modal" data-target="#myModal<%=loai.getMaSanPham()%>" class="btn btn-warning btn-sm">
+                                <i class="fa-solid fa-pen-to-square"></i> Cập nhật
+                            </a>
+                            <a data-toggle="modal" data-target="#myModalXoa<%=loai.getMaSanPham()%>" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-trash-can"></i> Xoá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal cập nhật -->
+         <div class="modal fade" id="myModal<%=loai.getMaSanPham()%>" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -457,7 +514,7 @@
 										placeholder="Nhập giá" required="required"> <br>
 								</div> 
 								<div class="form-row">
-									<span class="labelspan">Chiếc khấu:</span> <input class="input"
+									<span class="labelspan">Giảm giá:</span> <input class="input"
 										class="input" name="giamoi" type="text"
 										value="<%=loai.getChiecKhau()%>"
 										placeholder="Nhập giá mới" required="required"> <br>
@@ -511,7 +568,7 @@
 								int maloai = loai.getMaLoai();
 								String maString = String.valueOf(maloai);
 								%>
-						<select id="loaiSelectmd" name="maloai" style="border: 2px solid #446789; width:100%; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 60px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
+						<select id="loaiSelectmd" name="maloai" style="border: 2px solid #446789; width:100%; cursor: pointer; border-radius: 5px; margin: 5px 0px 5px 30px; padding: 5px; background-color: #f5f5f5; color: black; font-weight: bold;">
 						    <% 
 						    if (dsloai1 != null) {
 						        // Vòng lặp để hiển thị tùy chọn đã chọn
@@ -554,72 +611,33 @@
 				</div>
 			</div>
 		</div>
-	
-		
-	
-		<tr style="font-weight: bold;">
-			<td><%=loai.getMaSanPham()%></td>
-			<td><%=loai.getTenSanPham()%></td>
-			<td><%=loai.getGia()%></td>
-			<td><%=loai.getChiecKhau()%></td>
-			<td><img style="width: 40px;" alt="" src="<%=loai.getAnh()%>">
-			</td>
-				<td><a
-				href="adminCapNhatSizeController?msp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
-		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
-		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>"
-				style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-				<i class="fa-solid fa-pen-ruler"></i> </a></td>
-					<td><a href="adminThemAnhController?masp=<%=loai.getMaSanPham()%>&tsp=<%=loai.getTenSanPham()%>&sl=<%=loai.getSoLuong()%>
-		&giacu=<%=loai.getGia()%>&giamoi=<%=loai.getChiecKhau()%>&anh=<%=loai.getAnh()%>&maloai=<%=loai.getMaLoai()%>
-		&hang=<%=loai.getHang()%>&ngaynhap=<%=loai.getNgayNhap()%>&mota=<%=loai.getMoTaSanPham() %>"
-		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-		<i class="fa-solid fa-camera"></i></a></td>
-			
-					<td>
-					<a data-toggle="modal"
-							data-target="#myModal<%=loai.getMaSanPham()%>"
-							style=" border: 1px solid #ccc; padding: 7px; border-radius: 10px;cursor:pointer; background-color: #446879; color: #fff; font-weight: bold;">
-							<i class="fa-solid fa-pen-to-square"></i></a>
-					</td>	
-			<td><a
-				 data-toggle="modal" data-target="#myModalXoa<%=loai.getMaLoai()%>" 
-				style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
-					<i class="fa-solid fa-trash-can"></i>
-			</a></td>
-		</tr>
-		<!-- Modal xóa -->
-	<div class="container">
-  <div class="modal fade" id="myModalXoa<%=loai.getMaLoai()%>" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Thông báo xóa</h4>
+            <!-- Modal xóa -->
+            <div class="modal fade" id="myModalXoa<%=loai.getMaSanPham()%>" role="dialog">
+                <!-- Modal content -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thông báo xóa</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h2 style="margin-bottom: 35px">Bạn có chắc chắn muốn xóa sản phẩm này?</h2>
+                            <div style="margin-bottom: 20px">
+                                <a style="border: 1px solid red; border-radius: 20px; text-decoration: none; background-color: red; color: white; font-size: 18px; font-weight: bold; padding: 10px 40px; margin-right: 20px" href="adminsanphamcontroller?mspx=<%=loai.getMaSanPham()%>&tab=xoa">Có</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; border-radius: 20px; font-size: 18px">Không</button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% 
+            }
+            %>
         </div>
-        <div class="modal-body text-center">
-          <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn xóa danh mục này?</h2>
-          <div style="margin-bottom: 20px "> 
-          	<a style="border: 1px solid red;border-radius:20px;text-decoration:none; background-color:red;color:white;font-size:18px;font-weight:bold; padding: 10px 40px;margin-right: 20px "
-          	href="adminsanphamcontroller?mspx=<%=loai.getMaSanPham()%>&tab=xoa">Có</a>
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold;border-radius: 20px;font-size: 18px">Không</button>
-   		</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-  </div>
-  
-</div>
-</div>
-</div>
-		<%
-		}
-		%>
-	</table>
+    </div>
 	
 	
 

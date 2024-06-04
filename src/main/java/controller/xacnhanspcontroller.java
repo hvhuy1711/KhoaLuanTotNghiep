@@ -63,29 +63,35 @@ public class xacnhanspcontroller extends HttpServlet {
 				response.sendRedirect("ThongtinKhachHangController");
 				return;
 			}
-			else
-			if (session.getAttribute("maSPMUA") != null && (String)session.getAttribute("KichThuoc") != null) {
-				int maSPMUAInt = Integer.parseInt((String)session.getAttribute("maSPMUA"));
-				String KichThuoc1 = (String)session.getAttribute("KichThuoc");
+			else {
 				giospbo gh = new giospbo();
-				ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc1);
-					if (dsgiott != null) {
-						request.setAttribute("dsgio", dsgiott);
-						
-					}
-				session.removeAttribute("KichThuoc1");
-				session.removeAttribute("maSPMUA");
-			}else {
-				int maSPMUAInt = Integer.parseInt(maSPMUA);
-				giospbo gh = new giospbo();
-				if (btnTT != null) {
-				ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
-					if (dsgiott != null) {
-						request.setAttribute("dsgio", dsgiott);
-						
-					}
+				ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
+				if (dsgiott != null) {
+					request.setAttribute("dsgio", dsgiott);
 				}
 			}
+//			if (session.getAttribute("maSPMUA") != null && (String)session.getAttribute("KichThuoc") != null) {
+//				int maSPMUAInt = Integer.parseInt((String)session.getAttribute("maSPMUA"));
+//				String KichThuoc1 = (String)session.getAttribute("KichThuoc");
+//				giospbo gh = new giospbo();
+//				ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc1);
+//					if (dsgiott != null) {
+//						request.setAttribute("dsgio", dsgiott);
+//						
+//					}
+//				session.removeAttribute("KichThuoc1");
+//				session.removeAttribute("maSPMUA");
+//			}else {
+//				int maSPMUAInt = Integer.parseInt(maSPMUA);
+//				giospbo gh = new giospbo();
+//				if (btnTT != null) {
+//				ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
+//					if (dsgiott != null) {
+//						request.setAttribute("dsgio", dsgiott);
+//						
+//					}
+//				}
+//			}
 				
 			request.setAttribute("dn", kh);
 			RequestDispatcher rd = 

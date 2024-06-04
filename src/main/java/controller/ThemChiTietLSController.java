@@ -72,7 +72,7 @@ public class ThemChiTietLSController extends HttpServlet {
 				if (dskt != null) {
 					for (KichThuocBean kt : dskt) {
 						if (gio.getMaSanPham() == kt.getMaSanPham() && gio.getGhiChu().equals(kt.getTenKichThuoc()) ) {
-							System.out.println((int) (kt.getSoLuongSize() - gio.getSoLuongMua()));
+//							System.out.println((int) (kt.getSoLuongSize() - gio.getSoLuongMua()));
 							ktbo.UpdateSLMua(gio.getMaSanPham(), (int) (kt.getSoLuongSize() - gio.getSoLuongMua()),
 									gio.getGhiChu());
 //							System.out.println("Đã update lại số lượng");

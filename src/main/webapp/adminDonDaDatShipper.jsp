@@ -1,3 +1,4 @@
+<%@page import="bean.HoaDonBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="bean.DonHangDaDatBean"%>
 <%@page import="bean.khachhangthibean"%>
@@ -11,12 +12,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Trang Admin</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
@@ -26,10 +25,55 @@
     opacity: 0.5; /* Làm mờ nút */
     pointer-events: none; /* Ngăn không cho nhấp vào nút */
 }
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    border-bottom: 1px solid #ccc;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-footer {
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #446879;
+    color: #fff;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.card-img-top {
+    border-bottom: 1px solid #ccc;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-footer {
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
 </style>
 </head>
 <body>
-	<div id="main">
+	<%-- <div id="main">
 
 		<div id="header" style="height: 120px; background-color: #446879;">
 			<div
@@ -226,7 +270,7 @@
 		</div>
 		<!-- Hết modal đăng kí -->
 
-	</div>
+	</div> --%>
 	<%-- 
 <%
 	if (request.getParameter("kt") != null ){%>
@@ -250,29 +294,169 @@
 	}
 	%>
 
-
-
-	<h1 style="color: black; margin-top: 140px; text-align: center;">Trang
+	<!-- <h1 style="color: black; margin-top: 140px; text-align: center;">Trang
 		ADMIN Các đơn hàng đã đặt</h1>
 		<div style="display: flex;justify-content: space-between;">
-	<a href="adminDonHangDaXacNhanShipperController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 0px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
-		nhận cho shipper</a>
-	<a href="adminxacnhancontroller" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 7px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng chưa xác
-		nhận</a>
-		</div>
-	<div class="container text-center">
-		<div class="row content">
-			<div class="col-sm-12 text-left">
+			<a href="adminDonHangDaXacNhanShipperController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 0px;text-decoration: none;cursor:pointer; color: white;background-color: orange;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
+				nhận cho shipper</a>
+			<a href="adminxacnhancontroller" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 7px;text-decoration: none;cursor:pointer; color: white;background-color: red;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng chưa xác
+				nhận</a>
+		</div> -->
+
+<div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3" style="background-color: #ccc">
+                <div style="padding: 20px"></div>
+                <div style="display: flex;justify-content: center;align-items: center;">
+                	<img alt="" src="baithijava/admin1.jpg" style="width: 100px; height: 100px;">
+                	<h1 class="text-center" style="padding: 20px">ADMIN</h1>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: space-around; margin: 30px;">
+                    <a href="adminThongKeController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px;  color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo sản phẩm</a>
+                    <a href="adminThongKeKHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo khách hàng</a>
+                    <a href="adminThongKeDHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Thống kê theo đơn hàng</a>
+                    <a href="adminxacnhancontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Xác nhận đơn hàng</a>
+                    <a href="adminDonHangDaXacNhanShipperController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Trang của người vận chuyển</a>
+                    <a href="adminsanphamcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí sản phẩm</a>
+                    <a href="adminloaispcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí danh mục</a>
+                </div>
+            </div>
+			<div class="col-md-9 main-content">
+			<div style="padding: 20px"></div>
+			<h1 style="color: black; text-align: center;">Đơn hàng cần giao</h1>
 				<%
-				//hiển thị chờ xác nhận
+				ArrayList<HoaDonBean> dshd = (ArrayList<HoaDonBean>) request.getAttribute("dshd");
 				ArrayList<DonHangDaDatBean> dsadmin = (ArrayList<DonHangDaDatBean>) request.getAttribute("adminxacnhan");
-				if (dsadmin != null) {
-					long tongtien = 0;
-					int n= dsadmin.size();
-					for (int i = n-1; i>= 0;i--) {
+				if (dshd == null || dshd.isEmpty()) {
 				%>
-				<!-- Modal thông tin khách hàng -->
-				<div class="modal fade" id="myModal<%=dsadmin.get(i).getMaChiTiet()%>"
+				<h2 style="text-align: center; margin-top: 20px; font-size: 30px">Không có đơn hàng nào!!</h2>
+				<%
+				} else {
+				%>
+				<div class="container">
+				    <%
+				    for (HoaDonBean hd : dshd) {
+				    %>
+				    <%
+				    if (dsadmin != null && !dsadmin.isEmpty()) {
+				        boolean hasOrders = false;
+				        boolean firstOrder = true;
+				        for (DonHangDaDatBean dh : dsadmin) {
+				            if (dh.getMaHoaDon() == hd.getMaHoaDon() && dh.getTrangThaiCt() == 0) {
+				                hasOrders = true;
+				                if (firstOrder) {
+				                    firstOrder = false;
+				    %>
+				    <div class="row mb-4">
+				        <div class="col-12">
+				            <div class="card">
+				                <div class="card-header">
+				                    <h3>Mã Hóa Đơn: <%= hd.getMaHoaDon() %></h3>
+				                    <p>Ngày Đặt: <%= hd.getNgayMua() %></p>
+				                     <p class="payment-method">
+			                            <%
+			                            if (hd.getTrangThaiDon() == 0) {
+			                            %>
+			                            Phương thức thanh toán: Thanh toán trực tiếp (chưa thanh toán)
+			                            <%
+			                            } else {
+			                            %>
+			                            Phương thức thanh toán: Thanh toán online (đã thanh toán)
+			                            <%
+			                            }
+			                            %>
+			                        </p>
+				                </div>
+				                <div class="card-body">
+				    <%
+				                }
+				    %>
+				                    <div class="row order-details mb-2">
+				                        <div class="col-md-2">
+				                            <img src="<%= dh.getAnh() %>" alt="Ảnh sản phẩm" style="width: 100%; object-fit: cover;">
+				                        </div>
+				                        <div class="col-md-7">
+				                            <div>
+				                                <span><strong>Tên sản phẩm:</strong> <%= dh.getTenSanPham() %></span>
+				                            </div>
+				                            <div>
+				                            	<%
+										        double gia = dh.getDonGiaSP();
+										        double chiecKhau = dh.getChiecKhau();
+										        double thanhTientt = (gia * (1 - (chiecKhau / 100)));
+										        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+							        			String GiaFormatted = decimalFormat.format(thanhTientt); %>
+				                                <span><strong>Giá:</strong> <%= GiaFormatted %>đ</span> |
+				                                <span><strong>Số lượng:</strong> <%= dh.getSoLuongMua() %></span>
+				                            </div>
+				                            <div>
+				                                <span><strong>Kích thước:</strong> <%= dh.getGhiChuCT() %></span> |
+				                                <span><strong>Khách hàng:</strong> <%= dh.getHoTen() %></span>
+				                            </div>
+				                            <div>
+				                                <span><strong>Địa chỉ:</strong> <%= dh.getDiaChi() %></span> |
+				                                <span><strong>SĐT:</strong> <%= dh.getSoDT() %></span>
+				                            </div>
+				                            <div style="color: red;">
+				                                <span><strong>Trạng thái:</strong> <%= dh.getTrangThai() == 3 ? "Đã hoàn thành" : "Chưa xác nhận" %></span>
+				                            </div>
+				                        </div>
+				                         <div class="col-md-3" id="xacnhan-<%= dh.getMaHoaDon() %>">
+				                              <%
+				                              if (dh.getTrangThaiDon() == 1) {
+				                              %>
+				                              <a href="adminGiaoHangcontroller?btnGiaoHang&mact=<%= dh.getMaChiTiet() %>" onclick="disableButton(this)"
+				                                 style="border: 1px solid #ccc; text-decoration: none; font-weight: bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; background-color: red; color: #fff; border-radius: 10px">Giao hàng</a>
+				                              <% } else { %>
+				                              <a href="adminGiaoHangcontroller?btnGiaoHang&mact=<%= dh.getMaChiTiet() %>" onclick="disableButton(this)"
+				                                 style="border: 1px solid #ccc; text-decoration: none; font-weight: bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; background-color: red; color: #fff; border-radius: 10px">Giao hàng và nhận tiền</a>
+				                              <% } %>
+				                          </div>
+				                        <script src="assets/ThemDisable.js"></script>
+				                    </div>
+				    <%
+				            }
+				        }
+				        if (hasOrders) {
+				    %>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				    <%
+				        }
+				    }
+				    %>
+				    <%
+				    }
+				    %>
+				</div>
+				<%
+				}
+				%>
+				<script>
+				    // Chỉ hiển thị div đầu tiên với id bắt đầu bằng "xacnhan-" cho mỗi mã hóa đơn
+				    document.addEventListener('DOMContentLoaded', function() {
+				        var xacnhanDivs = document.querySelectorAll('div[id^="xacnhan-"]');
+				        var seen = {};
+				        xacnhanDivs.forEach(function(div) {
+				            var id = div.id.split('-')[1];
+				            if (seen[id]) {
+				                div.style.display = 'none';
+				            } else {
+				                seen[id] = true;
+				            }
+				        });
+				    });
+				</script>
+			</div>
+		</div>
+	</div>		
+
+
+	<!-- Modal thông tin khách hàng -->
+			<%-- 	<div class="modal fade" id="myModal<%=dsadmin.get(i).getMaChiTiet()%>"
 					role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -351,65 +535,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="row"
-					style="display: block; border: 1px solid #ccc; margin: 10px;">
-					<p style="font-size: 15px; font-weight: bold; padding-left: 15px">
-						Tên khách hàng:
-						<%=dsadmin.get(i).getHoTen()%></p>
-					<div>
-						<div class="col-sm-2">
-							<img style="width: 100%" alt="" src="<%=dsadmin.get(i).getAnh()%>">
-						</div>
-						<div class="col-sm-8">
-							<h3><%=dsadmin.get(i).getTenSanPham()%></h3>
-							
-							<p style="display: inline-block;">
-								Giá:
-								<%=GiaFormatted%></p>
-							x
-							<form style="display: inline-block;"
-								id="capnhat-<%=dsadmin.get(i).getTenSanPham()%>">
-								<input
-									style="width: 60px; margin-bottom: 20px; display: inline-block;text-align: center;"
-									disabled="disabled" name="soluong" type="text"
-									value="<%=dsadmin.get(i).getSoLuongMua()%>">
-							</form>
-						</div>
-						<div class="col-sm-2">
-							<p style="opacity: 0.7;position: absolute;bottom: 0px;right: 15px"><%=dsadmin.get(i).getNgayMua() %></p>
-						</div>
-					</div>
-					<br>
-					<div>
-						<input type="submit" value="Xem chi tiết" data-toggle="modal"
-							data-target="#myModal<%=dsadmin.get(i).getMaChiTiet()%>"
-							style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;font-weight:bold; margin-left: 20px; background-color: #446879; color: #fff; border-radius: 10px">
-							<% if(dsadmin.get(i).getTrangThaiDon() == 1){%>
-											<a href="adminGiaoHangcontroller?btnGiaoHang&mact=<%=dsadmin.get(i).getMaChiTiet()%>" onclick="disableButton(this)"
-							style="border: 1px solid #ccc; text-decoration: none;font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">Giao hàng</a>
-							<script src="assets/ThemDisable.js"></script>
-										<%}else{ %>
-										<a href="adminGiaoHangcontroller?btnGiaoHang&mact=<%=dsadmin.get(i).getMaChiTiet()%>" onclick="disableButton(this)"
-							style="border: 1px solid #ccc; text-decoration: none;font-weight:bold; padding: 9px 18px; display: block; float: right; margin-bottom: 20px; margin-right: 65px; background-color: red; color: #fff; border-radius: 10px">Giao hàng và nhận tiền</a>
-							<script src="assets/ThemDisable.js"></script>
-										<%} %>
-										
-						</div>
-				</div>
-				
-				<%
-				}
-				%>
-				<%-- <p style="font-size: 20px; font-weight: 600; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding-top: 20px; padding-bottom: 20px; padding-right: 80px;">Tổng tiền: <%=tongtien %> VNĐ</p> --%>
-				<%
-				}
-				%>
-			</div>
-		</div>
-	</div>
-
-
+				</div> --%>
 </body>
 </html>

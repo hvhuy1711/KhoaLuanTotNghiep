@@ -199,7 +199,33 @@ public class adminsanphamcontroller extends HttpServlet {
 			}
 			
 			ArrayList<sanphamfullbean> ds = sbo.getsanpham();
-			request.setAttribute("dssanpham", ds);
+			String key = request.getParameter("key");
+			ArrayList<sanphamfullbean> searchResults = new ArrayList<sanphamfullbean>();
+			if (key != null && !key.isEmpty()) {
+			    for (sanphamfullbean sp : ds) {
+			        if (sp.getTenSanPham().toLowerCase().contains(key.toLowerCase())) {
+			            searchResults.add(sp);
+			        }
+			    }
+			} else {
+			    searchResults = ds;
+			}
+			int page = 1;
+            int recordsPerPage = 10;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+
+            int totalRecords = searchResults.size();
+            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+            int start = (page - 1) * recordsPerPage;
+            int end = Math.min(start + recordsPerPage, totalRecords);
+            ArrayList<sanphamfullbean> dsPage = new ArrayList<>(searchResults.subList(start, end));
+
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+			request.setAttribute("dssanpham", dsPage);
 			RequestDispatcher rd = request.getRequestDispatcher("AdminThemSanPham.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

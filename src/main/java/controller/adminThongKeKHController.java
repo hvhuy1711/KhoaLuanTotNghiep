@@ -60,6 +60,34 @@ public class adminThongKeKHController extends HttpServlet {
 			 ArrayList<AnhBean> dsAnh = abo.getAnh();
 			 khachhangbo khbo = new khachhangbo();
 			 ArrayList<khachhangthibean> dskh = khbo.getAllkhachhang();
+			 String keyword = request.getParameter("productUser");
+				ArrayList<khachhangthibean> searchResults = new ArrayList<>();
+				if (keyword != null && !keyword.isEmpty()) {
+				    for (khachhangthibean kh : dskh) {
+				        if (kh.getHoTen().toLowerCase().contains(keyword.toLowerCase())) {
+				            searchResults.add(kh);
+				        }
+				    }
+				} else {
+				    searchResults = dskh;
+				}
+//				 request.setAttribute("dskh", searchResults);
+				 int page = 1;
+	            int recordsPerPage = 10;
+	            if (request.getParameter("page") != null) {
+	                page = Integer.parseInt(request.getParameter("page"));
+	            }
+
+	            int totalRecords = searchResults.size();
+	            int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+
+	            int start = (page - 1) * recordsPerPage;
+	            int end = Math.min(start + recordsPerPage, totalRecords);
+	            ArrayList<khachhangthibean> dsPage = new ArrayList<>(searchResults.subList(start, end));
+
+	            request.setAttribute("dskh", dsPage);
+	            request.setAttribute("currentPage", page);
+	            request.setAttribute("totalPages", totalPages);
 			 giospbo giobo = new giospbo();
 			 ArrayList<giospbean> dsgio = giobo.getAlldsgio();
 			 DonHangDaDatBo dhBo = new DonHangDaDatBo();
@@ -104,7 +132,7 @@ public class adminThongKeKHController extends HttpServlet {
 			 request.setAttribute("dskt", dskt);
 			 request.setAttribute("dsloai", dsloai);
 			 request.setAttribute("dsAnh", dsAnh);
-			 request.setAttribute("dskh", dskh);
+//			 request.setAttribute("dskh", dskh);
 			 request.setAttribute("dsgio", dsgio);
 			 request.setAttribute("dsdh", dsdh);
 			 RequestDispatcher rd = 

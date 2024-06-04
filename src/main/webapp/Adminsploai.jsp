@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Trang Admin</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="Thongbao.css">
 
@@ -34,10 +34,67 @@
 	width: 100%;
 	flex: 1; /* Đảm bảo input mở rộng để điền vào khoảng trống */
 }
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card-header {
+        font-weight: bold;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .btn {
+        margin: 5px;
+    }
+    .modal-header {
+        background-color: #446879;
+        color: #fff;
+    }
+    .modal-title {
+        margin: 0;
+    }
+    .modal-body {
+        padding: 20px;
+    }
+    .modal-footer {
+        padding: 10px;
+    }
+    .form {
+        padding: 20px;
+    }
+    .form-row {
+        margin-bottom: 15px;
+    }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
 </style>
+
 </head>
 <body>
-<div id="main">
+<%-- <div id="main">
   
     <div id="header" style="height: 120px;background-color: #446879; ">
     		<div style="position: relative; display: flex;justify-content: space-between;">
@@ -209,7 +266,7 @@
   </div>
 		  <!-- Hết modal đăng kí -->
         
-</div>
+</div> --%>
 
 <div class="notifications"></div>
 	<!-- Check cập nhật danh mục -->
@@ -282,8 +339,28 @@
 	}
 	%>
 
-
-<form action="adminloaispcontroller" method="get" style="margin-top: 140px"  class="text-center">
+<div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3" style="background-color: #ccc">
+                <div style="padding: 20px"></div>
+                <div style="display: flex;justify-content: center;align-items: center;">
+                	<img alt="" src="baithijava/admin1.jpg" style="width: 100px; height: 100px;">
+                	<h1 class="text-center" style="padding: 20px">ADMIN</h1>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: space-around; margin: 30px;">
+                    <a href="adminThongKeController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px;  color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo sản phẩm</a>
+                    <a href="adminThongKeKHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo khách hàng</a>
+                    <a href="adminThongKeDHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Thống kê theo đơn hàng</a>
+                    <a href="adminxacnhancontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Xác nhận đơn hàng</a>
+                    <a href="adminDonHangDaXacNhanShipperController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Trang của người vận chuyển</a>
+                    <a href="adminsanphamcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí sản phẩm</a>
+                    <a href="adminloaispcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí danh mục</a>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+            <form action="adminloaispcontroller" method="get" class="text-center">
 	<h1 style="color: black;">Trang ADMIN Quản lí danh mục</h1>
 	<div style="border: 2px solid #446789;padding: 30px;margin: 30px;border-radius: 20px">
 	<div class="form-row">
@@ -299,106 +376,148 @@
 
 
 <p style="text-align: center; margin-top: 20px; font-size: 30px">Danh sách các danh sách sản phẩm</p> 
-<div  style="border: 2px solid #446789;padding: 30px;margin: 30px;border-radius: 20px">
-<table class = "table table-hover ">
-	<tr style="background-color: #446879; color: #fff">
-		<th>Mã danh mục</th>
-		<th>Tên danh mục</th>
-		<!-- <th>Nút chọn</th> -->
-		<th>Nút cập nhật</th>
-		<th>Nút Xoá</th>
-	</tr>
-<%
-	ArrayList<loaispbean> ds = (ArrayList<loaispbean>) request.getAttribute("dsloai");
-	if(ds!= null){
-	for(loaispbean loai : ds){
-%>
-	<tr style="font-weight: bold">
-		<td><%=loai.getMaLoai() %></td>
-		<td><%=loai.getTenLoai()%></td>
-		<%-- <td><a href="adminloaispcontroller?ml=<%=loai.getMaLoai()%>&tl=<%=loai.getTenLoai() %> &tab=chon"
-		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
-			Chọn
-		</a></td> --%>
-		<td><a data-toggle="modal" data-target="#myModal<%=loai.getMaLoai()%>"
-		style="border: 1px solid #ccc; padding: 7px;cursor:pointer;text-decoration:none; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
-			<i class="fa-solid fa-pen-to-square"></i>
-		</a></td>
-		<td><a data-toggle="modal" data-target="#myModalXoa<%=loai.getMaLoai()%>" 
-		style="border: 1px solid #ccc;cursor:pointer; padding: 7px; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
-			<i class="fa-solid fa-trash-can"></i>
-		</a></td>
-	</tr>
-	
-  <!-- Modal xóa -->
-	<div class="container">
-  <div class="modal fade" id="myModalXoa<%=loai.getMaLoai()%>" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Thông báo xóa</h4>
-        </div>
-        <div class="modal-body text-center">
-          <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn xóa danh mục này?</h2>
-          <div style="margin-bottom: 20px "> 
-          	<a style="border: 1px solid red;border-radius:20px;text-decoration:none; background-color:red;color:white;font-size:18px;font-weight:bold; padding: 10px 40px;margin-right: 20px " href="adminloaispcontroller?mlxoa=<%=loai.getMaLoai() %>&tab=xoa">Có</a>
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold;border-radius: 20px;font-size: 18px">Không</button>
-   		</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-  </div>
-  
-</div>
-</div>
-</div>
 
-	
-	
-<!-- Modal cập nhật danh mục -->
-	<div class="modal fade" id="myModal<%=loai.getMaLoai() %>" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Thông tin cập nhật danh mục</h4>
-					</div>
-					<div class="Form">
-						<form style="text-align: center;" action="adminCNLoaiController" method="get" >
-						<div style="padding: 10px"></div>
-						<div class="form-row" style="display: none">
-									<span  class="labelspan">Mã danh mục:</span> <input class="input"
-										class="input" name="maloai" type="text"
-										value="<%=loai.getMaLoai() %>"
-										placeholder="Nhập mã sản phẩm" required="required"> <br>
-							</div>
-							
-							<div class="form-row">
-									<span class="labelspan">Tên danh mục:</span> <input class="input"
-										class="input" name="tenloai" type="text"
-										value="<%=loai.getTenLoai() %>"
-										placeholder="Nhập số lượng" required="required"> <br>
-							</div> 
-							<div class="form-row" style="margin-top: 10px; padding: 0 40px 10px">
-							<input name="btnLoai" type="submit" value="Cập nhật danh mục sản phẩm" 
-								style="height: 45px; background-color: #446879; color: #fff; font-weight: bold; outline: none; border: 2px solid #ccc; border-radius: 10px; margin:0 auto;padding: 0 20px">
-								</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-<%} 
-}%>
-</table>
+<div class="container">
+    <h1 class="text-center">Tìm kiếm danh mục</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="adminloaispcontroller" method="post">
+                <div class="form-group">
+                    <input class="form-control" name="key" type="text" placeholder="Nhập từ khóa tìm kiếm" required="required">
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<div style="border: 2px solid #446789; padding: 30px; margin: 30px; border-radius: 20px">
+    <div class="row">
+        <%
+        ArrayList<loaispbean> ds = (ArrayList<loaispbean>) request.getAttribute("dsloai");
+        if (ds != null) {
+            for (loaispbean loai : ds) {
+        %>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header" style="background-color: #446879; color: #fff">
+                    <h5 class="card-title">Mã danh mục: <%=loai.getMaLoai() %></h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Tên danh mục:</strong> <%=loai.getTenLoai() %></p>
+                    <div class="d-flex justify-content-between">
+                        <a data-toggle="modal" data-target="#myModal<%=loai.getMaLoai()%>"
+                           class="btn btn-warning btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i> Cập nhật
+                        </a>
+                        <a data-toggle="modal" data-target="#myModalXoa<%=loai.getMaLoai()%>"
+                           class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash-can"></i> Xoá
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+
+        <!-- Modal xóa -->
+        <div class="modal fade" id="myModalXoa<%=loai.getMaLoai()%>" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                        <h4 class="modal-title">Thông báo xóa</h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h2 style="margin-bottom: 40px">Bạn có chắc chắn muốn xóa danh mục này?</h2>
+                        <div style="margin-bottom: 20px">
+                            <a href="adminloaispcontroller?mlxoa=<%=loai.getMaLoai() %>&tab=xoa"
+                               class="btn btn-danger" style="border-radius:20px; font-size:18px; font-weight:bold; padding: 10px 40px; margin-right: 20px">
+                                Có
+                            </a>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; border-radius: 20px; font-size: 18px">Không</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal cập nhật danh mục -->
+        <div class="modal fade" id="myModal<%=loai.getMaLoai() %>" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                        <h4 class="modal-title">Thông tin cập nhật danh mục</h4>
+                    </div>
+                    <div class="form">
+                        <form style="text-align: center;" action="adminCNLoaiController" method="get">
+                            <div style="padding: 10px"></div>
+                            <div class="form-row" style="display: none">
+                                <span class="labelspan">Mã danh mục:</span>
+                                <input class="input" name="maloai" type="text"
+                                       value="<%=loai.getMaLoai() %>"
+                                       placeholder="Nhập mã sản phẩm" required="required">
+                                <br>
+                            </div>
+                            <div class="form-row">
+                                <span class="labelspan">Tên danh mục:</span>
+                                <input class="input" name="tenloai" type="text"
+                                       value="<%=loai.getTenLoai() %>"
+                                       placeholder="Nhập số lượng" required="required">
+                                <br>
+                            </div>
+                            <div class="form-row" style="margin-top: 10px; padding: 0 40px 10px">
+                                <input name="btnLoai" type="submit" value="Cập nhật danh mục sản phẩm"
+                                       class="btn btn-primary" style="background-color: #446879; color: #fff; font-weight: bold; border-radius: 10px; padding: 10px 20px;">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%
+            }
+        }
+        %>
+    </div>
+      <div class="pagination">
+        <%
+            int currentPage = (int) request.getAttribute("currentPage");
+            int totalPages = (int) request.getAttribute("totalPages");
+            String keyword = request.getParameter("key");
+
+            String queryParams = "";
+            if (keyword != null) queryParams += "&key=" + keyword;
+
+            if (currentPage > 1) {
+        %>
+        <a href="adminloaispcontroller?page=<%= currentPage - 1 %><%= queryParams %>">&laquo; Quay lại</a>
+        <% 
+            }
+            for (int i = 1; i <= totalPages; i++) {
+        %>
+        <a href="adminloaispcontroller?page=<%= i %><%= queryParams %>" class="<%= (i == currentPage) ? "active" : "" %>"><%= i %></a>
+        <% 
+            }
+            if (currentPage < totalPages) {
+        %>
+        <a href="adminloaispcontroller?page=<%= currentPage + 1 %><%= queryParams %>">Tiếp theo &raquo;</a>
+        <% } %>
+    </div>	
+</div>
+            </div>
+           </div>
+          </div>
+
+
+
 </body>
 </html>

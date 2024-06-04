@@ -15,12 +15,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Trang Admin</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="assets/fontawesome-free-6.3.0-web/css/all.min.css">
 <link rel="stylesheet" href="index.css">
@@ -65,76 +63,76 @@
 	text-align: center;
 }
 
- .product-details {
-            margin: 20px 0;
-        }
+.product-details {
+	margin: 20px 0;
+}
 
-        .product-details img {
-            max-width: 100%;
-            height: auto;
-        }
+.product-details img {
+	max-width: 100%;
+	height: auto;
+}
 
-        .product-details .col-sm-6 {
-            padding: 10px;
-        }
+.product-details .col-sm-6 {
+	padding: 10px;
+}
 
-        .product-details .col-sm-6 p {
-            margin: 5px 0;
-            font-size: 16px;
-            color: #333;
-        }
+.product-details .col-sm-6 p {
+	margin: 5px 0;
+	font-size: 16px;
+	color: #333;
+}
 
-        .product-details .col-sm-6 p span {
-            font-weight: bold;
-            color: #000;
-        }
+.product-details .col-sm-6 p span {
+	font-weight: bold;
+	color: #000;
+}
 
-        .modal-dialog {
-            max-width: 600px; /* Adjust the width as needed */
-        }
+.modal-dialog {
+	max-width: 600px; /* Adjust the width as needed */
+}
 
-        .modal-header .close {
-            font-size: 24px;
-            cursor: pointer;
-        }
+.modal-header .close {
+	font-size: 24px;
+	cursor: pointer;
+}
 
-        .modal-header .fa-times {
-            float: right;
-        }
+.modal-header .fa-times {
+	float: right;
+}
 
-        .modal-header h4 {
-            font-size: 30px;
-        }
+.modal-header h4 {
+	font-size: 30px;
+}
 
-        .modal-body .product-details p {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+.modal-body .product-details p {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
 
-        .modal-body .product-details p span {
-            font-size: 18px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
+.modal-body .product-details p span {
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 10px;
+}
 
-        .modal-body .product-details input {
-            color: red;
-            width: 100px;
-            text-align: center;
-            border: none;
-            background: none;
-        }
+.modal-body .product-details input {
+	color: red;
+	width: 100px;
+	text-align: center;
+	border: none;
+	background: none;
+}
 
-        .modal-body .product-details p .mota {
-            font-size: 25px;
-            color: red;
-        }
+.modal-body .product-details p .mota {
+	font-size: 25px;
+	color: red;
+}
 
-        .btn-default {
-            background-color: #f0f0f0;
-            border-color: #ccc;
-            color: #333;
-        }
+.btn-default {
+	background-color: #f0f0f0;
+	border-color: #ccc;
+	color: #333;
+}
 
 .modal-footer {
 	border-top: none;
@@ -152,10 +150,30 @@
 .modal-footer .btn:hover {
 	background-color: #0056b3;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
 </style>
 </head>
 <body>
-	<div id="main">
+	<%-- <div id="main">
 
 		<div id="header" style="height: 120px; background-color: #446879;">
 			<div
@@ -173,7 +191,8 @@
 				<li><a href="adminloaispcontroller">Quản lí danh mục</a></li>
 				<li><a href="adminsanphamcontroller">Quản lí sản phẩm</a></li>
 				<li><a href="adminxacnhancontroller">Xác nhận đặt hàng</a></li>
-				 <li><a href="adminxoatkcontroller" class="nav-mobile-css">Quản lí tài khoản</a></li>
+				<li><a href="adminxoatkcontroller" class="nav-mobile-css">Quản
+						lí tài khoản</a></li>
 				<li><a
 					class="footer-Evaluate footer-group js-buy-btn-Evaluate ">Thống
 						kê</a></li>
@@ -347,158 +366,235 @@
 			</div>
 		</div>
 		<!-- Hết modal đăng kí -->
-	</div>
+	</div> --%>
+	
+	<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+       <div class="col-md-3" style="background-color: #ccc">
+                <div style="padding: 20px"></div>
+                <div style="display: flex;justify-content: center;align-items: center;">
+                	<img alt="" src="baithijava/admin1.jpg" style="width: 100px; height: 100px;">
+                	<h1 class="text-center" style="padding: 20px">ADMIN</h1>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: space-around; margin: 30px;">
+                    <a href="adminThongKeController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px;  color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo sản phẩm</a>
+                    <a href="adminThongKeKHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold; margin-bottom: 10px;">Thống kê theo khách hàng</a>
+                    <a href="adminThongKeDHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Thống kê theo đơn hàng</a>
+                    <a href="adminxacnhancontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Xác nhận đơn hàng</a>
+                    <a href="adminDonHangDaXacNhanShipperController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Trang của người vận chuyển</a>
+                    <a href="adminsanphamcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí sản phẩm</a>
+                    <a href="adminloaispcontroller" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px; padding: 10px; color: black; font-weight: bold;margin-bottom: 10px;">Quản lí danh mục</a>
+                </div>
+            </div>
+        <!-- Main Content -->
+        <div class="col-md-9">
+        <div style="padding: 20px"></div>
+            <h1 class="text-center" style="padding: 20px">Thống kê Khách hàng</h1>
+            <div class="container">
+            <!--  <form action="adminThongKeKHController" method="GET">
+                     <div class="form-group">
+                         <label for="productName">Tìm kiếm Khách hàng:</label>
+                         <input type="text" class="form-control" id="productUser" name="productUser" placeholder="Nhập tên khách hàng">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                 </form> -->
+                 
+                 <div class="container">
+					    <h4 class="text-center">Tìm kiếm khách hàng</h4>
+					    <div class="row justify-content-center">
+					        <div class="col-md-6">
+					            <form action="adminThongKeKHController" method="post">
+					                <div class="form-group">
+					                    <input class="form-control" name="productUser" type="text" placeholder="Nhập từ khóa tìm kiếm" required="required">
+					                </div>
+					                <div class="form-group text-center">
+					                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+					                </div>
+					            </form>
+					        </div>
+					    </div>
+					</div>
+                <div class="row" style="margin-left: 150px">
+                    <% 
+                    ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
+                    if (dskh != null) {
+                        for (khachhangthibean s : dskh) {
+                    %>
+                    <div class="col-sm-4 col-xs-6 col-md-3 text-center" style="border: 2px solid #446789; border-radius: 10px; padding: 25px; margin: 10px;">
+                        <h1 style="font-size: 30px; font-weight: bold; color: red;">Khách hàng</h1>
+                        <h1 style="font-size: 25px; font-weight: bold; color: red; margin-bottom: 20px"><%=s.getHoTen()%></h1>
+                        <div>
+                            <%-- <a data-toggle="modal" data-target="#myModalGH<%= s.getMaKhachHang() %>" style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: green; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Giỏ hàng</a> --%>
+                            <a data-toggle="modal" data-target="#myModalXKH<%= s.getMaKhachHang() %>" style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: green; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Xem chi tiết</a>
+                        </div>
+                    </div>
+                    
+             
+                    
+                    
+                    
+                    <!-- Modal giỏ hàng -->
+						<div class="containerss">
+							<div class="modal fade" id="myModalGH<%=s.getMaKhachHang()%>"
+								role="dialog">
+								<div class="modal-dialog">
 
-	<div style="padding: 50px"></div>
-	<h1 class="text-center" style="padding: 20px">Thống kê sản phẩm</h1>
-	<div style="display: flex;justify-content: space-around;margin: 30px 100px">
-		<a href="adminThongKeController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo sản phẩm</a>
-		<a href="adminThongKeKHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo khách hàng</a>
-		<a href="adminThongKeDHController" style="border: 2px solid #fff; border-radius: 10px; text-decoration: none; font-size: 18px;padding: 10px; background-color: #446879; color: #fff; font-weight: bold;">Thống kê theo đơn hàng</a>
-	</div>
-	<h1 class="text-center" style="padding: 20px">Thống kê Khách hàng</h1>
-	<div class="container">
-		<div class="row">
-			<%
-			ArrayList<khachhangthibean> dskh = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
-			if (dskh != null) {
-				for (khachhangthibean s : dskh) {
-			%>
-			<div class="col-sm-4 col-xs-6 col-md- text-center"
-				style="border: 2px solid #446789; border-radius: 10px; padding: 25px">
-				<h1 style="font-size: 30px; font-weight: bold; color: red;">Khách
-					hàng</h1>
-				<h1
-					style="font-size: 25px; font-weight: bold; color: red; margin-bottom: 20px"><%=s.getHoTen()%></h1>
-				<div style="">
-					<a data-toggle="modal"
-						data-target="#myModalGH<%=s.getMaKhachHang()%>"
-						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Giỏ
-						hàng</a> <a data-toggle="modal"
-						data-target="#myModalXKH<%=s.getMaKhachHang()%>"
-						style="display: block; text-decoration: none; cursor: pointer; border: 1px solid; background-color: #446789; padding: 10px; margin: 10px; font-size: 18px; font-weight: bold; border-radius: 10px; color: white">Xem
-						chi tiết</a>
-				</div>
-			</div>
-
-			<!-- Modal giỏ hàng -->
-			<div class="containerss">
-				<div class="modal fade" id="myModalGH<%=s.getMaKhachHang()%>"
-					role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Thông tin sản phẩm</h4>
-							</div>
-							<div class="modal-body">
-								<%
-								ArrayList<giospbean> gio = (ArrayList<giospbean>) request.getAttribute("dsgio");
-								if (gio == null) {
-								%>
-								<h1>Danh sách giỏ đang trống</h1>
-								<%
-								} else {
-								int dem = 1;
-								for (giospbean ds1 : gio) {
-									if (ds1.getMaKhachHang() == s.getMaKhachHang()) {
-								%>
-								<div class="product-details">
-									<p>
-										Sản phẩm số
-										<%=dem%>:
-									</p>
-									<div class="row">
-										<div class="col-sm-6">
-											<img alt="" src="<%=ds1.getAnh()%>">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Thông tin sản phẩm</h4>
 										</div>
-										<div class="col-sm-6">
-											<p>
-												<span>Tên sản phẩm:</span>
-												<%=ds1.getTenSanPham()%></p>
-											<p>
-												<span>Giá:</span>
-												<%=ds1.getGia()%>đ
-											</p>
-											<p>
-												<span>Giảm giá:</span>
-												<%=ds1.getChiecKhau()%>%
-											</p>
-											<p>
-												<span>Số lượng mua:</span>
-												<%=ds1.getSoLuongMua()%></p>
-											<p>
-												<span>Kích thước:</span>
-												<%=ds1.getGhiChu()%></p>
+										<div class="modal-body">
+											<%
+											ArrayList<giospbean> gio = (ArrayList<giospbean>) request.getAttribute("dsgio");
+											if (gio == null) {
+											%>
+											<h1>Danh sách giỏ đang trống</h1>
+											<%
+											} else {
+											int dem = 1;
+											for (giospbean ds1 : gio) {
+												if (ds1.getMaKhachHang() == s.getMaKhachHang()) {
+											%>
+											<div class="product-details">
+												<p>
+													Sản phẩm số
+													<%=dem%>:
+												</p>
+												<div class="row">
+													<div class="col-sm-6">
+														<img alt="" src="<%=ds1.getAnh()%>">
+													</div>
+													<div class="col-sm-6">
+														<p>
+															<span>Tên sản phẩm:</span>
+															<%=ds1.getTenSanPham()%></p>
+														<p>
+															<span>Giá:</span>
+															<%=ds1.getGia()%>đ
+														</p>
+														<p>
+															<span>Giảm giá:</span>
+															<%=ds1.getChiecKhau()%>%
+														</p>
+														<p>
+															<span>Số lượng mua:</span>
+															<%=ds1.getSoLuongMua()%></p>
+														<p>
+															<span>Kích thước:</span>
+															<%=ds1.getGhiChu()%></p>
+													</div>
+												</div>
+												<hr>
+												<hr>
+											</div>
+											<%
+											dem++;
+											}
+											}
+											}
+											%>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">Close</button>
+											</div>
 										</div>
 									</div>
-									<hr>
-									<hr>
-								</div>
-								<%
-								dem++;
-								}
-								}
-								}
-								%>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
+						
+						<!-- 	Modal xem xem chi tiết khách hàng -->
+						<div class="containers">
+							<div class="modal fade" id="myModalXKH<%=s.getMaKhachHang()%>"
+								role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title">Thông tin khách hàng</h4>
+										</div>
+										<div class="modal-body text-center">
+											<%
+											ArrayList<khachhangthibean> dskh2 = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
+											if (dskh2 != null) {
+												for (khachhangthibean d : dskh2) {
+													if (d.getMaKhachHang() == s.getMaKhachHang()) {
+											%>
+											<div class="text-center customer-details">
+												<p>
+													<span>Tên khách hàng:</span><input
+														value="<%=d.getHoTen()%>" disabled="disabled">
+												</p>
+												<p>
+													<span>Địa chỉ:</span><input value="<%=d.getDiaChi()%>"
+														disabled="disabled">
+												</p>
+												<p>
+													<span>Số điện thoại:</span><input value="<%=d.getSoDT()%>"
+														disabled="disabled">
+												</p>
+												<p>
+													<span>Tên đăng nhập:</span><input value="<%=d.getTenDN()%>"
+														disabled="disabled">
+												</p>
+												<p>
+													<span>Email:</span><input value="<%=d.getEmail()%>"
+														disabled="disabled">
+												</p>
+											</div>
+											<%
+											}
+											}
+											}
+											%>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                    <% 
+                        }
+                    }
+                    %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+        <div class="pagination">
+        <%
+            int currentPage = (int) request.getAttribute("currentPage");
+            int totalPages = (int) request.getAttribute("totalPages");
+            String keyword = request.getParameter("productUser");
 
+            String queryParams = "";
+            if (keyword != null) queryParams += "&productUser=" + keyword;
 
-
-			<!-- 	Modal xem xem chi tiết khách hàng -->
-	<div class="containers">
-	    <div class="modal fade" id="myModalXKH<%=s.getMaKhachHang()%>" role="dialog">
-	        <div class="modal-dialog">
-	            <!-- Modal content-->
-	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-	                    <h4 class="modal-title">Thông tin khách hàng</h4>
-	                </div>
-	                <div class="modal-body text-center">
-	                    <%
-	                    ArrayList<khachhangthibean> dskh2 = (ArrayList<khachhangthibean>) request.getAttribute("dskh");
-	                    if (dskh2 != null) {
-	                        for (khachhangthibean d : dskh2) {
-	                            if (d.getMaKhachHang() == s.getMaKhachHang()) {
-	                    %>
-	                    <div class="text-center customer-details">
-	                        <p><span>Tên khách hàng:</span><input value="<%=d.getHoTen()%>" disabled="disabled"></p>
-	                        <p><span>Địa chỉ:</span><input value="<%=d.getDiaChi()%>" disabled="disabled"></p>
-	                        <p><span>Số điện thoại:</span><input value="<%=d.getSoDT()%>" disabled="disabled"></p>
-	                        <p><span>Tên đăng nhập:</span><input value="<%=d.getTenDN()%>" disabled="disabled"></p>
-	                        <p><span>Email:</span><input value="<%=d.getEmail()%>" disabled="disabled"></p>
-	                    </div>
-	                    <%
-	                    }
-	                    }
-	                    }
-	                    %>
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-			<%
-			}
-			}
-			%>
-		</div>
-	</div>
-
+            if (currentPage > 1) {
+        %>
+        <a href="adminThongKeKHController?page=<%= currentPage - 1 %><%= queryParams %>">&laquo; Quay lại</a>
+        <% 
+            }
+            for (int i = 1; i <= totalPages; i++) {
+        %>
+        <a href="adminThongKeKHController?page=<%= i %><%= queryParams %>" class="<%= (i == currentPage) ? "active" : "" %>"><%= i %></a>
+        <% 
+            }
+            if (currentPage < totalPages) {
+        %>
+        <a href="adminThongKeKHController?page=<%= currentPage + 1 %><%= queryParams %>">Tiếp theo &raquo;</a>
+        <% } %>
+    </div>	
 </body>
 </html>

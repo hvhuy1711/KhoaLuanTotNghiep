@@ -315,7 +315,7 @@
 							</div>
 							<div class="row">
 								<div class="Form col-sm-6"
-									style="border-right: 1px solid black;">
+									>
 									<form style="text-align: center;" action="" method="post">
 
 										<span class="FormSV-span" style="font-size: 18px">Ngày
@@ -341,7 +341,7 @@
 										<p style="color: red"><%=dsadmin.get(i).getEmail()%></p>
 									</form>
 								</div>
-								<div class="col-sm-6 text-center">
+								<div class="col-sm-6 text-center" style="border-left: 1px solid black;">
 									<span class="FormSV-span" style="font-size: 18px">Tên
 										sản phẩm :</span>
 									<p style="color: red"><%=dsadmin.get(i).getTenSanPham()%></p>
@@ -372,6 +372,8 @@
 								
 									<span class="FormSV-span" style="font-size: 18px">Tổng tiền:</span>
 									<p style="color: red"><%=tongTienFormatted%></p>
+									<span class="FormSV-span" style="font-size: 18px">Nội dung trả:</span>
+									<p style="color: red"><%=dsadmin.get(i).getGhiChuLS()%></p>
 								</div>
 							</div>
 							<div class="modal-footer">

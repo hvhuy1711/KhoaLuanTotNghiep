@@ -317,8 +317,6 @@ public class giospcontroller extends HttpServlet {
 
 			ArrayList<KichThuocBean> dskt = (ArrayList<KichThuocBean>)request.getAttribute("dskt");
 			if (dskt != null) {
-				System.out.println(2);
-				System.out.println(dskt);
 				request.setAttribute("dskt", dskt);
 			}
 

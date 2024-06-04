@@ -43,7 +43,6 @@
 	text-align: center;
 }
 
-
 /* tablet */
 @media ( min-width : 739px) and (max-width:1023px) {
 form {
@@ -193,24 +192,24 @@ form#locgia input[type="submit"]:hover {
 }
 
 .pagination {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
 
-        .pagination a {
-            margin: 0 5px;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            color: #333;
-        }
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+}
 
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #4CAF50;
-        }
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
 
 </style>
 
@@ -858,7 +857,6 @@ form#locgia input[type="submit"]:hover {
         <%
             int currentPage = (int) request.getAttribute("currentPage");
             int totalPages = (int) request.getAttribute("totalPages");
-
             String ml = request.getParameter("ml");
             String key1 = request.getParameter("txttim");
             String hang = request.getParameter("tenhang");
@@ -869,8 +867,9 @@ form#locgia input[type="submit"]:hover {
             if (ml != null) queryParams += "&ml=" + ml;
             if (key1 != null) queryParams += "&txttim=" + key1;
             if (hang != null) queryParams += "&tenhang=" + hang;
-            if (minGia != null) queryParams += "&minGia=" + minGia;
-            if (maxGiasp != null) queryParams += "&maxGiasp=" + maxGiasp;
+            if(minGia != null && maxGiasp != null) queryParams += "&minGia=" + minGia + "&maxGiasp=" + maxGiasp;
+         /*    if (minGia != null) queryParams += "&minGia=" + minGia;
+            if (maxGiasp != null) queryParams += "&maxGiasp=" + maxGiasp; */
 
             if (currentPage > 1) {
         %>

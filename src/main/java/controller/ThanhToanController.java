@@ -47,9 +47,9 @@ public class ThanhToanController extends HttpServlet {
 					HttpSession session = request.getSession();
 					khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
 						long makh = kh.getMaKhachHang();
-						int maSPMUAInt = Integer.parseInt(maSPMUA);
+//						int maSPMUAInt = Integer.parseInt(maSPMUA);
 						giospbo gh = new giospbo();
-						ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
+						ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
 							if (dsgiott != null) {
 								session.setAttribute("dstt", (ArrayList<giospbean>)dsgiott);
 							}
@@ -63,9 +63,9 @@ public class ThanhToanController extends HttpServlet {
 					HttpSession session = request.getSession();
 					khachhangthibean kh = (khachhangthibean)session.getAttribute("dn");
 						long makh = kh.getMaKhachHang();
-						int maSPMUAInt = Integer.parseInt(maSPMUA);
+//						int maSPMUAInt = Integer.parseInt(maSPMUA);
 						giospbo gh = new giospbo();
-						ArrayList<giospbean> dsgiott = gh.getdsgio1SP(makh, maSPMUAInt ,KichThuoc);
+						ArrayList<giospbean> dsgiott = gh.getdsgio(makh);
 							if (dsgiott != null) {
 								session.setAttribute("dstt", (ArrayList<giospbean>)dsgiott);
 								

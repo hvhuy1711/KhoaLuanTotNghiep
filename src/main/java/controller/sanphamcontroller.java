@@ -90,7 +90,6 @@ public class sanphamcontroller extends HttpServlet {
             request.setAttribute("dssanpham", dsPage);
             request.setAttribute("currentPage", page);
             request.setAttribute("totalPages", totalPages);
-
 			//hết phân trang
 			
 			request.setAttribute("maxGia" ,sbo.maxGia());

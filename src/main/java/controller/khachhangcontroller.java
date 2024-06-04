@@ -143,7 +143,6 @@ public class khachhangcontroller extends HttpServlet {
 		}
 	}
 
-	// sử lí check số điện thoại
 	private boolean isValidPhoneNumber(String phoneNumber) {
 		String phoneRegex = constClass.PHONE_REGEX;
 		Pattern pattern = Pattern.compile(phoneRegex);

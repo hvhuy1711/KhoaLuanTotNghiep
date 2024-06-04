@@ -1,3 +1,5 @@
+<%@page import="bean.SPHoaDonBean"%>
+<%@page import="bean.HoaDonBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="bean.DonHangDaDatBean"%>
 <%@page import="bean.sanphamfullbean"%>
@@ -128,6 +130,72 @@
     opacity: 0.5; /* Làm mờ nút */
     pointer-events: none; /* Ngăn không cho nhấp vào nút */
 }
+.order-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 5px solid #446879;
+    border-radius: 10px;
+    max-width: 800px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa thẻ */
+}
+
+.order-header {
+    background-color: #446879;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.order-header h3 {
+    margin: 0;
+}
+
+.order-details {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-item {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.order-item:first-child {
+    border-top: none;
+}
+
+.product-box {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 3px solid #446879;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px; /* Bo tròn các góc của hình ảnh */
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.product-details p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: red;
+}
+
 </style>
 
 </head>
@@ -625,129 +693,94 @@
 	<!-- body -->
 	<div style="padding-top: 110px"></div>
 	<h1 style="text-align: center; margin-top: 20px; font-size: 35px">Danh
-		sách các sản phẩm đã mua</h1>
+		sách các đơn hàng đã mua</h1>
 	<div style="padding: 10px"></div>
 	<%
-		ArrayList<DonHangDaDatBean> dsdonhang = (ArrayList<DonHangDaDatBean>) request.getAttribute("dsdonhang");
-		if (dsdonhang == null) {%>
-		<h2 style="text-align: center; margin-top: 20px; font-size: 30px">Bạn chưa mua bất kì sản phẩm nào</h2>
-		<%
-		}else{%>
-			<table class="table table-hover center">
-				<tr style="background-color: #446879; color: #fff">
-					<th>Tên sản phẩm</th>
-					<th>Ảnh</th>
-					<th>Đơn Giá</th>
-					<th>Số lượng</th>
-					<th>Kích thước</th>
-					<th>Ngày đặt</th>
-					<th>Trả hàng</th>
-					<th>Xem chi tiết</th>
-					<th>Mua lại</th>
-					<th>Trạng thái hàng</th>
-		
-				</tr>
-		<%
-		int n = dsdonhang.size();
-			for (int i = n-1;i >= 0 ; i--) {
-		%>
-		<div class="modal fade" id="myModal<%=dsdonhang.get(i).getMaChiTiet()%>"
-			role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 class="modal-title">Thông tin đơn hàng</h2>
-					</div>
-					<div class="row">
-					<div class="col-sm-6 text-center" style="border-right: 1px solid black;">
-							<span class="FormSV-span" style="font-size: 18px">Tên sản
-								phẩm :</span>
-							<p style="color: red"><%=dsdonhang.get(i).getTenSanPham()%></p>
+    ArrayList<HoaDonBean> dshd = (ArrayList<HoaDonBean>) request.getAttribute("dshd");
+    if (dshd == null) {
+%>
+    <h2 style="text-align: center; margin-top: 20px; font-size: 30px">Bạn chưa mua bất kì sản phẩm nào</h2>
+<%
+    } else {
+        int n = dshd.size();
+        for (int i = n - 1; i >= 0; i--) {
+            HoaDonBean hoadon = dshd.get(i);
+%>
+    <div class="order-card">
+        <div class="order-header">
+            <h3>Mã Hóa Đơn: <%= hoadon.getMaHoaDon() %></h3>
+            <p>Ngày Đặt: <%= hoadon.getNgayMua() %></p>
+            <p>Thanh Toán: <%= hoadon.getTrangThaiDon() == 0 ? "Thanh toán trực tiếp" : "Thanh toán online" %></p>
+        </div>
+        <ul class="order-details">
+            <%
+            ArrayList<DonHangDaDatBean> dsdonhang = (ArrayList<DonHangDaDatBean>) request.getAttribute("dsdonhang");
+            for (DonHangDaDatBean ds : dsdonhang) {
+                if (ds.getMaHoaDon() == hoadon.getMaHoaDon()) {
+            %>
+            <li class="order-item">
+                <div class="product-box">
+                    <img src="<%= ds.getAnh() %>" alt="Ảnh sản phẩm" class="product-img">
+                    <div class="product-details">
+                        <p class="product-name"><%= ds.getTenSanPham() %></p>
+                        <p>Số lượng mua: <span style="color: red"><%= ds.getSoLuongMua() %></span></p>
+                        <%
+                        long giaLong = ds.getDonGiaSP();
+                        long chiecKhauLong = ds.getChiecKhau();
+                        float gia = (float) giaLong;
+                        float chiecKhau = (float) chiecKhauLong;
+                        float giaSauChiecKhau = gia - (gia * (chiecKhau / 100));
+                        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                        String giaFormatted = decimalFormat.format(giaSauChiecKhau);
+                        %>
+                        <p>Giá: <span style="color: red"><%= giaFormatted %>đ</span></p>
+                        <%
+                        double soLuongMua = ds.getSoLuongMua();
+                        double thanhTien = soLuongMua * giaSauChiecKhau;
+                        String tongTienFormatted = decimalFormat.format(thanhTien);
+                        %>
+                        <p>Tổng tiền: <span style="color: red"><%= tongTienFormatted %>đ</span></p>
+                        <p>Kích thước: <span style="color: red"><%= ds.getGhiChuCT() %></span></p>
+                        <p>Hãng: <span style="color: red"><%= ds.getHang() %></span></p>
+                        <p>Trạng thái đơn: <span style="color: red">
+                            <%
+                            switch (ds.getTrangThai()) {
+                                case 0:
+                                    out.print("Chờ xác nhận");
+                                    break;
+                                case 1:
+                                    out.print("Đang vận chuyển");
+                                    break;
+                                case 2:
+                                    out.print("Đã nhận hàng");
+                                    break;
+                                case 3:
+                                    out.print("Đã hoàn thành");
+                                    break;
+                                case 4:
+                                    out.print("Chờ xác nhận trả");
+                                    break;
+                            }
+                            %>
+                        </span></p>
+                    </div>
+                </div>
+            </li>
+            <%
+                }
+            }
+            %>
+        </ul>
+    </div>
+<%
+        }
+    }
+%>
 
-							<!-- <span class = "FormSV-span" style="font-size: 18px">Ảnh:</span> -->
-							<img alt="" src="<%=dsdonhang.get(i).getAnh()%>" style="width: 50px"> <span
-								class="FormSV-span" style="font-size: 18px">Số lượng mua:</span>
-							<p style="color: red"><%=dsdonhang.get(i).getSoLuongMua()%></p>
-
-							<% 		
-									long giaLong = dsdonhang.get(i).getDonGiaSP();
-								    long chiecKhauLong = dsdonhang.get(i).getChiecKhau();
-								    float gia = (float) giaLong;
-								    float chiecKhau = (float) chiecKhauLong;
-								    float giaSauChiecKhau = gia -( gia * (chiecKhau / 100));
-					
-								    // Định dạng giá tiền thành dạng mong muốn
-								    DecimalFormat decimalFormat = new DecimalFormat("#,###");
-								    String giaFormatted = decimalFormat.format(giaSauChiecKhau);
-								   %>
-							<span class="FormSV-span" style="font-size: 18px">Giá:</span>
-							<p style="color: red"><%=giaFormatted%></p>
-
-								<%
-								 	double soLuongMua = dsdonhang.get(i).getSoLuongMua();
-							        double giassp = dsdonhang.get(i).getDonGiaSP();
-							        double chiecKhausp = dsdonhang.get(i).getChiecKhau();
-							        double thanhTien = soLuongMua * (gia - (gia * (chiecKhau / 100)));
-				        			DecimalFormat decimalFormat1 = new DecimalFormat("#,###");
-				        			String tongTienFormatted = decimalFormat1.format(thanhTien); 
-				        		%>
-								<span class="FormSV-span" style="font-size: 18px">Tổng tiền:</span>
-								<p style="color: red"><%=tongTienFormatted%></p>
-						
-						</div>
-						<div class="Form col-sm-6 text-center" >
-							<form style="text-align: center;" action="" method="post">
-
-								<span class="FormSV-span" style="font-size: 18px">Ngày
-									đặt hàng:</span>
-								<p style="color: red"><%=dsdonhang.get(i).getNgayMua()%></p>
-
-								<span class="FormSV-span" style="font-size: 18px">Kích thước:</span>
-								<p style="color: red"><%=dsdonhang.get(i).getGhiChuCT()%></p>
-
-								<span class="FormSV-span" style="font-size: 18px">Hãng:</span>
-								<p style="color: red"><%=dsdonhang.get(i).getHang()%></p>
-
-								<span class="FormSV-span" style="font-size: 18px">Phương thức thanh toán:</span>
-								<%if(dsdonhang.get(i).getTrangThaiDon() == 1){ %>
-									<p style="color: red">Thanh toán online</p>
-								<%}else if (dsdonhang.get(i).getTrangThaiDon() == 0){ %>
-									<p style="color: red">Thanh toán tiền mặt</p>
-								<%} %>
-							
-								<span class="FormSV-span" style="font-size: 18px">Trạng thái đơn:</span>
-								<%if(dsdonhang.get(i).getTrangThai() == 0){ %>
-									<p style="color: red">Chờ xác nhận</p>
-								<%}else if (dsdonhang.get(i).getTrangThai() == 1){ %>
-									<p style="color: red">Đang vận chuyển</p>
-								<%}else if (dsdonhang.get(i).getTrangThai() == 2){ %>
-									<p style="color: red">Đã nhận hàng</p>
-								<%}else if (dsdonhang.get(i).getTrangThai() == 3){ %>
-									<p style="color: red">Đã hoàn thành</p>
-								<%}else if (dsdonhang.get(i).getTrangThai() == 4){ %>
-								<p style="color: red">Chờ xác nhận trả</p>
-								<%} %>
-							</form>
-						</div>
-						
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<tr style="font-weight: bold">
-			<td><%=dsdonhang.get(i).getTenSanPham()%></td>
-			<td><img style="width: 120px; height: 120px;" alt=""
-				src="<%=dsdonhang.get(i).getAnh()%>"></td>
-			<td><%=giaFormatted%></td>
+		<%-- 	<td><%=giaFormatted%></td>
 			<td><%=dsdonhang.get(i).getSoLuongMua()%></td>
-			<td><%=dsdonhang.get(i).getGhiChuCT()%></td>
-			<td><%=dsdonhang.get(i).getNgayMua()%></td>
-			<%if (dsdonhang.get(i).getTrangThai() == 3){%>
+			<td><%=dsdonhang.get(i).getGhiChuCT()%></td> --%>
+			<%-- <%if (dsdonhang.get(i).getTrangThai() == 3){%>
 				<td>
 				<a href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
 				</td>
@@ -759,10 +792,10 @@
 			<td>
 				<a class="disabled" href="TraSanPhamController?maDanhGia=<%=dsdonhang.get(i).getMaChiTiet() %>&maloai=<%=dsdonhang.get(i).getMaLoai() %>" style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;"><i class="fa-solid fa-pencil"></i> Trả hàng</a>
 				</td>
-			<%} %>
+			<%} %> --%>
 			
 <!-- Modal xóa -->
-<div class="container">
+<%-- <div class="container">
   <div class="modal fade" id="myModalXoa<%=dsdonhang.get(i).getMaChiTiet()%>" role="dialog">
     <div class="modal-dialog">
     
@@ -789,15 +822,11 @@
 </div>
 </div>
 </div>
-
+ --%>
 <!-- Hết modal xóa -->
-			<td><a
-				data-toggle="modal" data-target="#myModal<%=dsdonhang.get(i).getMaChiTiet()%>"
-				style="border: 1px solid #ccc;cursor:pointer; padding: 7px; background-color: #446879; color: #fff; border-radius: 10px">
-				<i class="fa-solid fa-book-medical"></i></i></a>
-				</td>
+			
 				
-			<td><a
+			<%-- <td><a
 				href="chitietsanphamcontroller?ctsp=<%=dsdonhang.get(i).getMaSanPham()%>&maloai=<%=dsdonhang.get(i).getMaLoai() %>"
 				style="border: 1px solid #ccc; cursor: pointer; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #446879; color: #fff; font-weight: bold;">
 					<i class="fas fa-shopping-cart"></i></a></td>
@@ -823,8 +852,8 @@
 				<%}else if (dsdonhang.get(i).getTrangThai() == 4){ %>
 				<td><a
 				style="border: 1px solid #ccc; cursor: pointer; opacity: 0.5; text-decoration: none; padding: 7px; border-radius: 10px; background-color: #ef4b2c; color: #fff; font-weight: bold;">
-					<i style="padding: 5px" class="fa-solid fa-hourglass-start"></i>Chờ xác nhận trả</a></td>
-					<%} %>
+					<i style="padding: 5px" class="fa-solid fa-hourglass-start"></i>Chờ xác nhận trả</a></td> --%>
+				
 			<%-- <td><a href="adminloaispcontroller?ml=<%=loai.getMaLoai()%>&tl=<%=loai.getTenLoai() %> &tab=chon"
 		style="border: 1px solid #ccc; padding: 7px; border-radius: 10px; background-color: #446879;color: #fff; font-weight: bold;">
 			Chọn
@@ -834,12 +863,12 @@
 			<i class="fa-solid fa-trash-can"></i>
 		</a></td> --%>
 		</tr>
-		<%
+		<%-- <%
 		}
 			
 		}
-		%>
+		%> --%>
 
-	</table>
+	
 </body>
 </html>

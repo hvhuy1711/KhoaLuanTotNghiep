@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.DonHangDaDatBean;
+import bean.HoaDonBean;
 import bean.khachhangthibean;
 import bo.DonHangDaDatBo;
+import bo.HoaDonBo;
 import bo.sanphambo;
 import dao.DonHangDaDatDao;
 
@@ -43,6 +45,9 @@ public class LichSuMuaController extends HttpServlet {
 			khachhangthibean kh = (khachhangthibean) session.getAttribute("dn");
 			long makh = kh.getMaKhachHang();
 			sanphambo sbo = new sanphambo();
+			HoaDonBo hdbo = new HoaDonBo();
+			ArrayList<HoaDonBean> dshd = hdbo.GetDSHoaDon(makh);
+			request.setAttribute("dshd", dshd);
 			ArrayList<String> dsHang = sbo.getHang();
 			request.setAttribute("dsHang", dsHang);
 			DonHangDaDatBo dhbo = new DonHangDaDatBo();

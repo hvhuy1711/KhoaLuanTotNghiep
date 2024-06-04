@@ -260,9 +260,9 @@
 	<h1 style="color: black; margin-top: 140px; text-align: center;">Trang
 		ADMIN Các đơn hàng đã đặt</h1>
 		<div style="display: flex;justify-content: space-between;">
-	<a href="adminDonHangDaXacNhanShipperController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
+	<a href="adminDonHangDaXacNhanShipperController" style="display:block;border: 1px solid black;margin-left: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: orange;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-check" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng đã xác
 		nhận cho shipper</a>
-	<a href="adminxacnhancontroller" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: #446789;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-times" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng chưa xác
+	<a href="adminxacnhancontroller" style="display:block;border: 1px solid black;margin-right: 72px;padding:0px 5px;text-decoration: none;cursor:pointer; color: white;background-color: red;border-radius: 10px;font-size: 20px;float: right;"><i class="fas fa-times" style="width: 20px;margin-right: 10px;padding: 20px"></i>Đơn hàng chưa xác
 		nhận</a>
 		</div>
 	<div class="container text-center">

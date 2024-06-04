@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.DonHangDaDatBean;
+import bean.HoaDonBean;
 import bo.DonHangDaDatBo;
+import bo.HoaDonBo;
 
 /**
  * Servlet implementation class adminDonHangDaXacNhanShipperController
@@ -37,6 +39,9 @@ public class adminDonHangDaXacNhanShipperController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			request.setCharacterEncoding("utf-8");
 			DonHangDaDatBo dhad = new DonHangDaDatBo();
+			HoaDonBo hdbo = new HoaDonBo();
+			ArrayList<HoaDonBean> dshd = hdbo.GetALLDSHoaDon();
+			request.setAttribute("dshd", dshd);
 			ArrayList<DonHangDaDatBean> dsdhadmin;
 			dsdhadmin = dhad.getDHDDAdmin(1);
 			request.setAttribute("adminxacnhan", dsdhadmin);
